@@ -1,0 +1,248 @@
+{
+  "format": 1,
+  "restore": {
+    "/Users/galmaegee/Desktop/personal-coding-project/JobSeekerApp/API/API.csproj": {}
+  },
+  "projects": {
+    "/Users/galmaegee/Desktop/personal-coding-project/JobSeekerApp/API/API.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/galmaegee/Desktop/personal-coding-project/JobSeekerApp/API/API.csproj",
+        "projectName": "API",
+        "projectPath": "/Users/galmaegee/Desktop/personal-coding-project/JobSeekerApp/API/API.csproj",
+        "packagesPath": "/Users/galmaegee/.nuget/packages/",
+        "outputPath": "/Users/galmaegee/Desktop/personal-coding-project/JobSeekerApp/API/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/galmaegee/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net7.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net7.0": {
+            "targetAlias": "net7.0",
+            "projectReferences": {
+              "/Users/galmaegee/Desktop/personal-coding-project/JobSeekerApp/Application/Application.csproj": {
+                "projectPath": "/Users/galmaegee/Desktop/personal-coding-project/JobSeekerApp/Application/Application.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.OpenApi": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[6.4.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.100/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/galmaegee/Desktop/personal-coding-project/JobSeekerApp/Application/Application.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/galmaegee/Desktop/personal-coding-project/JobSeekerApp/Application/Application.csproj",
+        "projectName": "Application",
+        "projectPath": "/Users/galmaegee/Desktop/personal-coding-project/JobSeekerApp/Application/Application.csproj",
+        "packagesPath": "/Users/galmaegee/.nuget/packages/",
+        "outputPath": "/Users/galmaegee/Desktop/personal-coding-project/JobSeekerApp/Application/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/galmaegee/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net7.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net7.0": {
+            "targetAlias": "net7.0",
+            "projectReferences": {
+              "/Users/galmaegee/Desktop/personal-coding-project/JobSeekerApp/Domain/Domain.csproj": {
+                "projectPath": "/Users/galmaegee/Desktop/personal-coding-project/JobSeekerApp/Domain/Domain.csproj"
+              },
+              "/Users/galmaegee/Desktop/personal-coding-project/JobSeekerApp/Persistence/Persistence.csproj": {
+                "projectPath": "/Users/galmaegee/Desktop/personal-coding-project/JobSeekerApp/Persistence/Persistence.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.100/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/galmaegee/Desktop/personal-coding-project/JobSeekerApp/Domain/Domain.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/galmaegee/Desktop/personal-coding-project/JobSeekerApp/Domain/Domain.csproj",
+        "projectName": "Domain",
+        "projectPath": "/Users/galmaegee/Desktop/personal-coding-project/JobSeekerApp/Domain/Domain.csproj",
+        "packagesPath": "/Users/galmaegee/.nuget/packages/",
+        "outputPath": "/Users/galmaegee/Desktop/personal-coding-project/JobSeekerApp/Domain/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/galmaegee/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net7.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net7.0": {
+            "targetAlias": "net7.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.100/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/galmaegee/Desktop/personal-coding-project/JobSeekerApp/Persistence/Persistence.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/galmaegee/Desktop/personal-coding-project/JobSeekerApp/Persistence/Persistence.csproj",
+        "projectName": "Persistence",
+        "projectPath": "/Users/galmaegee/Desktop/personal-coding-project/JobSeekerApp/Persistence/Persistence.csproj",
+        "packagesPath": "/Users/galmaegee/.nuget/packages/",
+        "outputPath": "/Users/galmaegee/Desktop/personal-coding-project/JobSeekerApp/Persistence/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/galmaegee/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net7.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net7.0": {
+            "targetAlias": "net7.0",
+            "projectReferences": {
+              "/Users/galmaegee/Desktop/personal-coding-project/JobSeekerApp/Domain/Domain.csproj": {
+                "projectPath": "/Users/galmaegee/Desktop/personal-coding-project/JobSeekerApp/Domain/Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.100/RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
