@@ -1,3 +1,10 @@
+/* app */
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
 /* app header */
 .app__header {
   display: flex;
@@ -50,7 +57,6 @@
 /* app mobile navbar */
 .header__mobile-navbar {
   position: absolute;
-  top: 3rem;
   right: 0;
   z-index: 100;
   background-color: #fff;
@@ -71,8 +77,9 @@
 }
 .header__mobile-navbar .mobile-navbar__dropdown {
   position: absolute;
-  top: 4rem;
+  top: 3rem;
   right: 0;
+  padding: 0;
   width: 100vw;
   height: 100vh;
   background-color: #fff;
@@ -80,7 +87,7 @@
   transform: scaleY(0);
   transform-origin: top;
   transition: transform 0.1s ease-out;
-  z-index: 1;
+  z-index: 10;
 }
 .header__mobile-navbar .mobile-navbar__dropdown.open {
   transform: scaleY(1);
@@ -125,4 +132,21 @@
 }
 .header__navbar .navbar__link:hover {
   color: #007acc;
+}
+
+/* app main */
+.app__main {
+  flex-grow: 1;
+}
+
+/* app footer */
+.app__footer {
+  margin: 0 auto;
+  width: 100vw;
+  background-color: rgb(245, 245, 245);
+  color: #000;
+  text-align: center;
+}
+.app__footer .footer__text {
+  font-size: 1.2rem;
 }/*# sourceMappingURL=styles.css.map */
