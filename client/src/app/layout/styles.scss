@@ -1,0 +1,141 @@
+/* app header */
+
+.app__header {
+    display: flex;
+    position: relative;
+    justify-content: space-between;
+    align-items: center;
+    height: 6rem;
+    background-color: #fff;
+    padding: 1rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+    @media screen and (min-width: 768px) {
+        padding: 1rem 2rem;
+    }
+
+    .app__branding {
+        display: flex;
+        align-items: center;
+    }
+
+    .branding__logo {
+        display: flex;
+        align-items: center;
+        color: #333;
+        text-decoration: none;
+
+        svg {
+            font-size: 2.4rem;
+
+            @media screen and (min-width: 768px) {
+                font-size: 3rem;
+            }
+        }
+    }
+
+    .branding__text {
+        font-size: 1.8rem;
+        margin-left: 1rem;
+        font-weight: 700;
+
+        @media screen and (min-width: 768px) {
+            font-size: 2.4rem;
+        }
+    }
+}
+
+
+/* app mobile navbar */
+.header__mobile-navbar {
+    position: absolute;
+    top: 3rem;
+    right: 0;
+    z-index: 100;
+    background-color: #fff;
+
+    .mobile-navbar__menu-toggle {
+        display: flex;
+        margin-right: 1rem;
+        align-items: center;
+        justify-content: space-between;
+        background: none;
+        border: none;
+        color: #333;
+        font-size: 1.8rem;
+        cursor: pointer;
+
+        svg {
+            font-size: 2rem;
+        }
+    }
+
+    .mobile-navbar__dropdown {
+        position: absolute;
+        top: 4rem;
+        right: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: #fff;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        transform: scaleY(0);
+        transform-origin: top;
+        transition: transform 0.1s ease-out;
+        z-index: 1;
+
+        &.open {
+            transform: scaleY(1);
+        }
+
+        .mobile-navbar__item {
+            text-align: center;
+            padding: 1.5rem;
+            border-bottom: 1px solid #eee;
+            list-style: none;
+
+            &:last-child {
+                border-bottom: none;
+            }
+
+            .mobile-navbar__link {
+                display: block;
+                color: #333;
+                font-size: 1.8rem;
+                text-decoration: none;
+            }
+        }
+    }
+}
+
+/* app desktop navbar */
+.header__navbar {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 1rem;
+
+    .navbar__menu {
+        display: flex;
+        align-items: center;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    .navbar__item {
+        margin-left: 2rem;
+    }
+
+    .navbar__link {
+        color: #333;
+        font-size: 1.8rem;
+        text-decoration: none;
+        transition: all 0.3s ease;
+
+        &:hover {
+            color: #007acc;
+        }
+    }
+}
