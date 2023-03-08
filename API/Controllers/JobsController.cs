@@ -13,10 +13,16 @@ namespace API.Controllers
             return await Mediator.Send(new List.Query());
         }
 
-        [HttpGet("{id}")] // api/job/{id}
+        [HttpGet("{id}")] // api/jobs/{id}
         public async Task<ActionResult<Job>> GetJob(Guid id)
         {
             return await Mediator.Send(new Details.Query { Id = id });
+        }
+
+        [HttpPost] // api/jobs
+        public async Task<IActionResult> CreateJob(Job job)
+        {
+            return Ok(await Mediator.Send(new Create.Command { Job = job }));
         }
     }
 }
