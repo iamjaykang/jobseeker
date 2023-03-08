@@ -1,3 +1,5 @@
+using Application.Jobs;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
 
@@ -16,10 +18,12 @@ builder.Services.AddDbContext<DataContext>(opt =>
 );
 builder.Services.AddCors(opt =>
 {
-    opt.AddPolicy("CorsPolicy", policy => {
+    opt.AddPolicy("CorsPolicy", policy =>
+    {
         policy.AllowAnyMethod().AllowAnyHeader().WithOrigins("http://localhost:5173");
     });
 });
+builder.Services.AddMediatR(typeof(List.Handler));
 
 var app = builder.Build();
 
