@@ -11,6 +11,7 @@ export interface Job {
 }
 
 export class JobFormValues {
+  id?: string = undefined;
   title: string = "";
   description: string = "";
   jobType: string = "";
@@ -18,9 +19,11 @@ export class JobFormValues {
   salary: string = "";
   experienceLevel: string = "";
   city: string = "";
+  date: string = new Date().toISOString();
 
   constructor(job?: JobFormValues) {
     if (job) {
+      this.id = job.id;
       this.title = job.title;
       this.description = job.description;
       this.jobType = job.jobType;
@@ -28,6 +31,8 @@ export class JobFormValues {
       this.salary = job.salary;
       this.experienceLevel = job.experienceLevel;
       this.city = job.city;
+      this.date = job.date || this.date;
     }
   }
 }
+
