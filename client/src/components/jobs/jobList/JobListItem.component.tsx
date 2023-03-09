@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom/";
 import { Job } from "../../../app/models/job.model";
 
 interface Props {
@@ -9,7 +10,9 @@ const JobListItem = ({ job }: Props) => {
   return (
     <>
       <li className="job-list__item">
-        <h2 className="job-list__title">{job.title}</h2>
+        <Link to={`/browse-jobs/${job.id}`}>
+          <h2 className="job-list__title">{job.title}</h2>
+        </Link>
         <p className="job-list__date">Posted On: {job.date}</p>
         <p className="job-list__posted-by">Posted By: {job.postedBy}</p>
         <p className="job-list__location">{job.city}</p>
