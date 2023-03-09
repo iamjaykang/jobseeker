@@ -1,17 +1,17 @@
 import React, { ChangeEvent, FormEvent, useState } from "react";
-
-const initialFormData = {
-  title: "",
-  description: "",
-  jobType: "",
-  postedBy: "",
-  salary: "",
-  experienceLevel: "",
-  city: "",
-};
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom/";
+import { JobFormValues } from "../../../app/models/job.model";
+import { addJobLoading } from "../../../app/stores/jobs/job.action";
+import { v4 as uuid } from "uuid";
+import './jobForm.styles.css'
 
 const JobForm = () => {
-  const [formData, setFormData] = useState(initialFormData);
+  const [formData, setFormData] = useState<JobFormValues>(new JobFormValues());
+
+  const navigate = useNavigate();
+
+  const dispatch = useDispatch();
 
   const {
     title,
@@ -37,10 +37,19 @@ const JobForm = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    console.log("Form submitted");
+  
+    if (!formData.id) {
+      let newJob = {
+        ...formData,
+        id: uuid(),
+      };
+  
+      await dispatch(addJobLoading(newJob)); // Wait for dispatch to complete
+  
+      navigate(`/browse-jobs/${newJob.id}`); // Navigate after dispatch is complete
+    }
   };
   return (
     <form className="job-form" onSubmit={handleSubmit}>
@@ -112,6 +121,7 @@ const JobForm = () => {
         name="experienceLevel"
         onChange={handleSelectChange}
       >
+        <option value="">--- Select Experience Level ---</option>
         <option value="entry">Entry</option>
         <option value="intermediate">Intermediate</option>
         <option value="senior">Senior</option>

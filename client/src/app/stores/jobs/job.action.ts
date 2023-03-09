@@ -105,8 +105,9 @@ export const fetchJobByIdFailed = withMatcher(
 
 // Action to add JOBS loading
 export const addJobLoading = withMatcher(
-  (jobFormData: JobFormValues): AddJobLoading =>
-    createAction(JOBS_ACTION_TYPES.ADD_JOB_LOADING, jobFormData)
+  (jobFormData: JobFormValues): AddJobLoading =>{
+    jobFormData
+    return createAction(JOBS_ACTION_TYPES.ADD_JOB_LOADING, jobFormData)}
 );
 
 // Action to add JOBS success
