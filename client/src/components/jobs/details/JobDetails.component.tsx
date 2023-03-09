@@ -27,7 +27,7 @@ const JobDetails = () => {
 
   return (
     <div className="job-details-page">
-      <JobDetailsCard job={job} />
+      {job && <JobDetailsCard job={job} />}
     </div>
   );
 };
