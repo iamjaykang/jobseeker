@@ -8,7 +8,7 @@ interface Props {
 const JobListItem = ({ job }: Props) => {
   return (
     <>
-      <li key={job.id} className="job-list__item">
+      <li className="job-list__item">
         <h2 className="job-list__title">{job.title}</h2>
         <p className="job-list__date">Posted On: {job.date}</p>
         <p className="job-list__posted-by">Posted By: {job.postedBy}</p>

@@ -10,7 +10,7 @@ const JobList = ({ jobs }: Props) => {
   return (
     <ul className="job-list">
       {jobs.map((job) => (
-        <JobListItem job={job} />
+        <JobListItem key={job.id} job={job} />
       ))}
     </ul>
   );
