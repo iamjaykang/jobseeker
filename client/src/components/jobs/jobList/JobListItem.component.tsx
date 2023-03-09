@@ -1,5 +1,5 @@
 import React from "react";
-import { Job } from "../../../app/models/job";
+import { Job } from "../../../app/models/job.model";
 
 interface Props {
   job: Job;

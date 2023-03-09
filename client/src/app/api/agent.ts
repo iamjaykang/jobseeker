@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from "axios";
-import { Job } from "../models/job";
+import { Job, JobFormValues } from "../models/job.model";
 
 axios.defaults.baseURL = "http://localhost:5000/api";
 
@@ -16,6 +16,11 @@ const requests = {
 const Jobs = {
   list: () => requests.get<Job[]>("/jobs"),
   details: (id: string) => requests.get<Job>(`/jobs/${id}`),
+  create: (jobFormData: JobFormValues) =>
+    requests.post<void>("/jobs", jobFormData),
+  update: (jobId: string, newJobFormData: JobFormValues) =>
+    requests.put<void>(`/jobs/${jobId}`, newJobFormData),
+  delete: (jobId: string) => requests.del<void>(`/jobs/${jobId}`),
 };
 
 const agent = {

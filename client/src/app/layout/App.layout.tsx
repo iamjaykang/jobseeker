@@ -4,6 +4,7 @@ import Footer from "./Footer.layout";
 import "./styles.css";
 import HomePage from "../../components/home/HomePage.component";
 import JobSearchForm from "./JobSearchForm.layout";
+import JobListPage from "../../components/jobs/jobList/JobListPage.component";
 
 function App() {
   return (
@@ -13,7 +14,7 @@ function App() {
         <JobSearchForm />
       </div>
       <main className="app__main">
-        <HomePage />
+        <JobListPage />
       </main>
       <Footer />
     </div>

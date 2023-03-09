@@ -1,26 +1,18 @@
-import React, { useEffect, useState } from "react";
-import agent from "../../../app/api/agent";
-import { Job } from "../../../app/models/job";
-import { convertUtcToLocal } from "../../../app/utils/convertUtcToLocal.util";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchAllJobsLoading } from "../../../app/stores/jobs/job.action";
+import { selectJobsArray } from "../../../app/stores/jobs/job.selector";
 import JobList from "./JobList.component";
 import "./jobListPage.styles.css";
 
 const JobListPage = () => {
-  const [jobs, setJobs] = useState<Job[]>();
+  const dispatch = useDispatch();
+
+  const jobs = useSelector(selectJobsArray);
 
   useEffect(() => {
-    const loadJobs = async () => {
-      const response = await agent.Jobs.list();
-      const updatedJobs = response.map((job) => {
-        const localDate = convertUtcToLocal(job.date);
-        return { ...job, date: localDate };
-      });
-
-      setJobs(updatedJobs);
-    };
-
-    loadJobs();
-  }, [setJobs]);
+    dispatch(fetchAllJobsLoading());
+  }, [dispatch]);
 
   return (
     <div className="job-list-page">

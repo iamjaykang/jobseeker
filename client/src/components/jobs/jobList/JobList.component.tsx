@@ -1,5 +1,5 @@
 import React from "react";
-import { Job } from "../../../app/models/job";
+import { Job } from "../../../app/models/job.model";
 import JobListItem from "./JobListItem.component";
 
 interface Props {
