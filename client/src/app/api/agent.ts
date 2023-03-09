@@ -1,7 +1,20 @@
 import axios, { AxiosResponse } from "axios";
 import { Job, JobFormValues } from "../models/job.model";
 
+const sleep = (delay: number) => {
+  return new Promise((resolve) => {
+    setTimeout(resolve, delay);
+  });
+};
+
 axios.defaults.baseURL = "http://localhost:5000/api";
+
+axios.interceptors.response.use(
+  async (res) => {
+    if(process.env.NODE_ENV === 'development') await sleep(1000);
+    return res;
+  },
+);
 
 const responseBody = <T>(response: AxiosResponse<T>) => response.data;
 
