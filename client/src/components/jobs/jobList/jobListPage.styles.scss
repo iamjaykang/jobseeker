@@ -1,0 +1,52 @@
+.job-list-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+
+    h1 {
+        font-size: 2rem;
+        margin-bottom: 2rem;
+        color: #333;
+    }
+
+    p {
+        font-size: 1.6rem;
+        color: #333;
+    }
+}
+
+
+.job-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+
+    .job-list__item {
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        padding: 1rem;
+        margin-bottom: 1rem;
+
+        .job-list__title {
+            font-size: 2rem;
+            margin-top: 0;
+            margin-bottom: 1rem;
+        }
+
+        .job-list__description {
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+        }
+
+        .job-list__location,
+        .job-list__salary,
+        .job-list__type,
+        .job-list__level,
+        .job-list__posted-by,
+        .job-list__date {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+        }
+    }
+}

@@ -1,0 +1,19 @@
+import React from "react";
+import { Job } from "../../../app/models/job";
+import JobListItem from "./JobListItem.component";
+
+interface Props {
+  jobs: Job[];
+}
+
+const JobList = ({ jobs }: Props) => {
+  return (
+    <ul className="job-list">
+      {jobs.map((job) => (
+        <JobListItem job={job} />
+      ))}
+    </ul>
+  );
+};
+
+export default JobList;
