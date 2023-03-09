@@ -15,22 +15,22 @@ const MobileNavbar = () => {
       </button>
       <ul className={`mobile-navbar__dropdown${isOpen ? " open" : ""}`}>
         <li className="mobile-navbar__item">
-          <a className="mobile-navbar__link" href="#">
+          <a className="mobile-navbar__link" href="/browse-jobs">
             Browse Jobs
           </a>
         </li>
         <li className="mobile-navbar__item">
-          <a className="mobile-navbar__link" href="#">
+          <a className="mobile-navbar__link" href="/post-job">
             Post a Job
           </a>
         </li>
         <li className="mobile-navbar__item">
-          <a className="mobile-navbar__link" href="#">
+          <a className="mobile-navbar__link" href="/login">
             Login
           </a>
         </li>
         <li className="mobile-navbar__item">
-          <a className="mobile-navbar__link" href="#">
+          <a className="mobile-navbar__link" href="/sign-up">
             Sign Up
           </a>
         </li>

@@ -1,32 +1,32 @@
-import React from 'react'
+import React from "react";
 
 const Navbar = () => {
   return (
     <nav className="header__navbar">
-        <ul className="navbar__menu">
-          <li className="navbar__item">
-            <a className="navbar__link" href="#">
-              Browse Jobs
-            </a>
-          </li>
-          <li className="navbar__item">
-            <a className="navbar__link" href="#">
-              Post a Job
-            </a>
-          </li>
-          <li className="navbar__item">
-            <a className="navbar__link" href="#">
-              Login
-            </a>
-          </li>
-          <li className="navbar__item">
-            <a className="navbar__link" href="#">
-              Sign Up
-            </a>
-          </li>
-        </ul>
-      </nav>
-  )
-}
+      <ul className="navbar__menu">
+        <li className="navbar__item">
+          <a className="navbar__link" href="/browse-jobs">
+            Browse Jobs
+          </a>
+        </li>
+        <li className="navbar__item">
+          <a className="navbar__link" href="/post-job">
+            Post a Job
+          </a>
+        </li>
+        <li className="navbar__item">
+          <a className="navbar__link" href="/login">
+            Login
+          </a>
+        </li>
+        <li className="navbar__item">
+          <a className="navbar__link" href="/sign-up">
+            Sign Up
+          </a>
+        </li>
+      </ul>
+    </nav>
+  );
+};
 
-export default Navbar
+export default Navbar;
