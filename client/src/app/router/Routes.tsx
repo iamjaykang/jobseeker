@@ -1,3 +1,4 @@
+
 import { createBrowserRouter, RouteObject } from "react-router-dom";
 import JobDetails from "../../components/jobs/details/JobDetails.component";
 import JobListPage from "../../components/jobs/jobList/JobListPage.component";
