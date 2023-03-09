@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { FaBriefcase } from "react-icons/fa";
+import { Link } from "react-router-dom/";
 import { useScreenWidth } from "../utils/screenWidth.util";
 import MobileNavbar from "./MobileNavbar.layout";
 import Navbar from "./Navbar.layout";
@@ -20,9 +21,9 @@ const Header = () => {
   return (
     <header className="app__header">
       <div className="app__branding">
-        <a href="#" className="branding__logo">
+        <Link to="/" className="branding__logo">
           <FaBriefcase /> <span className="branding__text">Job Seeker</span>
-        </a>
+        </Link>
       </div>
       {isMobile ? <MobileNavbar /> : <Navbar />}
     </header>
