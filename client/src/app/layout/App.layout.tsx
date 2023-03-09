@@ -2,11 +2,12 @@ import React from "react";
 import Header from "./Header.layout";
 import Footer from "./Footer.layout";
 import "./styles.css";
-import HomePage from "../../components/home/HomePage.component";
 import JobSearchForm from "./JobSearchForm.layout";
-import JobListPage from "../../components/jobs/jobList/JobListPage.component";
+import { Outlet, useLocation } from "react-router";
+import HomePage from "../../components/home/HomePage.component";
 
 function App() {
+  const location = useLocation();
   return (
     <div className="app">
       <Header />
@@ -14,7 +15,7 @@ function App() {
         <JobSearchForm />
       </div>
       <main className="app__main">
-        <JobListPage />
+        {location.pathname === "/" ? <HomePage /> : <Outlet />}
       </main>
       <Footer />
     </div>

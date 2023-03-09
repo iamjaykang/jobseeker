@@ -1,11 +1,19 @@
-import React from "react";
-import { Job } from "../../../app/models/job";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router";
+import { fetchJobByIdLoading } from "../../../app/stores/jobs/job.action";
+import { selectJob } from "../../../app/stores/jobs/job.selector";
 
-interface Props {
-  job: Job;
-}
+const JobDetails = () => {
+  const { id } = useParams();
 
-const JobDetailsPage = ({ job }: Props) => {
+  const dispatch = useDispatch();
+
+  const job = useSelector(selectJob);
+
+  useEffect(() => {
+    if (id) dispatch(fetchJobByIdLoading(id));
+  }, [id]);
   return (
     <div className="job-details-page">
       <h2 className="job-details__title">{job.title}</h2>
@@ -22,4 +30,4 @@ const JobDetailsPage = ({ job }: Props) => {
   );
 };
 
-export default JobDetailsPage;
+export default JobDetails;
