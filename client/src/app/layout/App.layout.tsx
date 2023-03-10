@@ -10,7 +10,7 @@ import HomePage from "../../components/home/HomePage.component";
 function App() {
   const location = useLocation();
   const { id } = useParams();
-  const hiddenPaths = [`/browse-jobs/${id}`, "/post-job"];
+  const hiddenPaths = [`/browse-jobs/${id}`, "/post-job", `/manage/${id}`];
   const isSearchFormVisible = !hiddenPaths.some((path) =>
     location.pathname.startsWith(path)
   );

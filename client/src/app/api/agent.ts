@@ -9,12 +9,10 @@ const sleep = (delay: number) => {
 
 axios.defaults.baseURL = "http://localhost:5000/api";
 
-axios.interceptors.response.use(
-  async (res) => {
-    if(process.env.NODE_ENV === 'development') await sleep(1000);
-    return res;
-  },
-);
+axios.interceptors.response.use(async (res) => {
+  if (process.env.NODE_ENV === "development") await sleep(1000);
+  return res;
+});
 
 const responseBody = <T>(response: AxiosResponse<T>) => response.data;
 
@@ -31,8 +29,8 @@ const Jobs = {
   details: (id: string) => requests.get<Job>(`/jobs/${id}`),
   create: (jobFormData: JobFormValues) =>
     requests.post<void>("/jobs", jobFormData),
-  update: (jobId: string, newJobFormData: JobFormValues) =>
-    requests.put<void>(`/jobs/${jobId}`, newJobFormData),
+  update: (newJobFormData: JobFormValues) =>
+    requests.put<void>(`/jobs/${newJobFormData.id}`, newJobFormData),
   delete: (jobId: string) => requests.del<void>(`/jobs/${jobId}`),
 };
 
