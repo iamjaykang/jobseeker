@@ -1,0 +1,27 @@
+.validation-error {
+  margin: 2rem 0;
+}
+.validation-error__card {
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  border-radius: 0.25rem;
+  box-shadow: 0 1px 2px 0 rgba(34, 36, 38, 0.15);
+  padding: 1rem;
+  max-width: 60vw;
+  width: 100%;
+  margin: 0 auto;
+}
+.validation-error h3 {
+  margin-top: 1rem;
+  font-size: 2.2rem;
+}
+.validation-error__list {
+  list-style-type: none;
+  padding-left: 0;
+  margin: 0;
+}
+.validation-error__item {
+  color: #721c24;
+  margin-bottom: 0.5rem;
+  font-size: 1.6rem;
+}/*# sourceMappingURL=validationError.styles.css.map */
