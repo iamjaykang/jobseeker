@@ -1,4 +1,5 @@
 using Domain;
+using FluentValidation;
 using MediatR;
 using Persistence;
 
@@ -10,6 +11,16 @@ namespace Application.Jobs
         public class Command : IRequest
         {
             public Job Job { get; set; }
+        }
+
+        public class CommandValidator : AbstractValidator<Command>
+        {
+
+            public CommandValidator()
+            {
+                RuleFor(x => x.Job)
+                .SetValidator(new JobValidator());
+            }
         }
 
         public class Handler : IRequestHandler<Command>
