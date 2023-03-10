@@ -1,0 +1,34 @@
+.server-error {
+  max-width: 75vw;
+  width: 100%;
+  margin: 2rem auto;
+}
+.server-error h1 {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+}
+.server-error__message {
+  font-size: 2rem;
+  color: red;
+  margin-bottom: 1rem;
+}
+.server-error__details {
+  background-color: #f2f2f2;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  margin-top: 2rem;
+  padding: 1rem;
+}
+.server-error__details-heading {
+  margin-top: 0.6rem;
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+}
+.server-error__details code {
+  display: block;
+  font-size: 1.2rem;
+  padding: 1rem;
+  margin-top: 2rem;
+  word-wrap: break-word;
+}/*# sourceMappingURL=serverError.styles.css.map */
