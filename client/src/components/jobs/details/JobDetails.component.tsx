@@ -1,8 +1,11 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom/";
+import { Link, useNavigate, useParams } from "react-router-dom/";
 import LoadingSpinner from "../../../app/common/loadingSpinner/LoadingSpinner.common";
-import { fetchJobByIdLoading } from "../../../app/stores/jobs/job.action";
+import {
+  deleteJobLoading,
+  fetchJobByIdLoading,
+} from "../../../app/stores/jobs/job.action";
 import {
   selectJob,
   selectJobsIsLoading,
@@ -15,9 +18,18 @@ const JobDetails = () => {
 
   const dispatch = useDispatch();
 
+  const navigate = useNavigate();
+
   const job = useSelector(selectJob);
 
   const jobIsLoading = useSelector(selectJobsIsLoading);
+
+  const handleDelete = () => {
+    if (job && job.id) {
+      dispatch(deleteJobLoading(job.id));
+      navigate("/browse-jobs");
+    }
+  };
 
   useEffect(() => {
     if (id) dispatch(fetchJobByIdLoading(id));
@@ -27,7 +39,27 @@ const JobDetails = () => {
 
   return (
     <div className="job-details-page">
-      {job && <JobDetailsCard job={job} />}
+      <div className="job-details__card-container">
+        {job && (
+          <>
+            <div className="job-details__action-container">
+              <Link
+                to={`/manage/${job.id}`}
+                className="job-details__edit-button"
+              >
+                Edit
+              </Link>
+              <button
+                onClick={handleDelete}
+                className="job-details__delete-button"
+              >
+                Delete
+              </button>
+            </div>
+            <JobDetailsCard job={job} />
+          </>
+        )}
+      </div>
     </div>
   );
 };
