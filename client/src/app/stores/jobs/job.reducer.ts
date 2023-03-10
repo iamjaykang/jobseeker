@@ -27,7 +27,6 @@ export interface JobState {
 
 const JOB_INITIAL_STATE = {
   isLoading: false,
-  error: null,
   jobsArray: [],
   job: null,
 };
@@ -38,7 +37,6 @@ const jobsReducer = (state = JOB_INITIAL_STATE, action = {} as AnyAction) => {
       ...state,
       isLoading: true,
       jobsArray: [],
-      error: null,
     };
   }
 
@@ -51,7 +49,6 @@ const jobsReducer = (state = JOB_INITIAL_STATE, action = {} as AnyAction) => {
       ...state,
       isLoading: true,
       job: null,
-      error: null,
     };
   }
 
@@ -60,7 +57,6 @@ const jobsReducer = (state = JOB_INITIAL_STATE, action = {} as AnyAction) => {
       ...state,
       isLoading: true,
       job: null,
-      error: null,
     };
   }
 
@@ -69,7 +65,6 @@ const jobsReducer = (state = JOB_INITIAL_STATE, action = {} as AnyAction) => {
       ...state,
       isLoading: false,
       jobsArray: action.payload,
-      error: null,
     };
   }
 
@@ -78,7 +73,6 @@ const jobsReducer = (state = JOB_INITIAL_STATE, action = {} as AnyAction) => {
       ...state,
       isLoading: false,
       job: action.payload,
-      error: null,
     };
   }
 
@@ -90,32 +84,19 @@ const jobsReducer = (state = JOB_INITIAL_STATE, action = {} as AnyAction) => {
     return {
       ...state,
       isLoading: false,
-      error: null,
     };
   }
 
   if (
     fetchAllJobsFailed.match(action) ||
-    fetchJobByIdFailed.match(action) ||
+    updateJobFailed.match(action) ||
     addJobFailed.match(action) ||
-    updateJobFailed.match(action)
+    fetchJobByIdFailed.match(action) ||
+    deleteJobFailed.match(action)
   ) {
     return {
       ...state,
       isLoading: false,
-      success: false,
-      error: action.payload.stack,
-    };
-  }
-
-  if (deleteJobFailed.match(action)) {
-    return {
-      ...state,
-      isLoading: false,
-      job: null,
-      success: true,
-      message: "User deleted successfully",
-      error: null,
     };
   }
 

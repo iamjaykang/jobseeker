@@ -1,5 +1,6 @@
 import { takeLatest, all, call, put } from "typed-redux-saga";
 import agent from "../../api/agent";
+import { router } from "../../router/Routes";
 import {
   addJobFailed,
   AddJobLoading,
@@ -22,8 +23,8 @@ export function* fetchAllJobs() {
   try {
     const jobsArray = yield* call(agent.Jobs.list);
     yield* put(fetchAllJobsSuccess(jobsArray));
-  } catch (error) {
-    yield* put(fetchAllJobsFailed(error as Error));
+  } catch {
+    yield* put(fetchAllJobsFailed());
   }
 }
 
@@ -31,28 +32,31 @@ export function* fetchJobById({ payload }: FetchJobByIdLoading) {
   try {
     const job = yield* call(agent.Jobs.details, payload);
     yield* put(fetchJobByIdSuccess(job));
-  } catch (error) {
-    yield* put(fetchJobByIdFailed(error as Error));
+  } catch {
+    yield* put(fetchJobByIdFailed());
   }
 }
 
 export function* addJob({ payload }: AddJobLoading) {
   try {
     yield* call(agent.Jobs.create, payload);
+    const { id } = payload;
     yield* put(addJobSuccess());
-  } catch (error) {
-    yield* put(addJobFailed(error as Error));
+    router.navigate(`/browse-jobs/${id}`);
+  } catch {
+    yield* put(addJobFailed());
   }
 }
 
 export function* updateJob({ payload }: UpdateJobLoading) {
   const { newJobFormData } = payload;
-  console.log(newJobFormData)
   try {
     yield* call(agent.Jobs.update, newJobFormData);
+    const { id } = newJobFormData;
     yield* put(updateJobSuccess());
-  } catch (error) {
-    yield* put(updateJobFailed(error as Error));
+    router.navigate(`/browse-jobs/${id}`);
+  } catch {
+    yield* put(updateJobFailed());
   }
 }
 
@@ -60,8 +64,8 @@ export function* deleteJob({ payload: jobId }: DeleteJobLoading) {
   try {
     yield* call(agent.Jobs.delete, jobId);
     yield* put(deleteJobSuccess());
-  } catch (error) {
-    yield* put(deleteJobFailed(error as Error));
+  } catch {
+    yield* put(deleteJobFailed());
   }
 }
 

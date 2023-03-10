@@ -10,7 +10,7 @@ import {
 import { v4 as uuid } from "uuid";
 import "./jobForm.styles.css";
 import { selectJobFormData } from "../../../app/stores/jobs/job.selector";
-import './jobForm.styles.css'
+import "./jobForm.styles.css";
 
 const JobForm = () => {
   const [formData, setFormData] = useState<JobFormValues>(new JobFormValues());
@@ -47,7 +47,7 @@ const JobForm = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (!formData.id) {
@@ -56,13 +56,10 @@ const JobForm = () => {
         id: uuid(),
       };
 
-      await dispatch(addJobLoading(newJob)); // Wait for dispatch to complete
-
-      navigate(`/browse-jobs/${newJob.id}`); // Navigate after dispatch is complete
+      dispatch(addJobLoading(newJob));
     } else {
       if (id) {
         dispatch(updateJobLoading(formData));
-        navigate(`/browse-jobs/${id}`);
       }
     }
   };
@@ -71,13 +68,17 @@ const JobForm = () => {
     if (id) {
       dispatch(fetchJobByIdLoading(id));
     }
-  }, [id, dispatch]);
+  }, [id]);
 
   useEffect(() => {
     if (jobFormData) {
       setFormData(new JobFormValues(jobFormData));
     }
   }, [jobFormData]);
+
+  useEffect(() => {
+    setFormData(new JobFormValues());
+  }, []);
 
   return (
     <div className="job-form-card">

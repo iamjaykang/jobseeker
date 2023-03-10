@@ -11,10 +11,8 @@ export type FetchAllJobsSuccess = ActionWithPayload<
   Job[]
 >;
 
-export type FetchAllJobsFailed = ActionWithPayload<
-  JOBS_ACTION_TYPES.FETCH_ALL_JOBS_FAILED,
-  Error
->;
+export type FetchAllJobsFailed =
+  Action<JOBS_ACTION_TYPES.FETCH_ALL_JOBS_FAILED>;
 
 export type FetchJobByIdLoading = ActionWithPayload<
   JOBS_ACTION_TYPES.FETCH_JOB_BY_ID_LOADING,
@@ -26,10 +24,8 @@ export type FetchJobByIdSuccess = ActionWithPayload<
   Job
 >;
 
-export type FetchJobByIdFailed = ActionWithPayload<
-  JOBS_ACTION_TYPES.FETCH_JOB_BY_ID_FAILED,
-  Error
->;
+export type FetchJobByIdFailed =
+  Action<JOBS_ACTION_TYPES.FETCH_JOB_BY_ID_FAILED>;
 
 export type AddJobLoading = ActionWithPayload<
   JOBS_ACTION_TYPES.ADD_JOB_LOADING,
@@ -38,10 +34,7 @@ export type AddJobLoading = ActionWithPayload<
 
 export type AddJobSuccess = Action<JOBS_ACTION_TYPES.ADD_JOB_SUCCESS>;
 
-export type AddJobFailed = ActionWithPayload<
-  JOBS_ACTION_TYPES.ADD_JOB_FAILED,
-  Error
->;
+export type AddJobFailed = Action<JOBS_ACTION_TYPES.ADD_JOB_FAILED>;
 
 export type UpdateJobLoading = ActionWithPayload<
   JOBS_ACTION_TYPES.UPDATE_JOB_LOADING,
@@ -50,10 +43,7 @@ export type UpdateJobLoading = ActionWithPayload<
 
 export type UpdateJobSuccess = Action<JOBS_ACTION_TYPES.UPDATE_JOB_SUCCESS>;
 
-export type UpdateJobFailed = ActionWithPayload<
-  JOBS_ACTION_TYPES.UPDATE_JOB_FAILED,
-  Error
->;
+export type UpdateJobFailed = Action<JOBS_ACTION_TYPES.UPDATE_JOB_FAILED>;
 
 export type DeleteJobLoading = ActionWithPayload<
   JOBS_ACTION_TYPES.DELETE_JOB_LOADING,
@@ -62,10 +52,7 @@ export type DeleteJobLoading = ActionWithPayload<
 
 export type DeleteJobSuccess = Action<JOBS_ACTION_TYPES.DELETE_JOB_SUCCESS>;
 
-export type DeleteJobFailed = ActionWithPayload<
-  JOBS_ACTION_TYPES.DELETE_JOB_FAILED,
-  Error
->;
+export type DeleteJobFailed = Action<JOBS_ACTION_TYPES.DELETE_JOB_FAILED>;
 
 // Action to get all JOBS loading
 export const fetchAllJobsLoading = withMatcher(
@@ -81,8 +68,8 @@ export const fetchAllJobsSuccess = withMatcher(
 
 // Action to get all JOBS failed
 export const fetchAllJobsFailed = withMatcher(
-  (error: Error): FetchAllJobsFailed =>
-    createAction(JOBS_ACTION_TYPES.FETCH_ALL_JOBS_FAILED, error)
+  (): FetchAllJobsFailed =>
+    createAction(JOBS_ACTION_TYPES.FETCH_ALL_JOBS_FAILED)
 );
 
 // Action to get JOB by id loading
@@ -99,15 +86,16 @@ export const fetchJobByIdSuccess = withMatcher(
 
 // Action to get JOB by id failed
 export const fetchJobByIdFailed = withMatcher(
-  (error: Error): FetchJobByIdFailed =>
-    createAction(JOBS_ACTION_TYPES.FETCH_JOB_BY_ID_FAILED, error)
+  (): FetchJobByIdFailed =>
+    createAction(JOBS_ACTION_TYPES.FETCH_JOB_BY_ID_FAILED)
 );
 
 // Action to add JOBS loading
 export const addJobLoading = withMatcher(
-  (jobFormData: JobFormValues): AddJobLoading =>{
-    jobFormData
-    return createAction(JOBS_ACTION_TYPES.ADD_JOB_LOADING, jobFormData)}
+  (jobFormData: JobFormValues): AddJobLoading => {
+    jobFormData;
+    return createAction(JOBS_ACTION_TYPES.ADD_JOB_LOADING, jobFormData);
+  }
 );
 
 // Action to add JOBS success
@@ -117,8 +105,7 @@ export const addJobSuccess = withMatcher(
 
 // Action to add JOBS failed
 export const addJobFailed = withMatcher(
-  (error: Error): AddJobFailed =>
-    createAction(JOBS_ACTION_TYPES.ADD_JOB_FAILED, error)
+  (): AddJobFailed => createAction(JOBS_ACTION_TYPES.ADD_JOB_FAILED)
 );
 
 // Action to update JOBS loading
@@ -136,8 +123,7 @@ export const updateJobSuccess = withMatcher(
 
 // Action to update JOBS failed
 export const updateJobFailed = withMatcher(
-  (error: Error): UpdateJobFailed =>
-    createAction(JOBS_ACTION_TYPES.UPDATE_JOB_FAILED, error)
+  (): UpdateJobFailed => createAction(JOBS_ACTION_TYPES.UPDATE_JOB_FAILED)
 );
 
 // Action to delete JOB loading
@@ -153,6 +139,5 @@ export const deleteJobSuccess = withMatcher(
 
 // Action to delete JOB failed
 export const deleteJobFailed = withMatcher(
-  (error: Error): DeleteJobFailed =>
-    createAction(JOBS_ACTION_TYPES.DELETE_JOB_FAILED, error)
+  (): DeleteJobFailed => createAction(JOBS_ACTION_TYPES.DELETE_JOB_FAILED)
 );
