@@ -1,3 +1,4 @@
+using Application.Core;
 using AutoMapper;
 using Domain;
 using FluentValidation;
@@ -9,7 +10,7 @@ namespace Application.Jobs
     public class Edit
     {
         
-        public class Command : IRequest
+        public class Command : IRequest<Result<Unit>>
         {
 
             public Job Job { get; set; }
@@ -25,7 +26,7 @@ namespace Application.Jobs
             }
         }
 
-        public class Handler : IRequestHandler<Command>
+        public class Handler : IRequestHandler<Command, Result<Unit>>
         {
         private readonly DataContext _context;
         private readonly IMapper _mapper;
@@ -35,15 +36,21 @@ namespace Application.Jobs
             _context = context;
             }
 
-            public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
+            public async Task<Result<Unit>> Handle(Command request, CancellationToken cancellationToken)
             {
                 var job = await _context.Jobs.FindAsync(request.Job.Id);
 
+                if (job == null) return null;
+
                 _mapper.Map(request.Job, job);
 
-                await _context.SaveChangesAsync();
+                var result = await _context.SaveChangesAsync() > 0;
 
-                return Unit.Value;
+                if (!result) return Result<Unit>
+                .Failure("Failed to update job");
+
+                return Result<Unit>
+                .Success(Unit.Value);
             }
         }
     }
