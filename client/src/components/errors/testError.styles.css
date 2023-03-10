@@ -1,0 +1,23 @@
+.test-errors__header {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+.test-errors__container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+.test-errors__button {
+  padding: 1rem 2rem;
+  background-color: #0052cc;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 1.4rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.test-errors__button:hover {
+  background-color: #00449e;
+}/*# sourceMappingURL=testError.styles.css.map */
