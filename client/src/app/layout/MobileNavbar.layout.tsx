@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
+import { Link } from "react-router-dom/";
 
 const MobileNavbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -15,24 +16,24 @@ const MobileNavbar = () => {
       </button>
       <ul className={`mobile-navbar__dropdown${isOpen ? " open" : ""}`}>
         <li className="mobile-navbar__item">
-          <a className="mobile-navbar__link" href="/browse-jobs">
+          <Link className="mobile-navbar__link" to="/browse-jobs">
             Browse Jobs
-          </a>
+          </Link>
         </li>
         <li className="mobile-navbar__item">
-          <a className="mobile-navbar__link" href="/post-job">
+          <Link className="mobile-navbar__link" to="/post-job">
             Post a Job
-          </a>
+          </Link>
         </li>
         <li className="mobile-navbar__item">
-          <a className="mobile-navbar__link" href="/login">
+          <Link className="mobile-navbar__link" to="/login">
             Login
-          </a>
+          </Link>
         </li>
         <li className="mobile-navbar__item">
-          <a className="mobile-navbar__link" href="/sign-up">
+          <Link className="mobile-navbar__link" to="/sign-up">
             Sign Up
-          </a>
+          </Link>
         </li>
       </ul>
     </nav>

@@ -5,6 +5,7 @@ import { RouterProvider } from "react-router-dom/";
 import { router } from "./app/router/Routes";
 import { store } from "./app/stores/store";
 import "./index.css";
+import 'react-toastify/dist/ReactToastify.min.css';
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
     <Provider store={store}>
