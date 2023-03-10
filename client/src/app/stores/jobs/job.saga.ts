@@ -46,9 +46,10 @@ export function* addJob({ payload }: AddJobLoading) {
 }
 
 export function* updateJob({ payload }: UpdateJobLoading) {
-  const { jobId, newJobFormData } = payload;
+  const { newJobFormData } = payload;
+  console.log(newJobFormData)
   try {
-    yield* call(agent.Jobs.update, jobId, newJobFormData);
+    yield* call(agent.Jobs.update, newJobFormData);
     yield* put(updateJobSuccess());
   } catch (error) {
     yield* put(updateJobFailed(error as Error));

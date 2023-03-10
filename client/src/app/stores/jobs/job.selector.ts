@@ -1,4 +1,5 @@
 import { createSelector } from "reselect";
+import { JobFormValues } from "../../models/job.model";
 import { convertUtcToLocal } from "../../utils/convertUtcToLocal.util";
 import { RootState } from "../store";
 import { JobState } from "./job.reducer";
@@ -28,6 +29,16 @@ export const selectJob = createSelector(
     };
   }
 );
+
+export const selectJobFormData = createSelector(
+  [selectJobsReducer],
+  (jobsSlice) => {
+    const job = jobsSlice.job;
+    if (!job) return new JobFormValues();
+    return new JobFormValues(job);
+  }
+);
+
 
 export const selectJobsIsLoading = createSelector(
   [selectJobsReducer],

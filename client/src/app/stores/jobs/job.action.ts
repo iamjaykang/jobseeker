@@ -45,7 +45,7 @@ export type AddJobFailed = ActionWithPayload<
 
 export type UpdateJobLoading = ActionWithPayload<
   JOBS_ACTION_TYPES.UPDATE_JOB_LOADING,
-  { jobId: string; newJobFormData: JobFormValues }
+  { newJobFormData: JobFormValues }
 >;
 
 export type UpdateJobSuccess = Action<JOBS_ACTION_TYPES.UPDATE_JOB_SUCCESS>;
@@ -123,9 +123,8 @@ export const addJobFailed = withMatcher(
 
 // Action to update JOBS loading
 export const updateJobLoading = withMatcher(
-  (jobId: string, newJobFormData: JobFormValues): UpdateJobLoading =>
+  (newJobFormData: JobFormValues): UpdateJobLoading =>
     createAction(JOBS_ACTION_TYPES.UPDATE_JOB_LOADING, {
-      jobId,
       newJobFormData,
     })
 );
