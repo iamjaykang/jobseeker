@@ -13,9 +13,9 @@ namespace Persistence
 
                 var users = new List<AppUser>
                 {
-                    new AppUser { DisplayName = "John Smith", UserName = "johnsmith", Email = "john.smith@example.com" },
-new AppUser { DisplayName = "Jane Doe", UserName = "janedoe", Email = "jane.doe@example.com" },
-new AppUser { DisplayName = "Bob Johnson", UserName = "bobjohnson", Email = "bob.johnson@example.com" },
+                    new AppUser { FirstName = "John",LastName = "Smith", UserName = "johnsmith", Email = "john.smith@example.com" },
+new AppUser { FirstName = "Jane",LastName = "Doe", UserName = "janedoe", Email = "jane.doe@example.com" },
+new AppUser { FirstName = "Bob",LastName = "Johnson", UserName = "bobjohnson", Email = "bob.johnson@example.com" },
                 };
 
                 foreach (var user in users)
