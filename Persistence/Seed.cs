@@ -1,11 +1,29 @@
 using Domain;
+using Microsoft.AspNetCore.Identity;
 
 namespace Persistence
 {
     public static class Seed
     {
-        public static async Task SeedData(DataContext context)
+        public static async Task SeedData(DataContext context, UserManager<AppUser> userManager)
         {
+
+            if (!userManager.Users.Any())
+            {
+
+                var users = new List<AppUser>
+                {
+                    new AppUser { DisplayName = "John Smith", UserName = "johnsmith", Email = "john.smith@example.com" },
+new AppUser { DisplayName = "Jane Doe", UserName = "janedoe", Email = "jane.doe@example.com" },
+new AppUser { DisplayName = "Bob Johnson", UserName = "bobjohnson", Email = "bob.johnson@example.com" },
+                };
+
+                foreach (var user in users)
+                {
+                    await userManager.CreateAsync(user, "Pa$$w0rd");
+                }
+            }
+
             if (!context.Jobs.Any())
             {
                 var jobs = new List<Job>
@@ -18,7 +36,7 @@ namespace Persistence
                     JobType = "Full-time",
                     PostedBy = "John Doe",
                     Salary = "$100,000 - $120,000",
-                    ExperienceLevel = "Mid-level",
+                    ExperienceLevel = "Intermediate",
                     City = "Auckland"
                 },
                 new Job
