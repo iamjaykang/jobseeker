@@ -1,5 +1,6 @@
 using Application.Jobs;
 using Domain;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -7,12 +8,13 @@ namespace API.Controllers
     public class JobsController : BaseApiController
     {
 
+        [AllowAnonymous]
         [HttpGet] // api/jobs
         public async Task<IActionResult> GetJobs()
         {
             return HandleResult(await Mediator.Send(new List.Query()));
         }
-
+        [AllowAnonymous]
         [HttpGet("{id}")] // api/jobs/{id}
         public async Task<IActionResult> GetJob(Guid id)
         {
