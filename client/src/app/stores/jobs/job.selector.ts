@@ -18,17 +18,14 @@ export const selectJobsArray = createSelector(
   }
 );
 
-export const selectJob = createSelector(
-  [selectJobsReducer],
-  (jobsSlice) => {
-    const job = jobsSlice.job;
-    if (!job) return null;
-    return {
-      ...job,
-      date: convertUtcToLocal(job.date),
-    };
-  }
-);
+export const selectJob = createSelector([selectJobsReducer], (jobsSlice) => {
+  const job = jobsSlice.job;
+  if (!job) return null;
+  return {
+    ...job,
+    date: convertUtcToLocal(job.date),
+  };
+});
 
 export const selectJobFormData = createSelector(
   [selectJobsReducer],
@@ -38,7 +35,6 @@ export const selectJobFormData = createSelector(
     return new JobFormValues(job);
   }
 );
-
 
 export const selectJobsIsLoading = createSelector(
   [selectJobsReducer],

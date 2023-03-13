@@ -10,16 +10,9 @@ import { ToastContainer } from "react-toastify";
 
 function App() {
   const location = useLocation();
-  const { id } = useParams();
-  const hiddenPaths = [
-    `/browse-jobs/${id}`,
-    "/post-job",
-    `/manage/${id}`,
-    "/not-found",
-  ];
-  const isSearchFormVisible = !hiddenPaths.some((path) =>
-    location.pathname.startsWith(path)
-  );
+  const {id} = useParams();
+  const visiblePaths = ["/", "/browse-jobs", `/browse-jobs/${id}`];
+  const isSearchFormVisible = visiblePaths.includes(location.pathname);
   return (
     <div className="app">
       <ScrollRestoration />

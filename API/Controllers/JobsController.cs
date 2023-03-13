@@ -20,7 +20,7 @@ namespace API.Controllers
         {
             return HandleResult(await Mediator.Send(new Details.Query { Id = id }));
         }
-
+        
         [HttpPost] // api/jobs
         public async Task<IActionResult> CreateJob(Job job)
         {
