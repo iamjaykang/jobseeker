@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom/";
 import { JobFormValues } from "../../../app/models/job.model";
-import { Formik } from "formik";
+import { Formik, Form } from "formik";
 import {
   addJobLoading,
   fetchJobByIdLoading,
@@ -60,81 +60,83 @@ const JobForm = () => {
   }, []);
 
   return (
-    <div className="job-form-card">
-      <div className="job-form-card__content">
-        <Formik
-          enableReinitialize
-          validationSchema={jobFormValidation}
-          initialValues={formData}
-          onSubmit={(values) => handleFormSubmit(values)}
-        >
-          {({ handleSubmit, isSubmitting, dirty, isValid }) => (
-            <form
-              className="job-form"
-              onSubmit={handleSubmit}
-              autoComplete="off"
-            >
-              <div className="job-form__heading">
-                <div className="job-form__header">Job Details</div>
-                <MySubmitButton
-                  buttonType="job-form"
-                  label="Submit"
-                  disabled={isSubmitting || !dirty || !isValid}
+    <div className="job-form__container">
+      <div className="job-form-card">
+        <div className="job-form-card__content">
+          <Formik
+            enableReinitialize
+            validationSchema={jobFormValidation}
+            initialValues={formData}
+            onSubmit={(values) => handleFormSubmit(values)}
+          >
+            {({ handleSubmit, isSubmitting, dirty, isValid }) => (
+              <Form
+                className="job-form"
+                onSubmit={handleSubmit}
+                autoComplete="off"
+              >
+                <div className="job-form__heading">
+                  <div className="job-form__header">Job Details</div>
+                  <MySubmitButton
+                    buttonType="job-form"
+                    label="Submit"
+                    disabled={isSubmitting || !dirty || !isValid}
+                  />
+                </div>
+                <MyTextInput
+                  name="title"
+                  placeholder="Enter Title"
+                  label="Job Title"
+                  formtype="job-form"
                 />
-              </div>
-              <MyTextInput
-                name="title"
-                placeholder="Enter Title"
-                label="Job Title"
-                formtype="job-form"
-              />
 
-              <MyTextArea
-                name="description"
-                placeholder="Enter Description"
-                label="Job Description"
-                formtype="job-form"
-                rows={4}
-              />
+                <MyTextArea
+                  name="description"
+                  placeholder="Enter Description"
+                  label="Job Description"
+                  formtype="job-form"
+                  rows={4}
+                />
 
-              <MyTextInput
-                name="jobType"
-                placeholder="Enter Job Type"
-                label="Job Type"
-                formtype="job-form"
-              />
+                <MyTextInput
+                  name="jobType"
+                  placeholder="Enter Job Type"
+                  label="Job Type"
+                  formtype="job-form"
+                />
 
-              <MyTextInput
-                name="postedBy"
-                placeholder="Posted By"
-                label="Posted By"
-                formtype="job-form"
-              />
+                <MyTextInput
+                  name="postedBy"
+                  placeholder="Posted By"
+                  label="Posted By"
+                  formtype="job-form"
+                />
 
-              <MyTextInput
-                name="salary"
-                placeholder="Enter Salary"
-                label="Job Salary"
-                formtype="job-form"
-              />
+                <MyTextInput
+                  name="salary"
+                  placeholder="Enter Salary"
+                  label="Job Salary"
+                  formtype="job-form"
+                />
 
-              <MySelectInput
-                name="experienceLevel"
-                options={experienceLevelOptions}
-                placeholder="Experience Level"
-                formtype="job-form"
-                label="Experience Level"
-              />
+                <MySelectInput
+                  name="experienceLevel"
+                  options={experienceLevelOptions}
+                  placeholder="Experience Level"
+                  formtype="job-form"
+                  label="Experience Level"
+                />
 
-              <MyTextInput
-                name="city"
-                placeholder="Enter Location"
-                label="Job Location"
-                formtype="job-form"
-              />
-            </form>
-          )}
-        </Formik>
+                <MyTextInput
+                  name="city"
+                  placeholder="Enter Location"
+                  label="Job Location"
+                  formtype="job-form"
+                />
+              </Form>
+            )}
+          </Formik>
+        </div>
       </div>
     </div>
   );

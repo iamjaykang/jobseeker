@@ -1,9 +1,16 @@
+.job-form__container {
+    height: 90vh;
+    display: flex;
+    align-items: center;
+}
+
 .job-form-card {
     background-color: #fff;
     border: 1px solid #ccc;
     margin: 2rem auto;
     position: relative;
     max-width: 90%;
+    width: 100%;
     border-radius: 8px;
     padding: 2rem;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
