@@ -1,7 +1,8 @@
-import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom/";
+import { useParams } from "react-router-dom/";
 import { JobFormValues } from "../../../app/models/job.model";
+import { Formik } from "formik";
 import {
   addJobLoading,
   fetchJobByIdLoading,
@@ -11,6 +12,10 @@ import { v4 as uuid } from "uuid";
 import "./jobForm.styles.css";
 import { selectJobFormData } from "../../../app/stores/jobs/job.selector";
 import "./jobForm.styles.css";
+import MyTextInput from "../../../app/common/form/MyTextInput.common";
+import MyTextArea from "../../../app/common/form/MyTextArea.common";
+import MySelectInput from "../../../app/common/form/MySelectInput.common";
+import { experienceLevelOptions } from "../../../app/common/options/experienceLevelOptions.common";
 
 const JobForm = () => {
   const [formData, setFormData] = useState<JobFormValues>(new JobFormValues());
@@ -19,47 +24,19 @@ const JobForm = () => {
 
   const { id } = useParams();
 
-  const navigate = useNavigate();
-
   const dispatch = useDispatch();
 
-  const {
-    title,
-    description,
-    jobType,
-    postedBy,
-    salary,
-    experienceLevel,
-    city,
-  } = formData;
-
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
-  const handleTextAreaChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
-  const handleSelectChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
+  const handleFormSubmit = (job: JobFormValues) => {
     if (!formData.id) {
       let newJob = {
-        ...formData,
+        ...job,
         id: uuid(),
       };
 
       dispatch(addJobLoading(newJob));
     } else {
       if (id) {
-        dispatch(updateJobLoading(formData));
+        dispatch(updateJobLoading(job));
       }
     }
   };
@@ -84,97 +61,74 @@ const JobForm = () => {
     <div className="job-form-card">
       <div className="job-form-card__header">Job Details</div>
       <div className="job-form-card__content">
-        <form className="job-form" onSubmit={handleSubmit}>
-          <label htmlFor="title" className="job-form__label">
-            Title
-          </label>
-          <input
-            className="job-form__input"
-            type="text"
-            value={title}
-            name="title"
-            placeholder="Enter title"
-            onChange={handleInputChange}
-          />
+        <Formik
+          enableReinitialize
+          initialValues={formData}
+          onSubmit={(values) => handleFormSubmit(values)}
+        >
+          {({ handleSubmit }) => (
+            <form
+              className="job-form"
+              onSubmit={handleSubmit}
+              autoComplete="off"
+            >
+              <MyTextInput
+                name="title"
+                placeholder="Enter Title"
+                label="Job Title"
+                formtype="job-form"
+              />
 
-          <label htmlFor="description" className="job-form__label">
-            Description
-          </label>
-          <textarea
-            className="job-form__input"
-            value={description}
-            name="description"
-            placeholder="Enter job description"
-            onChange={handleTextAreaChange}
-          />
+              <MyTextArea
+                name="description"
+                placeholder="Enter Description"
+                label="Job Description"
+                formtype="job-form"
+                rows={4}
+              />
 
-          <label htmlFor="jobType" className="job-form__label">
-            Job Type
-          </label>
-          <input
-            className="job-form__input"
-            value={jobType}
-            type="text"
-            name="jobType"
-            placeholder="Enter job type"
-            onChange={handleInputChange}
-          />
+              <MyTextInput
+                name="jobType"
+                placeholder="Enter Job Type"
+                label="Job Type"
+                formtype="job-form"
+              />
 
-          <label htmlFor="postedBy" className="job-form__label">
-            Posted By
-          </label>
-          <input
-            className="job-form__input"
-            type="text"
-            value={postedBy}
-            name="postedBy"
-            placeholder="Enter poster's name"
-            onChange={handleInputChange}
-          />
+              <MyTextInput
+                name="postedBy"
+                placeholder="Posted By"
+                label="Posted By"
+                formtype="job-form"
+              />
 
-          <label htmlFor="salary" className="job-form__label">
-            Salary
-          </label>
-          <input
-            className="job-form__input"
-            type="text"
-            value={salary}
-            name="salary"
-            placeholder="Enter salary"
-            onChange={handleInputChange}
-          />
+              <MyTextInput
+                name="salary"
+                placeholder="Enter Salary"
+                label="Job Salary"
+                formtype="job-form"
+              />
 
-          <label htmlFor="experienceLevel" className="job-form__label">
-            Experience Level
-          </label>
-          <select
-            className="job-form__select"
-            value={experienceLevel}
-            name="experienceLevel"
-            onChange={handleSelectChange}
-          >
-            <option value="">--- Select Experience Level ---</option>
-            <option value="entry">Entry</option>
-            <option value="intermediate">Intermediate</option>
-            <option value="senior">Senior</option>
-          </select>
+              <MySelectInput
+                name="experienceLevel"
+                options={experienceLevelOptions}
+                placeholder="Experience Level"
+                formtype="job-form"
+                label="Experience Level"
+              />
 
-          <label htmlFor="city" className="job-form__label">
-            City
-          </label>
-          <input
-            className="job-form__input"
-            type="text"
-            value={city}
-            name="city"
-            placeholder="Enter city"
-            onChange={handleInputChange}
-          />
+              <MyTextInput
+                name="city"
+                placeholder="Enter Location"
+                label="Job Location"
+                formtype="job-form"
+              />
 
-          <button className="job-form__button" type="submit">
-            Submit
-          </button>
-        </form>
+              <button className="job-form__button" type="submit">
+                Submit
+              </button>
+            </form>
+          )}
+        </Formik>
       </div>
     </div>
   );
