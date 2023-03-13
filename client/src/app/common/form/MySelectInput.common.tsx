@@ -37,8 +37,8 @@ const MySelectInput = (props: Props) => {
         onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
           helpers.setValue(e.target.value)
         }
-        placeholder={props.placeholder}
       >
+        <option value="">{`---- Select ${props.placeholder} ----`}</option>
         {props.options.map(({ value, text }) => (
           <option value={value} key={value}>
             {text}

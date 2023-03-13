@@ -2,15 +2,47 @@
     background-color: #fff;
     border: 1px solid #ccc;
     margin: 2rem auto;
-    max-width: 80%;
+    position: relative;
+    max-width: 90%;
     border-radius: 8px;
     padding: 2rem;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 
-    .job-form-card__header {
-        font-size: 2rem;
-        font-weight: bold;
+    @media screen and (min-width: 1200px) {
+        max-width: 1200px;
+    }
+
+    .job-form__heading {
+        width: 100%;
         margin-bottom: 2rem;
+        flex-direction: row;
+        display: flex;
+        justify-content:space-between;
+
+        .job-form__header {
+            font-size: 2rem;
+            font-weight: bold;
+            margin: auto 0;
+        }
+
+        .job-form__button {
+            background-color: #007acc;
+            color: #fff;
+            padding: 1.2rem 4rem;
+            border: none;
+            border-radius: 4px;
+            font-size: 1.6rem;
+            cursor: pointer;
+
+            &:disabled {
+                opacity: 0.5;
+                cursor: not-allowed;
+            }
+
+            &:hover {
+                background-color: #005fa3;
+            }
+        }
     }
 
     .job-form-card__content {
@@ -19,7 +51,7 @@
         align-items: flex-start;
 
         .job-form {
-            max-width: 800px;
+
             width: 100%;
 
             .job-form__label {
@@ -34,24 +66,19 @@
                 padding: 1rem;
                 border: 1px solid #ccc;
                 border-radius: 4px;
-                font-size: 1.6rem;
                 margin-bottom: 1rem;
-            }
-
-            .job-form__button {
-                background-color: #007acc;
-                color: #fff;
-                padding: 1rem 2rem;
-                border: none;
-                border-radius: 4px;
                 font-size: 1.6rem;
-                cursor: pointer;
-                transition: all 0.2s;
-
-                &:hover {
-                    background-color: #005fa3;
-                }
             }
+
+            .job-form__below-label {
+                margin-bottom: 1rem;
+                padding: 1rem;
+                border: 1px solid red;
+                border-radius: 4px;
+                color: red;
+                font-size: 14px;
+              }
+              
         }
     }
 }
