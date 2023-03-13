@@ -1,7 +1,7 @@
 import React from "react";
 
 interface Props {
-  disabled: boolean;
+  disabled?: boolean;
   buttonType: string;
   label: string;
 }
