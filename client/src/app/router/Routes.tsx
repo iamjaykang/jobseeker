@@ -6,6 +6,8 @@ import TestErrors from "../../components/errors/TestError.component";
 import JobDetails from "../../components/jobs/details/JobDetails.component";
 import JobForm from "../../components/jobs/form/JobForm.component";
 import JobListPage from "../../components/jobs/jobList/JobListPage.component";
+import LoginForm from "../../components/users/login/LoginForm.component";
+import SignupForm from "../../components/users/signup/SignupForm.component";
 import App from "../layout/App.layout";
 
 export const routes: RouteObject[] = [
@@ -17,6 +19,8 @@ export const routes: RouteObject[] = [
       { path: "browse-jobs/:id", element: <JobDetails /> },
       { path: "post-job", element: <JobForm key="create" /> },
       { path: "manage/:id", element: <JobForm key="manage" /> },
+      { path: "login", element: <LoginForm /> },
+      { path: "sign-up", element: <SignupForm /> },
       { path: "errors", element: <TestErrors /> },
       { path: "not-found", element: <NotFound /> },
       { path: "server-error", element: <ServerError /> },
