@@ -3,8 +3,11 @@ import { Formik, Form } from "formik";
 import MyTextInput from "../../../app/common/form/MyTextInput.common";
 import MySubmitButton from "../../../app/common/form/MySubmitButton.common";
 import "./signupForm.styles.css";
+import { useDispatch } from "react-redux";
+import { signupLoading } from "../../../app/stores/users/user.action";
 
 const SignupForm = () => {
+  const dispatch = useDispatch();
   return (
     <div className="signup-form__container">
       <Formik
@@ -15,7 +18,9 @@ const SignupForm = () => {
           email: "",
           password: "",
         }}
-        onSubmit={(values) => console.log(values)}
+        onSubmit={(values) => {
+          dispatch(signupLoading(values));
+        }}
       >
         {({ handleSubmit }) => (
           <Form

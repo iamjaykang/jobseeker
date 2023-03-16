@@ -15,7 +15,9 @@ export type SignupLoading = ActionWithPayload<USER_ACTION_TYPES.SIGNUP_LOADING, 
 
 export type SignupSuccess = ActionWithPayload<USER_ACTION_TYPES.SIGNUP_SUCCESS, User>;
 
-export type SignupFailed = Action<USER_ACTION_TYPES.SIGNUP_FAILED>;
+export type SignupFailed = ActionWithPayload<USER_ACTION_TYPES.SIGNUP_FAILED, Error>;
+
+export type LogoutUser = Action<USER_ACTION_TYPES.LOGOUT_USER>;
 
 
 // Actions
@@ -51,7 +53,12 @@ export const signupSuccess = withMatcher(
 )
 
 export const signupFailed = withMatcher(
-    (): SignupFailed =>
-    createAction(USER_ACTION_TYPES.SIGNUP_FAILED)
+    (error: Error): SignupFailed =>
+    createAction(USER_ACTION_TYPES.SIGNUP_FAILED, error)
+)
+
+export const logoutUser = withMatcher(
+    (): LogoutUser =>
+    createAction(USER_ACTION_TYPES.LOGOUT_USER)
 )
 
