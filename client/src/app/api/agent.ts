@@ -1,9 +1,12 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
+import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { Job, JobFormValues } from "../models/job.model";
 import { User, UserFormValues } from "../models/user.model";
 import { router } from "../router/Routes";
 import { setServerError } from "../stores/common/common.action";
+import { CommonState } from "../stores/common/common.reducer";
+import { selectUserToken } from "../stores/common/common.selector";
 import { store } from "../stores/store";
 
 const sleep = (delay: number) => {
@@ -61,6 +64,14 @@ axios.interceptors.response.use(
 
 const responseBody = <T>(response: AxiosResponse<T>) => response.data;
 
+axios.interceptors.request.use((config) => {
+  const token = (store.getState() as { common: CommonState }).common.token;
+
+  if (token && config.headers) config.headers.Authorization = `Bearer ${token}`;
+
+  return config;
+});
+
 const requests = {
   get: <T>(url: string) => axios.get<T>(url).then(responseBody),
   post: <T>(url: string, body: {}) =>
@@ -81,15 +92,14 @@ const Jobs = {
 
 const Account = {
   current: () => requests.get<User>("/account"),
-  login: (user: UserFormValues) =>
-    requests.post<User>("/account/login", user),
+  login: (user: UserFormValues) => requests.post<User>("/account/login", user),
   register: (user: UserFormValues) =>
     requests.post<User>("/account/register", user),
 };
 
 const agent = {
   Jobs,
-  Account
+  Account,
 };
 
 export default agent;

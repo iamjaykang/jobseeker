@@ -8,3 +8,8 @@ export const selectServerError = createSelector(
   [selectCommonReducer],
   (commonSlice) => commonSlice.error
 );
+
+export const selectUserToken = createSelector(
+  [selectCommonReducer],
+  (commonSlice) => commonSlice.token
+)

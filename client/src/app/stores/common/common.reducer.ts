@@ -9,7 +9,7 @@ export interface CommonState {
 
 const COMMON_INITIAL_STATE = {
   error: null,
-  token: null
+  token: localStorage.getItem('jwt') || null
 };
 
 const commonReducer = (
