@@ -1,13 +1,15 @@
 import { AnyAction } from "redux";
 import { ServerError } from "../../models/serverError.model";
-import { setServerError } from "./common.action";
+import { setServerError, setToken } from "./common.action";
 
 export interface CommonState {
   readonly error: ServerError;
+  readonly token: string | null;
 }
 
 const COMMON_INITIAL_STATE = {
   error: null,
+  token: null
 };
 
 const commonReducer = (
@@ -19,6 +21,13 @@ const commonReducer = (
       ...state,
       error: action.payload,
     };
+  }
+
+  if (setToken.match(action)) {
+    return {
+      ...state,
+      token: action.payload
+    }
   }
 
   return state;

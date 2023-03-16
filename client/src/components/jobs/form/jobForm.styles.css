@@ -61,6 +61,9 @@
   margin-bottom: 0.5rem;
   display: block;
 }
+.job-form-card .job-form-card__content .job-form textarea {
+  max-width: 1158px;
+}
 .job-form-card .job-form-card__content .job-form .job-form__input,
 .job-form-card .job-form-card__content .job-form .job-form__select {
   width: 100%;

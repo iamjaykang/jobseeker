@@ -3,13 +3,21 @@ import { Formik, Form } from "formik";
 import MyTextInput from "../../../app/common/form/MyTextInput.common";
 import MySubmitButton from "../../../app/common/form/MySubmitButton.common";
 import "./loginForm.styles.css";
+import { useDispatch, useSelector } from "react-redux";
+import { loginLoading } from "../../../app/stores/users/user.action";
+import { selectUserError } from "../../../app/stores/users/user.selector";
 
 const LoginForm = () => {
+  const dispatch = useDispatch();
+
+  const loginError = useSelector(selectUserError);
   return (
     <div className="login-form__container">
       <Formik
         initialValues={{ email: "", password: "" }}
-        onSubmit={(values) => console.log(values)}
+        onSubmit={(values) => {
+          dispatch(loginLoading(values));
+        }}
       >
         {({ handleSubmit }) => (
           <Form
@@ -34,6 +42,10 @@ const LoginForm = () => {
               type="password"
               label="Password"
             />
+
+            {loginError && (
+              <div className="login-form__error">{loginError.message}</div>
+            )}
 
             <MySubmitButton buttonType="login-form" label="Login" />
           </Form>

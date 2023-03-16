@@ -2,13 +2,19 @@ import React from "react";
 import { Formik, Form } from "formik";
 import MyTextInput from "../../../app/common/form/MyTextInput.common";
 import MySubmitButton from "../../../app/common/form/MySubmitButton.common";
-import './signupForm.styles.css'
+import "./signupForm.styles.css";
 
 const SignupForm = () => {
   return (
     <div className="signup-form__container">
       <Formik
-        initialValues={{ firstName: "", lastName: "", email: "", password: "" }}
+        initialValues={{
+          firstName: "",
+          lastName: "",
+          username: "",
+          email: "",
+          password: "",
+        }}
         onSubmit={(values) => console.log(values)}
       >
         {({ handleSubmit }) => (
@@ -33,6 +39,13 @@ const SignupForm = () => {
               formtype="signup-form"
               type="text"
               label="Last Name"
+            />
+            <MyTextInput
+              name="username"
+              placeholder="Username"
+              formtype="signup-form"
+              type="text"
+              label="Username"
             />
             <MyTextInput
               name="email"

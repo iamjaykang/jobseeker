@@ -1,6 +1,7 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
 import { toast } from "react-toastify";
 import { Job, JobFormValues } from "../models/job.model";
+import { User, UserFormValues } from "../models/user.model";
 import { router } from "../router/Routes";
 import { setServerError } from "../stores/common/common.action";
 import { store } from "../stores/store";
@@ -78,8 +79,17 @@ const Jobs = {
   delete: (jobId: string) => requests.del<void>(`/jobs/${jobId}`),
 };
 
+const Account = {
+  current: () => requests.get<User>("/account"),
+  login: (user: UserFormValues) =>
+    requests.post<User>("/account/login", user),
+  register: (user: UserFormValues) =>
+    requests.post<User>("/account/register", user),
+};
+
 const agent = {
   Jobs,
+  Account
 };
 
 export default agent;
