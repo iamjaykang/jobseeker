@@ -4,70 +4,89 @@
   align-items: center;
   justify-content: center;
 }
-.signup-form__container .signup-form {
+
+.signup-form {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 100%;
-  max-width: 400px;
+  max-width: 300px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 1.5rem;
   background-color: #fff;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   border-radius: 5px;
 }
-.signup-form__container .signup-form__heading {
+.signup-form__heading {
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
 }
-.signup-form__container .signup-form__header {
-  font-size: 3rem;
+.signup-form__header {
+  font-size: 2.2rem;
   font-weight: bold;
   color: #1e90ff;
 }
-.signup-form__container .signup-form__label {
-  font-size: 2rem;
+.signup-form__label {
+  font-size: 1.6rem;
   margin-bottom: 0.5rem;
   color: #333;
 }
-.signup-form__container .signup-form__input {
+.signup-form__input {
   padding: 0.5rem;
   margin-bottom: 1rem;
   width: 100%;
   border-radius: 5px;
   border: 1px solid #ccc;
-  font-size: 2rem;
+  font-size: 1.6rem;
 }
-.signup-form__container .signup-form__input:focus {
+.signup-form__input:focus {
   outline: none;
   border-color: #1e90ff;
 }
-.signup-form__container .signup-form__button {
+.signup-form__error {
+  color: #ff0000;
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+.signup-form__button {
   background-color: #1e90ff;
   color: #fff;
   border: none;
   border-radius: 5px;
-  padding: 1rem 2rem;
+  padding: 0.8rem 1.6rem;
   cursor: pointer;
   transition: all 0.3s ease;
-  font-size: 2rem;
+  font-size: 1.6rem;
   margin-top: 1rem;
   border: 1px solid #1e90ff;
 }
-.signup-form__container .signup-form__button:hover {
+.signup-form__button:hover {
   background-color: #fff;
   color: #1e90ff;
 }
-.signup-form__container .signup-form__button:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-.signup-form__container .signup-form__below-label {
-  margin-bottom: 1rem;
-  padding: 1rem;
-  border: 1px solid red;
-  border-radius: 4px;
-  color: red;
-  font-size: 14px;
+
+@media (min-width: 768px) {
+  .signup-form {
+    max-width: 400px;
+    padding: 2rem;
+  }
+  .signup-form__header {
+    font-size: 3rem;
+  }
+  .signup-form__label {
+    font-size: 2rem;
+  }
+  .signup-form__input {
+    font-size: 2rem;
+  }
+  .signup-form__error {
+    font-size: 1.4rem;
+  }
+  .signup-form__button {
+    font-size: 2rem;
+    padding: 1rem 2rem;
+  }
 }/*# sourceMappingURL=signupForm.styles.css.map */
