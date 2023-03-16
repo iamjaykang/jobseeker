@@ -3,11 +3,17 @@ import { Formik, Form } from "formik";
 import MyTextInput from "../../../app/common/form/MyTextInput.common";
 import MySubmitButton from "../../../app/common/form/MySubmitButton.common";
 import "./signupForm.styles.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { signupLoading } from "../../../app/stores/users/user.action";
+import { selectUserError } from "../../../app/stores/users/user.selector";
+import ValidationError from "../../errors/validationError/ValidationError.component";
+import { userFormValidation } from "../../../app/utils/userFormValidation.util";
 
 const SignupForm = () => {
   const dispatch = useDispatch();
+
+  const error = useSelector(selectUserError);
+
   return (
     <div className="signup-form__container">
       <Formik
@@ -21,8 +27,9 @@ const SignupForm = () => {
         onSubmit={(values) => {
           dispatch(signupLoading(values));
         }}
+        validationSchema={userFormValidation}
       >
-        {({ handleSubmit }) => (
+        {({ handleSubmit, isValid, isSubmitting, dirty }) => (
           <Form
             className="signup-form"
             onSubmit={handleSubmit}
@@ -67,7 +74,13 @@ const SignupForm = () => {
               label="Password"
             />
 
-            <MySubmitButton buttonType="signup-form" label="Sign Up" />
+            {error && <ValidationError errors={error} />}
+
+            <MySubmitButton
+              disabled={!isValid || isSubmitting || !dirty}
+              buttonType="signup-form"
+              label="Sign Up"
+            />
           </Form>
         )}
       </Formik>
