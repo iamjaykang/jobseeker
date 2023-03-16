@@ -16,22 +16,38 @@ const MobileNavbar = () => {
       </button>
       <ul className={`mobile-navbar__dropdown${isOpen ? " open" : ""}`}>
         <li className="mobile-navbar__item">
-          <Link className="mobile-navbar__link" to="/browse-jobs">
+          <Link
+            className="mobile-navbar__link"
+            to="/browse-jobs"
+            onClick={handleMenuToggle}
+          >
             Browse Jobs
           </Link>
         </li>
         <li className="mobile-navbar__item">
-          <Link className="mobile-navbar__link" to="/post-job">
+          <Link
+            className="mobile-navbar__link"
+            to="/post-job"
+            onClick={handleMenuToggle}
+          >
             Post a Job
           </Link>
         </li>
         <li className="mobile-navbar__item">
-          <Link className="mobile-navbar__link" to="/login">
+          <Link
+            className="mobile-navbar__link"
+            to="/login"
+            onClick={handleMenuToggle}
+          >
             Login
           </Link>
         </li>
         <li className="mobile-navbar__item">
-          <Link className="mobile-navbar__link" to="/sign-up">
+          <Link
+            className="mobile-navbar__link"
+            to="/sign-up"
+            onClick={handleMenuToggle}
+          >
             Sign Up
           </Link>
         </li>
