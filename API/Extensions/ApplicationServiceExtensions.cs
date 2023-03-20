@@ -31,6 +31,14 @@ namespace API.Extensions
             services.AddAutoMapper(typeof(MappingProfiles).Assembly);
             services.AddFluentValidationAutoValidation();
             services.AddValidatorsFromAssemblyContaining<Create>();
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("EmployerPolicy", policy =>
+                    policy.RequireAssertion(context =>
+                        context.User.IsInRole("Employer")
+                    )
+                );
+            });
 
             return services;
         }

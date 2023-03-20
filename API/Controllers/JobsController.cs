@@ -22,12 +22,14 @@ namespace API.Controllers
         }
 
         [HttpPost] // api/jobs
+        [Authorize(Policy = "EmployerPolicy")]
         public async Task<IActionResult> CreateJob(Job job)
         {
             return HandleResult(await Mediator.Send(new Create.Command { Job = job }));
         }
 
         [HttpPut("{id}")] // api/jobs/{id}
+        [Authorize(Policy = "EmployerPolicy")]
         public async Task<IActionResult> EditJob(Guid id, Job job)
         {
             job.Id = id;
@@ -36,6 +38,7 @@ namespace API.Controllers
         }
 
         [HttpDelete("{id}")] // api/jobs/{id}
+        [Authorize(Policy = "EmployerPolicy")]
         public async Task<IActionResult> DeleteJob(Guid id)
         {
             return HandleResult(await Mediator.Send(new Delete.Command { Id = id }));

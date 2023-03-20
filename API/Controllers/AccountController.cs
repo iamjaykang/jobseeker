@@ -36,7 +36,7 @@ namespace API.Controllers
 
             if (result)
             {
-                return CreateUserObject(user);
+                return await CreateUserObject(user);
             }
 
             return Unauthorized();
@@ -69,7 +69,7 @@ namespace API.Controllers
 
             if (result.Succeeded)
             {
-                return CreateUserObject(user);
+                return await CreateUserObject(user);
             }
 
 
@@ -80,18 +80,27 @@ namespace API.Controllers
         [HttpGet]
         public async Task<ActionResult<UserDto>> GetCurrentUser()
         {
-            var user = await _userManager.FindByEmailAsync(User.FindFirstValue(ClaimTypes.Email));
+            var email = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
 
-            return CreateUserObject(user);
+            if (string.IsNullOrEmpty(email))
+            {
+                return Unauthorized();
+            }
+
+            var user = await _userManager.FindByEmailAsync(email);
+
+            return await CreateUserObject(user);
         }
 
-        private UserDto CreateUserObject(AppUser user)
+
+
+        private async Task<UserDto> CreateUserObject(AppUser user)
         {
             return new UserDto
             {
                 FirstName = user.FirstName,
                 LastName = user.LastName,
-                Token = _tokenService.CreateToken(user),
+                Token = await _tokenService.CreateToken(user),
                 Username = user.UserName
             };
         }

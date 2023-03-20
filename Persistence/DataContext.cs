@@ -11,5 +11,6 @@ namespace Persistence
         }
 
         public DbSet<Job> Jobs { get; set; }
+
     }
 }
