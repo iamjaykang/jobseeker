@@ -11,10 +11,10 @@ namespace Persistence
             if (!roleManager.Roles.Any())
             {
                 var roles = new List<IdentityRole>
-{
-    new IdentityRole {Name = "Employee"},
-    new IdentityRole { Name = "Employer"}
-};
+                {
+                    new IdentityRole {Name = "Employee"},
+                    new IdentityRole { Name = "Employer"}
+                };
 
                 foreach (var role in roles)
                 {
@@ -29,8 +29,8 @@ namespace Persistence
                 var users = new List<AppUser>
                 {
                     new AppUser { FirstName = "John",LastName = "Smith", UserName = "johnsmith", Email = "john.smith@example.com" },
-new AppUser { FirstName = "Jane",LastName = "Doe", UserName = "janedoe", Email = "jane.doe@example.com" },
-new AppUser { FirstName = "Bob",LastName = "Johnson", UserName = "bobjohnson", Email = "bob.johnson@example.com" },
+                    new AppUser { FirstName = "Jane",LastName = "Doe", UserName = "janedoe", Email = "jane.doe@example.com" },
+                    new AppUser { FirstName = "Bob",LastName = "Johnson", UserName = "bobjohnson", Email = "bob.johnson@example.com" },
                 };
 
                 foreach (var user in users)
@@ -52,11 +52,13 @@ new AppUser { FirstName = "Bob",LastName = "Johnson", UserName = "bobjohnson", E
                 }
             }
 
-            if (!context.Jobs.Any())
+            if (!context.JobPosts.Any())
             {
-                var jobs = new List<Job>
+                var janeDoe = await userManager.FindByNameAsync("janedoe");
+
+                var jobPosts = new List<JobPost>
             {
-                new Job
+                new JobPost
                 {
                     Title = "Software Engineer",
                     Date = DateTime.UtcNow,
@@ -65,9 +67,10 @@ new AppUser { FirstName = "Bob",LastName = "Johnson", UserName = "bobjohnson", E
                     PostedBy = "John Doe",
                     Salary = "$100,000 - $120,000",
                     ExperienceLevel = "Intermediate",
-                    City = "Auckland"
+                    City = "Auckland",
+                    AppUserId = janeDoe.Id
                 },
-                new Job
+                new JobPost
                 {
                     Title = "UX Designer",
                     Date = DateTime.UtcNow,
@@ -76,11 +79,12 @@ new AppUser { FirstName = "Bob",LastName = "Johnson", UserName = "bobjohnson", E
                     PostedBy = "Jane Smith",
                     Salary = "$75 - $100 per hour",
                     ExperienceLevel = "Senior",
-                    City = "Wellington"
+                    City = "Wellington",
+                    AppUserId = janeDoe.Id
                 },
             };
 
-                await context.Jobs.AddRangeAsync(jobs);
+                await context.JobPosts.AddRangeAsync(jobPosts);
                 await context.SaveChangesAsync();
             }
         }

@@ -1,4 +1,4 @@
-using Application.Jobs;
+using Application.JobPosts;
 using Domain;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -23,18 +23,19 @@ namespace API.Controllers
 
         [HttpPost] // api/jobs
         [Authorize(Policy = "EmployerPolicy")]
-        public async Task<IActionResult> CreateJob(Job job)
+        public async Task<IActionResult> CreateJob(JobPost jobPost)
         {
-            return HandleResult(await Mediator.Send(new Create.Command { Job = job }));
+
+            return HandleResult(await Mediator.Send(new Create.Command { JobPost = jobPost }));
         }
 
         [HttpPut("{id}")] // api/jobs/{id}
         [Authorize(Policy = "EmployerPolicy")]
-        public async Task<IActionResult> EditJob(Guid id, Job job)
+        public async Task<IActionResult> EditJob(Guid id, JobPost jobPost)
         {
-            job.Id = id;
+            jobPost.Id = id;
 
-            return HandleResult(await Mediator.Send(new Edit.Command { Job = job }));
+            return HandleResult(await Mediator.Send(new Edit.Command { JobPost = jobPost }));
         }
 
         [HttpDelete("{id}")] // api/jobs/{id}

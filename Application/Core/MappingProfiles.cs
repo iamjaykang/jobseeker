@@ -7,7 +7,7 @@ namespace Application.Core
     {
         public MappingProfiles()
         {
-            CreateMap<Job, Job>();
+            CreateMap<JobPost, JobPost>();
         }
     }
 }

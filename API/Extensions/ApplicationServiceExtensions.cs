@@ -1,5 +1,5 @@
 using Application.Core;
-using Application.Jobs;
+using Application.JobPosts;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using MediatR;

@@ -1,6 +1,6 @@
 namespace Domain
 {
-    public class Job
+    public class JobPost
     {
         public Guid Id { get; set; }
         public string Title { get; set; }
@@ -11,5 +11,7 @@ namespace Domain
         public string Salary { get; set; }
         public string ExperienceLevel { get; set; }
         public string City { get; set; }
+        public string AppUserId { get; set; }
+        public AppUser AppUser { get; set; }
     }
 }

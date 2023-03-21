@@ -1,12 +1,12 @@
 using Domain;
 using FluentValidation;
 
-namespace Application.Jobs
+namespace Application.JobPosts
 {
-    public class JobValidator : AbstractValidator<Job>
+    public class JobPostValidator : AbstractValidator<JobPost>
     {
         
-        public JobValidator()
+        public JobPostValidator()
         {
             RuleFor(x => x.Title).NotEmpty();
             RuleFor(x => x.Description).NotEmpty();

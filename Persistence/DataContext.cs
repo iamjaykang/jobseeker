@@ -10,7 +10,17 @@ namespace Persistence
         {
         }
 
-        public DbSet<Job> Jobs { get; set; }
+        public DbSet<JobPost> JobPosts { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+
+            builder.Entity<JobPost>()
+            .HasOne(j => j.AppUser)
+            .WithMany()
+            .HasForeignKey(j => j.AppUserId);
+        }
 
     }
 }

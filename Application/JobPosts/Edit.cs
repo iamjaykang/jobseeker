@@ -5,7 +5,7 @@ using FluentValidation;
 using MediatR;
 using Persistence;
 
-namespace Application.Jobs
+namespace Application.JobPosts
 {
     public class Edit
     {
@@ -13,7 +13,7 @@ namespace Application.Jobs
         public class Command : IRequest<Result<Unit>>
         {
 
-            public Job Job { get; set; }
+            public JobPost JobPost { get; set; }
         }
 
                 public class CommandValidator : AbstractValidator<Command>
@@ -21,8 +21,8 @@ namespace Application.Jobs
 
             public CommandValidator()
             {
-                RuleFor(x => x.Job)
-                .SetValidator(new JobValidator());
+                RuleFor(x => x.JobPost)
+                .SetValidator(new JobPostValidator());
             }
         }
 
@@ -38,16 +38,16 @@ namespace Application.Jobs
 
             public async Task<Result<Unit>> Handle(Command request, CancellationToken cancellationToken)
             {
-                var job = await _context.Jobs.FindAsync(request.Job.Id);
+                var jobPost = await _context.JobPosts.FindAsync(request.JobPost.Id);
 
-                if (job == null) return null;
+                if (jobPost == null) return null;
 
-                _mapper.Map(request.Job, job);
+                _mapper.Map(request.JobPost, jobPost);
 
                 var result = await _context.SaveChangesAsync() > 0;
 
                 if (!result) return Result<Unit>
-                .Failure("Failed to update job");
+                .Failure("Failed to update Job Post");
 
                 return Result<Unit>
                 .Success(Unit.Value);

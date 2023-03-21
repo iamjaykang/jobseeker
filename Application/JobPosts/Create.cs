@@ -4,14 +4,14 @@ using FluentValidation;
 using MediatR;
 using Persistence;
 
-namespace Application.Jobs
+namespace Application.JobPosts
 {
     public class Create
     {
 
         public class Command : IRequest<Result<Unit>>
         {
-            public Job Job { get; set; }
+            public JobPost JobPost { get; set; }
         }
 
         public class CommandValidator : AbstractValidator<Command>
@@ -19,8 +19,8 @@ namespace Application.Jobs
 
             public CommandValidator()
             {
-                RuleFor(x => x.Job)
-                .SetValidator(new JobValidator());
+                RuleFor(x => x.JobPost)
+                .SetValidator(new JobPostValidator());
             }
         }
 
@@ -34,11 +34,11 @@ namespace Application.Jobs
 
             public async Task<Result<Unit>> Handle(Command request, CancellationToken cancellationToken)
             {
-                _context.Jobs.Add(request.Job);
+                _context.JobPosts.Add(request.JobPost);
 
                 var result = await _context.SaveChangesAsync() > 0;
 
-                if (!result) return Result<Unit>.Failure("Failed to create job");
+                if (!result) return Result<Unit>.Failure("Failed to create jobPost");
 
                 return Result<Unit>.Success(Unit.Value);
             }

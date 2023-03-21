@@ -2,7 +2,7 @@ using Application.Core;
 using MediatR;
 using Persistence;
 
-namespace Application.Jobs
+namespace Application.JobPosts
 {
     public class Delete
     {
@@ -23,11 +23,11 @@ namespace Application.Jobs
 
             public async Task<Result<Unit>> Handle(Command request, CancellationToken cancellationToken)
             {
-                var job = await _context.Jobs.FindAsync(request.Id);
+                var jobPost = await _context.JobPosts.FindAsync(request.Id);
 
-                if (job == null) return null;
+                if (jobPost == null) return null;
 
-                _context.Remove(job);
+                _context.Remove(jobPost);
 
                 var result = await _context.SaveChangesAsync() > 0;
 
