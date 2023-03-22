@@ -1,7 +1,9 @@
 using System.Text;
 using API.Services;
 using Domain;
+using Infrastructure.Security;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using Persistence;
@@ -39,7 +41,7 @@ namespace API.Extensions
                     ValidateAudience = false
                 };
             });
-            
+
             services.AddAuthorization(options =>
             {
                 options.AddPolicy("EmployerPolicy", policy =>
@@ -48,12 +50,17 @@ namespace API.Extensions
                     )
                 );
 
+                options.AddPolicy("IsPosterPolicy", policy =>
+                    policy.Requirements.Add(new IsPosterRequirement())
+                );
+
                 options.AddPolicy("EmployeePolicy", policy =>
                     policy.RequireAssertion(context =>
                         context.User.IsInRole("Employee")
                     )
                 );
             });
+            services.AddTransient<IAuthorizationHandler, IsPosterRequirementHandler>();
 
             services.AddScoped<TokenService>();
 

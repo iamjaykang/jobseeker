@@ -39,8 +39,10 @@ namespace Application.JobPosts
 
             public async Task<Result<Unit>> Handle(Command request, CancellationToken cancellationToken)
             {
+                // Get the user creating the job post
                 var user = await _context.Users.FirstOrDefaultAsync(x => x.Id == _userAccessor.GetUserId());
 
+                // Set the poster for the job post to the user creating it
                 request.JobPost.Poster = new JobPostPoster { Poster = user };
 
                 _context.JobPosts.Add(request.JobPost);

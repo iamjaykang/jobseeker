@@ -31,6 +31,7 @@ namespace API.Controllers
 
         [HttpPut("{id}")] // api/jobsPosts/{id}
         [Authorize(Policy = "EmployerPolicy")]
+        [Authorize(Policy = "IsPosterPolicy")]
         public async Task<IActionResult> EditJob(Guid id, JobPost jobPost)
         {
             jobPost.Id = id;
@@ -40,12 +41,13 @@ namespace API.Controllers
 
         [HttpDelete("{id}")] // api/jobsPosts/{id}
         [Authorize(Policy = "EmployerPolicy")]
+        [Authorize(Policy = "IsPosterPolicy")]
         public async Task<IActionResult> DeleteJob(Guid id)
         {
             return HandleResult(await Mediator.Send(new Delete.Command { Id = id }));
         }
 
-        [HttpPost("{id}/apply")]
+        [HttpPost("{id}/apply")] // api/jobPosts/{id}/apply
         [Authorize(Policy = "EmployeePolicy")]
         public async Task<IActionResult> Apply(Guid id, [FromBody] JobPostApplyDto applyDto)
         {
