@@ -35,14 +35,6 @@ namespace API.Extensions
             services.AddValidatorsFromAssemblyContaining<Create>();
             services.AddHttpContextAccessor();
             services.AddScoped<IUserAccessor, UserAccessor>();
-            services.AddAuthorization(options =>
-            {
-                options.AddPolicy("EmployerPolicy", policy =>
-                    policy.RequireAssertion(context =>
-                        context.User.IsInRole("Employer")
-                    )
-                );
-            });
 
             return services;
         }

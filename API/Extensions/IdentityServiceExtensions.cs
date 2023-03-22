@@ -13,6 +13,7 @@ namespace API.Extensions
 
         public static IServiceCollection AddIdentityServices(this IServiceCollection services, IConfiguration config)
         {
+
             services.AddIdentity<AppUser, IdentityRole>(opt =>
             {
                 opt.Password.RequireNonAlphanumeric = false;
@@ -37,6 +38,21 @@ namespace API.Extensions
                     ValidateIssuer = false,
                     ValidateAudience = false
                 };
+            });
+            
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("EmployerPolicy", policy =>
+                    policy.RequireAssertion(context =>
+                        context.User.IsInRole("Employer")
+                    )
+                );
+
+                options.AddPolicy("EmployeePolicy", policy =>
+                    policy.RequireAssertion(context =>
+                        context.User.IsInRole("Employee")
+                    )
+                );
             });
 
             services.AddScoped<TokenService>();
