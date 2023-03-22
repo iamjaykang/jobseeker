@@ -11,6 +11,8 @@ namespace Domain
         public string ExperienceLevel { get; set; }
         public string City { get; set; }
 
+        public bool IsClosed { get; set; }
+
         public ICollection<JobPostApplicant> Applicants { get; set; } = new List<JobPostApplicant>();
         public JobPostPoster Poster { get; set; }
 
