@@ -12,8 +12,8 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230321012125_ChangeJobsEntityToJobPosts")]
-    partial class ChangeJobsEntityToJobPosts
+    [Migration("20230321150925_ChangesToRelationships")]
+    partial class ChangesToRelationships
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -104,9 +104,6 @@ namespace Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<string>("AppUserId")
-                        .HasColumnType("text");
-
                     b.Property<string>("City")
                         .HasColumnType("text");
 
@@ -122,9 +119,6 @@ namespace Persistence.Migrations
                     b.Property<string>("JobType")
                         .HasColumnType("text");
 
-                    b.Property<string>("PostedBy")
-                        .HasColumnType("text");
-
                     b.Property<string>("Salary")
                         .HasColumnType("text");
 
@@ -133,9 +127,50 @@ namespace Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AppUserId");
-
                     b.ToTable("JobPosts");
+                });
+
+            modelBuilder.Entity("Domain.JobPostApplicant", b =>
+                {
+                    b.Property<string>("ApplicantId")
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("JobPostId")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("ApplicationDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("CoverLetter")
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Resume")
+                        .HasColumnType("text");
+
+                    b.HasKey("ApplicantId", "JobPostId");
+
+                    b.HasIndex("JobPostId");
+
+                    b.ToTable("JobPostApplicants");
+                });
+
+            modelBuilder.Entity("Domain.JobPostPoster", b =>
+                {
+                    b.Property<string>("PosterId")
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("JobPostId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("PosterId", "JobPostId");
+
+                    b.HasIndex("JobPostId")
+                        .IsUnique();
+
+                    b.ToTable("JobPostPosters");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -270,13 +305,42 @@ namespace Persistence.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("Domain.JobPost", b =>
+            modelBuilder.Entity("Domain.JobPostApplicant", b =>
                 {
-                    b.HasOne("Domain.AppUser", "AppUser")
-                        .WithMany()
-                        .HasForeignKey("AppUserId");
+                    b.HasOne("Domain.AppUser", "Applicant")
+                        .WithMany("AppliedJobPosts")
+                        .HasForeignKey("ApplicantId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("AppUser");
+                    b.HasOne("Domain.JobPost", "JobPost")
+                        .WithMany("Applicants")
+                        .HasForeignKey("JobPostId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Applicant");
+
+                    b.Navigation("JobPost");
+                });
+
+            modelBuilder.Entity("Domain.JobPostPoster", b =>
+                {
+                    b.HasOne("Domain.JobPost", "JobPost")
+                        .WithOne("Poster")
+                        .HasForeignKey("Domain.JobPostPoster", "JobPostId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.AppUser", "Poster")
+                        .WithMany("JobPosts")
+                        .HasForeignKey("PosterId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("JobPost");
+
+                    b.Navigation("Poster");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -328,6 +392,20 @@ namespace Persistence.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Domain.AppUser", b =>
+                {
+                    b.Navigation("AppliedJobPosts");
+
+                    b.Navigation("JobPosts");
+                });
+
+            modelBuilder.Entity("Domain.JobPost", b =>
+                {
+                    b.Navigation("Applicants");
+
+                    b.Navigation("Poster");
                 });
 #pragma warning restore 612, 618
         }

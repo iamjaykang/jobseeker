@@ -7,11 +7,12 @@ namespace Domain
         public DateTime Date { get; set; }
         public string Description { get; set; }
         public string JobType { get; set; }
-        public string PostedBy { get; set; }
         public string Salary { get; set; }
         public string ExperienceLevel { get; set; }
         public string City { get; set; }
-        public string AppUserId { get; set; }
-        public AppUser AppUser { get; set; }
+
+        public ICollection<JobPostApplicant> Applicants { get; set; } = new List<JobPostApplicant>();
+        public JobPostPoster Poster { get; set; }
+
     }
 }
