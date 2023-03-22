@@ -12,8 +12,7 @@ namespace Application.JobPosts
         public class Command : IRequest<Result<Unit>>
         {
             public Guid JobPostId { get; set; }
-            public string CoverLetter { get; set; }
-            public string ResumeUrl { get; set; }
+            public JobPostApplyDto ApplyDto { get; set; }
         }
 
         public class Handler : IRequestHandler<Command, Result<Unit>>
@@ -58,8 +57,8 @@ namespace Application.JobPosts
                     JobPostId = jobPost.Id,
                     ApplicantId = user.Id,
                     ApplicationDate = DateTime.UtcNow,
-                    CoverLetter = request.CoverLetter,
-                    Resume = request.ResumeUrl
+                    CoverLetter = request.ApplyDto.CoverLetter,
+                    Resume = request.ApplyDto.ResumeUrl
                 };
                 // Create a new list of applicants for the job post if it doesn't exist
                 if (jobPost.Applicants == null)
