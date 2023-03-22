@@ -1,5 +1,6 @@
 using Domain;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace Persistence
 {
@@ -53,6 +54,8 @@ namespace Persistence
             {
                 var janeDoe = await userManager.FindByNameAsync("janedoe");
                 var bobJohnson = await userManager.FindByNameAsync("bobjohnson");
+                var sarahJones = await userManager.FindByNameAsync("sarahjones");
+                var johnSmith = await userManager.FindByNameAsync("johnsmith");
 
                 var jobPosts = new List<JobPost>
         {
@@ -64,6 +67,17 @@ namespace Persistence
                 JobType = "Full-time",
                 Salary = "$100,000 - $120,000",
                 ExperienceLevel = "Intermediate",
+                Applicants = new List<JobPostApplicant>
+                {
+                    new JobPostApplicant
+                    {
+                        Applicant = sarahJones,
+                        ApplicationDate = DateTime.UtcNow,
+                        Id = Guid.NewGuid(),
+                        CoverLetter = "I'm excited about this opportunity and believe I would be a great fit for your team.",
+                        Resume = "https://example.com/resume/sarahjones.pdf"
+                    }
+                },
                 Poster = new JobPostPoster {Poster = janeDoe},
                 City = "Auckland",
             },
@@ -75,6 +89,16 @@ namespace Persistence
                 JobType = "Contract",
                 Salary = "$75 - $100 per hour",
                 ExperienceLevel = "Senior",
+                Applicants = new List<JobPostApplicant>
+                {
+                    new JobPostApplicant
+                    {
+                        Applicant = johnSmith,
+                        ApplicationDate = DateTime.UtcNow.AddDays(-1),
+                        Id = Guid.NewGuid(),CoverLetter = "I'm excited about this opportunity and believe I have the necessary skills to excel in this role.",
+                        Resume = "https://example.com/resume/johnsmith.pdf"
+                    }
+                },
                 Poster = new JobPostPoster {Poster = bobJohnson},
                 City = "Wellington",
             },
