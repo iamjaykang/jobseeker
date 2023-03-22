@@ -30,13 +30,14 @@ namespace Persistence
             new AppUser { FirstName = "John",LastName = "Smith", UserName = "johnsmith", Email = "john.smith@example.com" },
             new AppUser { FirstName = "Jane",LastName = "Doe", UserName = "janedoe", Email = "jane.doe@example.com" },
             new AppUser { FirstName = "Bob",LastName = "Johnson", UserName = "bobjohnson", Email = "bob.johnson@example.com" },
+            new AppUser { FirstName = "Sarah", LastName = "Jones", UserName = "sarahjones", Email = "sarah.jones@example.com" },
         };
 
                 foreach (var user in users)
                 {
                     await userManager.CreateAsync(user, "Pa$$w0rd");
 
-                    if (user.UserName == "johnsmith")
+                    if (user.UserName == "johnsmith" || user.UserName == "sarahjones")
                     {
                         await userManager.AddToRoleAsync(user, "Employee");
                     }
