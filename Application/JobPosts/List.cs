@@ -30,6 +30,8 @@ namespace Application.JobPosts
                 var jobPosts = await _context.JobPosts
                     .Include(jp => jp.Poster)
                     .ThenInclude(p => p.Poster)
+                    .Include(jp => jp.Applicants)
+                    .ThenInclude(jpa => jpa.Applicant)
                     .ToListAsync(cancellationToken);
 
                 // Map job post entities to job post DTOs

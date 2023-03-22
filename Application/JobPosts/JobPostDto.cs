@@ -13,6 +13,7 @@ namespace Application.JobPosts
         public string ExperienceLevel { get; set; }
         public string City { get; set; }
         public string IsClosed { get; set; }
+        public ICollection<ApplicantDto> Applicants { get; set; }
         public Profile Poster { get; set; }
     }
 }
