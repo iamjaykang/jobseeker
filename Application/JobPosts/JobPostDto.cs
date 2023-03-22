@@ -12,6 +12,7 @@ namespace Application.JobPosts
         public string Salary { get; set; }
         public string ExperienceLevel { get; set; }
         public string City { get; set; }
+        public string IsClosed { get; set; }
         public Profile Poster { get; set; }
     }
 }

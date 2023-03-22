@@ -44,5 +44,13 @@ namespace API.Controllers
         {
             return HandleResult(await Mediator.Send(new Delete.Command { Id = id }));
         }
+        
+        [HttpPost("{id}/apply")]
+        [Authorize(Policy = "EmployeePolicy")]
+        public async Task<IActionResult> Apply(Guid id, [FromBody] JobPostApply.Command command)
+        {
+            command.JobPostId = id;
+            return HandleResult(await Mediator.Send(command));
+        }
     }
 }
