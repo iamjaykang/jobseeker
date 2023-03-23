@@ -14,7 +14,7 @@ const JobListItem = ({ job }: Props) => {
           <h2 className="job-list__title">{job.title}</h2>
         </Link>
         <p className="job-list__date">Posted On: {job.date}</p>
-        <p className="job-list__posted-by">Posted By: {job.postedBy}</p>
+        <p className="job-list__posted-by">Posted By: {job.poster.username}</p>
         <p className="job-list__location">{job.city}</p>
         <p className="job-list__salary">Salary: {job.salary}</p>
         <p className="job-list__type">Job Type: {job.jobType}</p>

@@ -106,13 +106,6 @@ const JobForm = () => {
                 />
 
                 <MyTextInput
-                  name="postedBy"
-                  placeholder="Posted By"
-                  label="Posted By"
-                  formtype="job-form"
-                />
-
-                <MyTextInput
                   name="salary"
                   placeholder="Enter Salary"
                   label="Job Salary"
