@@ -1,12 +1,10 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
-import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { Job, JobFormValues } from "../models/job.model";
 import { User, UserFormValues } from "../models/user.model";
 import { router } from "../router/Routes";
 import { setServerError } from "../stores/common/common.action";
 import { CommonState } from "../stores/common/common.reducer";
-import { selectUserToken } from "../stores/common/common.selector";
 import { store } from "../stores/store";
 
 const sleep = (delay: number) => {
@@ -81,13 +79,13 @@ const requests = {
 };
 
 const Jobs = {
-  list: () => requests.get<Job[]>("/jobs"),
-  details: (id: string) => requests.get<Job>(`/jobs/${id}`),
+  list: () => requests.get<Job[]>("/jobPosts"),
+  details: (id: string) => requests.get<Job>(`/jobPosts/${id}`),
   create: (jobFormData: JobFormValues) =>
-    requests.post<void>("/jobs", jobFormData),
+    requests.post<void>("/jobPosts", jobFormData),
   update: (newJobFormData: JobFormValues) =>
-    requests.put<void>(`/jobs/${newJobFormData.id}`, newJobFormData),
-  delete: (jobId: string) => requests.del<void>(`/jobs/${jobId}`),
+    requests.put<void>(`/jobPosts/${newJobFormData.id}`, newJobFormData),
+  delete: (jobId: string) => requests.del<void>(`/jobPosts/${jobId}`),
 };
 
 const Account = {
