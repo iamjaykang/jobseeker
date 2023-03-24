@@ -14,6 +14,14 @@ namespace API.Controllers
         {
             return HandleResult(await Mediator.Send(new List.Query()));
         }
+
+        [HttpGet("employer/jobs")] // api/employer/jobsPosts
+        [Authorize(Policy = "EmployerPolicy")]
+        public async Task<IActionResult> GetJobsForEmployer()
+        {
+            return HandleResult(await Mediator.Send(new ListForEmployer.Query()));
+        }
+
         [AllowAnonymous]
         [HttpGet("{id}")] // api/jobsPosts/{id}
         public async Task<IActionResult> GetJob(Guid id)
