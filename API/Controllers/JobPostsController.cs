@@ -29,6 +29,13 @@ namespace API.Controllers
             return HandleResult(await Mediator.Send(new Details.Query { Id = id }));
         }
 
+        [HttpGet("employer/{id}")] // api/jobsPosts/{id}
+        [Authorize(Policy = "EmployerPolicy")]
+        public async Task<IActionResult> GetJobForEmployer(Guid id)
+        {
+            return HandleResult(await Mediator.Send(new DetailsForEmployer.Query { Id = id }));
+        }
+
         [HttpPost] // api/jobsPosts
         [Authorize(Policy = "EmployerPolicy")]
         public async Task<IActionResult> CreateJob(JobPost jobPost)
