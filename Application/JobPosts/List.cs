@@ -31,11 +31,18 @@ namespace Application.JobPosts
                     .Include(jp => jp.Poster)
                     .ThenInclude(p => p.Poster)
                     .Include(jp => jp.Applicants)
-                    .ThenInclude(jpa => jpa.Applicant)
                     .ToListAsync(cancellationToken);
 
                 // Map job post entities to job post DTOs
                 var jobPostDtos = _mapper.Map<List<JobPost>, List<JobPostDto>>(jobPosts);
+
+                // Update the jobPostDtos with the count of applicants for each job post
+                foreach (var jobPostDto in jobPostDtos)
+                {
+                    jobPostDto.NumberOfApplicants = jobPostDto.Applicants?.Count ?? 0;
+                    // Set Applicants to null to avoid sending unnecessary data
+                    jobPostDto.Applicants = null;
+                }
 
                 return Result<List<JobPostDto>>.Success(jobPostDtos);
             }

@@ -14,6 +14,7 @@ namespace Application.JobPosts
         public string City { get; set; }
         public string IsClosed { get; set; }
         public ICollection<ApplicantDto> Applicants { get; set; }
+        public int NumberOfApplicants { get; set; }
         public Profile Poster { get; set; }
     }
 }
