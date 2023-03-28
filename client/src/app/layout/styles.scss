@@ -108,8 +108,19 @@
                 border-bottom: none;
             }
 
+            .mobile-navbar__button {
+                display: inline-block;
+                color: #333;
+                font-size: 1.8rem;
+                margin: auto;
+                text-decoration: none;
+                background-color: transparent;
+                border: none;
+                cursor: pointer;
+            }
+
             .mobile-navbar__link {
-                display: block;
+                display: inline-block;
                 color: #333;
                 font-size: 1.8rem;
                 text-decoration: none;
@@ -135,6 +146,20 @@
     .navbar__item {
         margin-left: 2rem;
     }
+
+    .navbar__button {
+        color: #333;
+        font-size: 1.8rem;
+        text-decoration: none;
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      
+        &:hover {
+          color: #007acc;
+        }
+      }      
 
     .navbar__link {
         color: #333;

@@ -102,8 +102,18 @@
 .header__mobile-navbar .mobile-navbar__dropdown .mobile-navbar__item:last-child {
   border-bottom: none;
 }
+.header__mobile-navbar .mobile-navbar__dropdown .mobile-navbar__item .mobile-navbar__button {
+  display: inline-block;
+  color: #333;
+  font-size: 1.8rem;
+  margin: auto;
+  text-decoration: none;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
 .header__mobile-navbar .mobile-navbar__dropdown .mobile-navbar__item .mobile-navbar__link {
-  display: block;
+  display: inline-block;
   color: #333;
   font-size: 1.8rem;
   text-decoration: none;
@@ -124,6 +134,18 @@
 }
 .header__navbar .navbar__item {
   margin-left: 2rem;
+}
+.header__navbar .navbar__button {
+  color: #333;
+  font-size: 1.8rem;
+  text-decoration: none;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.header__navbar .navbar__button:hover {
+  color: #007acc;
 }
 .header__navbar .navbar__link {
   color: #333;
