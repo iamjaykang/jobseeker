@@ -1,17 +1,28 @@
 import { all, call, put, takeLatest } from "typed-redux-saga";
 import agent from "../../api/agent";
-import { UserFormValues } from "../../models/user.model";
 import { router } from "../../router/Routes";
 import { setToken } from "../common/common.action";
 import {
   loginFailed,
   LoginLoading,
   loginSuccess,
+  setCurrentUserFailed,
+  setCurrentUserSuccess,
   signupFailed,
   SignupLoading,
   signupSuccess,
 } from "./user.action";
 import { USER_ACTION_TYPES } from "./user.types";
+
+export function* getCurrentUser() {
+try {
+  const user = yield* call(agent.Account.current);
+
+  yield* put(setCurrentUserSuccess(user))
+} catch (error) {
+  yield* put(setCurrentUserFailed(error as Error))
+}
+}
 
 export function* loginUser({ payload }: LoginLoading) {
   try {
@@ -50,6 +61,10 @@ export function* logoutUser() {
   yield* put(setToken(null));
 }
 
+export function* onSetCurrentUserLoading() {
+  yield* takeLatest(USER_ACTION_TYPES.SET_CURRENT_USER_LOADING, getCurrentUser)
+}
+
 export function* onLoginUserLoading() {
   yield* takeLatest(USER_ACTION_TYPES.LOGIN_LOADING, loginUser);
 }
@@ -64,6 +79,7 @@ export function* watchLogoutUser() {
 
 export function* userSaga() {
   yield* all([
+    call(onSetCurrentUserLoading),
     call(onLoginUserLoading),
     call(watchLogoutUser),
     call(onSignupUserLoading),

@@ -3,7 +3,11 @@ import { User, UserFormValues } from "../../models/user.model";
 import { createAction, withMatcher } from "../../utils/reducer.util";
 import { USER_ACTION_TYPES } from "./user.types";
 
-export type SetCurrentUser = ActionWithPayload<USER_ACTION_TYPES.SET_CURRENT_USER, User>;
+export type SetCurrentUserLoading = Action<USER_ACTION_TYPES.SET_CURRENT_USER_LOADING>;
+
+export type SetCurrentUserSuccess = ActionWithPayload<USER_ACTION_TYPES.SET_CURRENT_USER_SUCCESS, User>;
+
+export type SetCurrentUserFailed = ActionWithPayload<USER_ACTION_TYPES.SET_CURRENT_USER_FAILED, Error>;
 
 export type LoginLoading = ActionWithPayload<USER_ACTION_TYPES.LOGIN_LOADING, UserFormValues>
 
@@ -22,9 +26,18 @@ export type LogoutUser = Action<USER_ACTION_TYPES.LOGOUT_USER>;
 
 // Actions
 
-export const setCurrentUser = withMatcher(
-    (user: User): SetCurrentUser =>
-    createAction(USER_ACTION_TYPES.SET_CURRENT_USER, user)
+export const setCurrentUserLoading = withMatcher(
+    (): SetCurrentUserLoading =>
+    createAction(USER_ACTION_TYPES.SET_CURRENT_USER_LOADING)
+)
+
+export const setCurrentUserSuccess = withMatcher(
+    (user: User): SetCurrentUserSuccess =>
+    createAction(USER_ACTION_TYPES.SET_CURRENT_USER_SUCCESS, user)
+)
+export const setCurrentUserFailed = withMatcher(
+    (error:Error): SetCurrentUserFailed =>
+    createAction(USER_ACTION_TYPES.SET_CURRENT_USER_FAILED, error)
 )
 
 export const loginLoading = withMatcher(

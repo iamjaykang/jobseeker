@@ -5,6 +5,9 @@ import {
   loginLoading,
   loginSuccess,
   logoutUser,
+  setCurrentUserFailed,
+  setCurrentUserLoading,
+  setCurrentUserSuccess,
   signupFailed,
   signupLoading,
   signupSuccess,
@@ -22,7 +25,11 @@ const USER_INITIAL_STATE = {
 };
 
 const userReducer = (state = USER_INITIAL_STATE, action = {} as AnyAction) => {
-  if (loginLoading.match(action) || signupLoading.match(action)) {
+  if (
+    loginLoading.match(action) ||
+    signupLoading.match(action) ||
+    setCurrentUserLoading.match(action)
+  ) {
     return {
       ...state,
       isLoading: true,
@@ -31,7 +38,11 @@ const userReducer = (state = USER_INITIAL_STATE, action = {} as AnyAction) => {
     };
   }
 
-  if (loginSuccess.match(action) || signupSuccess.match(action)) {
+  if (
+    loginSuccess.match(action) ||
+    signupSuccess.match(action) ||
+    setCurrentUserSuccess.match(action)
+  ) {
     return {
       ...state,
       isLoading: false,
@@ -40,7 +51,11 @@ const userReducer = (state = USER_INITIAL_STATE, action = {} as AnyAction) => {
     };
   }
 
-  if (loginFailed.match(action) || signupFailed.match(action)) {
+  if (
+    loginFailed.match(action) ||
+    signupFailed.match(action) ||
+    setCurrentUserFailed.match(action)
+  ) {
     return {
       ...state,
       isLoading: false,
