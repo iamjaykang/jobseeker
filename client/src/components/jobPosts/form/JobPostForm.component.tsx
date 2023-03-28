@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom/";
-import { JobFormValues } from "../../../app/models/job.model";
+import { JobPostFormValues } from "../../../app/models/jobPost.model";
 import { Formik, Form } from "formik";
 import {
-  addJobLoading,
-  fetchJobByIdLoading,
-  updateJobLoading,
-} from "../../../app/stores/jobPosts/job.action";
+  addJobPostLoading,
+  fetchJobPostByIdLoading,
+  updateJobPostLoading,
+} from "../../../app/stores/jobPosts/jobPosts.action";
 import { v4 as uuid } from "uuid";
-import "./jobForm.styles.css";
-import { selectJobFormData } from "../../../app/stores/jobPosts/job.selector";
-import "./jobForm.styles.css";
+import { selectJobPostFormData } from "../../../app/stores/jobPosts/jobPosts.selector";
+import "./jobPostForm.styles.css";
 import MyTextInput from "../../../app/common/form/MyTextInput.common";
 import MyTextArea from "../../../app/common/form/MyTextArea.common";
 import MySelectInput from "../../../app/common/form/MySelectInput.common";
@@ -19,44 +18,44 @@ import { experienceLevelOptions } from "../../../app/common/options/experienceLe
 import MySubmitButton from "../../../app/common/form/MySubmitButton.common";
 import { jobFormValidation } from "../../../app/utils/jobFormValidation.util";
 
-const JobForm = () => {
-  const [formData, setFormData] = useState<JobFormValues>(new JobFormValues());
+const JobPostForm = () => {
+  const [formData, setFormData] = useState<JobPostFormValues>(new JobPostFormValues());
 
-  const jobFormData = useSelector(selectJobFormData);
+  const jobFormData = useSelector(selectJobPostFormData);
 
   const { id } = useParams();
 
   const dispatch = useDispatch();
 
-  const handleFormSubmit = (job: JobFormValues) => {
+  const handleFormSubmit = (jobPost: JobPostFormValues) => {
     if (!formData.id) {
-      let newJob = {
-        ...job,
+      let newJobPost = {
+        ...jobPost,
         id: uuid(),
       };
 
-      dispatch(addJobLoading(newJob));
+      dispatch(addJobPostLoading(newJobPost));
     } else {
       if (id) {
-        dispatch(updateJobLoading(job));
+        dispatch(updateJobPostLoading(jobPost));
       }
     }
   };
 
   useEffect(() => {
     if (id) {
-      dispatch(fetchJobByIdLoading(id));
+      dispatch(fetchJobPostByIdLoading(id));
     }
   }, [id]);
 
   useEffect(() => {
     if (jobFormData) {
-      setFormData(new JobFormValues(jobFormData));
+      setFormData(new JobPostFormValues(jobFormData));
     }
   }, [jobFormData]);
 
   useEffect(() => {
-    setFormData(new JobFormValues());
+    setFormData(new JobPostFormValues());
   }, []);
 
   return (
@@ -135,4 +134,4 @@ const JobForm = () => {
   );
 };
 
-export default JobForm;
+export default JobPostForm;

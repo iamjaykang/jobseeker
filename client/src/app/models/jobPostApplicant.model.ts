@@ -1,4 +1,4 @@
-export interface JobApplicant {
+export interface JobPostApplicant {
   id: string;
   applicationDate: string;
   coverLetter: string;

@@ -3,7 +3,7 @@ import Header from "./Header.layout";
 import Footer from "./Footer.layout";
 import "./styles.css";
 import { ScrollRestoration, useParams } from "react-router-dom/";
-import JobSearchForm from "./JobSearchForm.layout";
+import JobPostSearchForm from "./JobPostSearchForm.layout";
 import { Outlet, useLocation } from "react-router";
 import HomePage from "../../components/home/HomePage.component";
 import { ToastContainer } from "react-toastify";
@@ -20,7 +20,7 @@ function App() {
       <Header />
       {isSearchFormVisible && (
         <div className="app__search">
-          <JobSearchForm />
+          <JobPostSearchForm />
         </div>
       )}
       <main className="app__main">

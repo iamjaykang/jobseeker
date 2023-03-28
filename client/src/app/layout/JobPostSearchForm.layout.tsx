@@ -6,7 +6,7 @@ const initialFormData = {
   city: "",
 };
 
-const JobSearchForm = () => {
+const JobPostSearchForm = () => {
   const [formData, setFormData] = useState(initialFormData);
 
   const { keyword, classification, city } = formData;
@@ -55,4 +55,4 @@ const JobSearchForm = () => {
   );
 };
 
-export default JobSearchForm;
+export default JobPostSearchForm;

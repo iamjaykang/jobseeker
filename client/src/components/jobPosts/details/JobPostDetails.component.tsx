@@ -3,36 +3,36 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom/";
 import LoadingSpinner from "../../../app/common/loadingSpinner/LoadingSpinner.common";
 import {
-  deleteJobLoading,
-  fetchJobByIdLoading,
-} from "../../../app/stores/jobPosts/job.action";
+  deleteJobPostLoading,
+  fetchJobPostByIdLoading,
+} from "../../../app/stores/jobPosts/jobPosts.action";
 import {
-  selectJob,
-  selectJobsIsLoading,
-} from "../../../app/stores/jobPosts/job.selector";
-import "./jobDetails.styles.css";
-import JobDetailsCard from "./JobDetailsCard.component";
+  selectJobPost,
+  selectJobPostsIsLoading,
+} from "../../../app/stores/jobPosts/jobPosts.selector";
+import "./jobPostDetails.styles.css";
+import JobPostDetailsCard from "./JobPostDetailsCard.component";
 
-const JobDetails = () => {
+const JobPostDetails = () => {
   const { id } = useParams();
 
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
 
-  const job = useSelector(selectJob);
+  const jobPost = useSelector(selectJobPost);
 
-  const jobIsLoading = useSelector(selectJobsIsLoading);
+  const jobIsLoading = useSelector(selectJobPostsIsLoading);
 
   const handleDelete = () => {
-    if (job && job.id) {
-      dispatch(deleteJobLoading(job.id));
+    if (jobPost && jobPost.id) {
+      dispatch(deleteJobPostLoading(jobPost.id));
       navigate("/browse-jobs");
     }
   };
 
   useEffect(() => {
-    if (id) dispatch(fetchJobByIdLoading(id));
+    if (id) dispatch(fetchJobPostByIdLoading(id));
   }, [id, dispatch]);
 
   if (jobIsLoading) return <LoadingSpinner />;
@@ -40,11 +40,11 @@ const JobDetails = () => {
   return (
     <div className="job-details-page">
       <div className="job-details__card-container">
-        {job && (
+        {jobPost && (
           <>
             <div className="job-details__action-container">
               <Link
-                to={`/manage/${job.id}`}
+                to={`/manage/${jobPost.id}`}
                 className="job-details__edit-button"
               >
                 Edit
@@ -56,7 +56,7 @@ const JobDetails = () => {
                 Delete
               </button>
             </div>
-            <JobDetailsCard job={job} />
+            <JobPostDetailsCard jobPost={jobPost} />
           </>
         )}
       </div>
@@ -64,4 +64,4 @@ const JobDetails = () => {
   );
 };
 
-export default JobDetails;
+export default JobPostDetails;

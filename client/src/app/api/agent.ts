@@ -1,6 +1,6 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
 import { toast } from "react-toastify";
-import { Job, JobFormValues } from "../models/job.model";
+import { JobPost, JobPostFormValues } from "../models/jobPost.model";
 import { User, UserFormValues } from "../models/user.model";
 import { router } from "../router/Routes";
 import { setServerError } from "../stores/common/common.action";
@@ -79,11 +79,11 @@ const requests = {
 };
 
 const JobPosts = {
-  list: () => requests.get<Job[]>("/jobPosts"),
-  details: (id: string) => requests.get<Job>(`/jobPosts/${id}`),
-  create: (jobFormData: JobFormValues) =>
+  list: () => requests.get<JobPost[]>("/jobPosts"),
+  details: (id: string) => requests.get<JobPost>(`/jobPosts/${id}`),
+  create: (jobFormData: JobPostFormValues) =>
     requests.post<void>("/jobPosts", jobFormData),
-  update: (newJobFormData: JobFormValues) =>
+  update: (newJobFormData: JobPostFormValues) =>
     requests.put<void>(`/jobPosts/${newJobFormData.id}`, newJobFormData),
   delete: (jobId: string) => requests.del<void>(`/jobPosts/${jobId}`),
 };
