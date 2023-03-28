@@ -78,7 +78,7 @@ const requests = {
   del: <T>(url: string) => axios.delete<T>(url).then(responseBody),
 };
 
-const Jobs = {
+const JobPosts = {
   list: () => requests.get<Job[]>("/jobPosts"),
   details: (id: string) => requests.get<Job>(`/jobPosts/${id}`),
   create: (jobFormData: JobFormValues) =>
@@ -96,7 +96,7 @@ const Account = {
 };
 
 const agent = {
-  Jobs,
+  JobPosts,
   Account,
 };
 

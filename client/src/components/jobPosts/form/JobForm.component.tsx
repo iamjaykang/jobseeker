@@ -7,10 +7,10 @@ import {
   addJobLoading,
   fetchJobByIdLoading,
   updateJobLoading,
-} from "../../../app/stores/jobs/job.action";
+} from "../../../app/stores/jobPosts/job.action";
 import { v4 as uuid } from "uuid";
 import "./jobForm.styles.css";
-import { selectJobFormData } from "../../../app/stores/jobs/job.selector";
+import { selectJobFormData } from "../../../app/stores/jobPosts/job.selector";
 import "./jobForm.styles.css";
 import MyTextInput from "../../../app/common/form/MyTextInput.common";
 import MyTextArea from "../../../app/common/form/MyTextArea.common";

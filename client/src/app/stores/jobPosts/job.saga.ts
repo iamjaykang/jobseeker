@@ -21,7 +21,7 @@ import { JOBS_ACTION_TYPES } from "./job.types";
 
 export function* fetchAllJobs() {
   try {
-    const jobsArray = yield* call(agent.Jobs.list);
+    const jobsArray = yield* call(agent.JobPosts.list);
     yield* put(fetchAllJobsSuccess(jobsArray));
   } catch {
     yield* put(fetchAllJobsFailed());
@@ -30,7 +30,7 @@ export function* fetchAllJobs() {
 
 export function* fetchJobById({ payload }: FetchJobByIdLoading) {
   try {
-    const job = yield* call(agent.Jobs.details, payload);
+    const job = yield* call(agent.JobPosts.details, payload);
     yield* put(fetchJobByIdSuccess(job));
   } catch {
     yield* put(fetchJobByIdFailed());
@@ -39,7 +39,7 @@ export function* fetchJobById({ payload }: FetchJobByIdLoading) {
 
 export function* addJob({ payload }: AddJobLoading) {
   try {
-    yield* call(agent.Jobs.create, payload);
+    yield* call(agent.JobPosts.create, payload);
     const { id } = payload;
     yield* put(addJobSuccess());
     router.navigate(`/browse-jobs/${id}`);
@@ -51,7 +51,7 @@ export function* addJob({ payload }: AddJobLoading) {
 export function* updateJob({ payload }: UpdateJobLoading) {
   const { newJobFormData } = payload;
   try {
-    yield* call(agent.Jobs.update, newJobFormData);
+    yield* call(agent.JobPosts.update, newJobFormData);
     const { id } = newJobFormData;
     yield* put(updateJobSuccess());
     router.navigate(`/browse-jobs/${id}`);
@@ -62,7 +62,7 @@ export function* updateJob({ payload }: UpdateJobLoading) {
 
 export function* deleteJob({ payload: jobId }: DeleteJobLoading) {
   try {
-    yield* call(agent.Jobs.delete, jobId);
+    yield* call(agent.JobPosts.delete, jobId);
     yield* put(deleteJobSuccess());
   } catch {
     yield* put(deleteJobFailed());

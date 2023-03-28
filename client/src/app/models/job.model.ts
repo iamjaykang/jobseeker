@@ -2,6 +2,7 @@ import { JobApplicant } from "./jobApplicant.model";
 import { JobPoster } from "./jobPoster.model";
 
 export interface Job {
+  numberOfApplicants: number;
   id: string;
   title: string;
   date: string;

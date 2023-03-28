@@ -5,11 +5,11 @@ import LoadingSpinner from "../../../app/common/loadingSpinner/LoadingSpinner.co
 import {
   deleteJobLoading,
   fetchJobByIdLoading,
-} from "../../../app/stores/jobs/job.action";
+} from "../../../app/stores/jobPosts/job.action";
 import {
   selectJob,
   selectJobsIsLoading,
-} from "../../../app/stores/jobs/job.selector";
+} from "../../../app/stores/jobPosts/job.selector";
 import "./jobDetails.styles.css";
 import JobDetailsCard from "./JobDetailsCard.component";
 

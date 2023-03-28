@@ -2,11 +2,11 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import LoadingSpinner from "../../../app/common/loadingSpinner/LoadingSpinner.common";
 import { Job } from "../../../app/models/job.model";
-import { fetchAllJobsLoading } from "../../../app/stores/jobs/job.action";
+import { fetchAllJobsLoading } from "../../../app/stores/jobPosts/job.action";
 import {
   selectJobsArray,
   selectJobsIsLoading,
-} from "../../../app/stores/jobs/job.selector";
+} from "../../../app/stores/jobPosts/job.selector";
 import JobList from "./JobList.component";
 import "./jobListPage.styles.css";
 
