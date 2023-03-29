@@ -49,7 +49,9 @@
 
   .job-details-card {
     max-width: 1200px;
+    background-color: #f9f9f9;
     margin: 0 auto;
+    border: 1px solid #ddd;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     border-radius: 4px;
     overflow: hidden;
@@ -127,6 +129,24 @@
     
   }
 }
+
+.job-details-actions__apply {
+  display: inline-block;
+  background-color: #0052cc;
+  color: #fff;
+  padding: 1rem 2rem;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 1.4rem;
+  transition: background-color 0.3s ease;
+  border: none;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #00449e;
+  }
+}
+
 
 @media (min-width: 768px) {
   .job-details-card-container {

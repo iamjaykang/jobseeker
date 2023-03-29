@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom/";
 import { JobPost } from "../../../app/models/jobPost.model";
 
 interface Props {
@@ -9,7 +10,7 @@ const JobPostDetailsActions = ({ jobPost }: Props) => {
   return (
     <div className="job-details-actions">
       <div className="job-details-actions__buttons">
-        <button className="job-details-actions__apply">Apply</button>
+        <Link to={`/job/${jobPost.id}/apply`} className="job-details-actions__apply">Apply</Link>
         <button className="job-details-actions__save">Save Job</button>
       </div>
       <p className="job-details-actions__applicants">
