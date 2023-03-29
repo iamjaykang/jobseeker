@@ -5,7 +5,7 @@ import "./jobPostApply.styles.css";
 import { useSelector } from "react-redux";
 import { selectJobPost } from "../../../app/stores/jobPosts/jobPosts.selector";
 import { selectUser } from "../../../app/stores/users/user.selector";
-import StepIndicator from "../../../app/common/stepIndicator/StepIndicator.common";
+import StepIndicator from "./StepIndicator.common";
 
 const JobPostApply = () => {
   const [currentStep, setCurrentStep] = useState(1);
@@ -25,20 +25,30 @@ const JobPostApply = () => {
   return (
     <div className="job-apply-page">
       <div className="step-indicator-container">
-        <StepIndicator currentStep={currentStep} />
+        <StepIndicator
+          currentStep={currentStep}
+          setCurrentStep={setCurrentStep}
+        />
         <div className="job-poster-info">
           <h2>{jobPost?.poster.username}</h2>
         </div>
-        
       </div>
       {currentStep === 1 ? (
-        <>
-        <DocumentUpload jobPost={jobPost} currentUser={currentUser} handleNextStep={handleNextStep} />
-        </>
+        <div className="document-upload-container">
+          <DocumentUpload
+            jobPost={jobPost}
+            currentUser={currentUser}
+            handleNextStep={handleNextStep}
+          />
+        </div>
       ) : (
-        <>
-        <ReviewSubmit jobPost={jobPost} currentUser={currentUser} handlePreviousStep={handlePreviousStep} />
-        </>
+        <div className="review-submit-container">
+          <ReviewSubmit
+            jobPost={jobPost}
+            currentUser={currentUser}
+            handlePreviousStep={handlePreviousStep}
+          />
+        </div>
       )}
     </div>
   );

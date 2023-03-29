@@ -1,3 +1,4 @@
+/* step indicator */
 .step-indicator-container {
     background-color: #fff;
     display: flex;
@@ -43,6 +44,7 @@
     color: #fff;
 }
 
+/* job apply button */
 .job-apply-button {
     background-color: #007bff;
     color: #fff;
@@ -59,23 +61,27 @@
     @media screen and (min-width: 768px) {
         width: 200px;
     }
-  }
-  
-  .job-apply-button:hover {
+}
+
+.job-apply-button:hover {
     background-color: #0062cc;
-  }
+}
+
+/* document upload */
 
 .document-upload {
-    max-width: 1200px;
-    margin: auto;
-    display: grid;
-    padding: 2rem;
-    grid-template-columns: 1fr;
-    gap: 2rem;
+    &-form {
+        max-width: 1200px;
+        margin: auto;
+        display: grid;
+        padding: 2rem;
+        grid-template-columns: 1fr;
+        gap: 2rem;
 
-    @media screen and (min-width: 768px) {
-        grid-template-columns: 3fr 2fr;
-        padding: 0;
+        @media screen and (min-width: 768px) {
+            grid-template-columns: 3fr 2fr;
+            padding: 0;
+        }
     }
 
     &__column {
@@ -144,5 +150,170 @@
 
     &__collapsible+&__details-content.open {
         display: block;
+    }
+}
+
+/* review submit */
+
+.review-submit {
+    &-container {
+        padding: 2rem;
+    }
+
+    &-form {
+        max-width: 1200px;
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        padding: 2rem;
+        background-color: #fff;
+        box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+        border: 1px solid #ddd;
+        border-radius: 0.5rem;
+    }
+
+    &__header {
+        margin-bottom: 2rem;
+    }
+
+    &__title {
+        font-size: 2.2rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+    }
+
+    &__content {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    &__section {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    &__text {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+
+    &__section-title {
+        font-size: 2rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+    }
+
+    &__section-content {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding: 2rem;
+        border: 1px solid #ddd;
+        background-color: #ffffff;
+        box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+        border-radius: 0.5rem;
+        transition: all 0.3s ease;
+
+        &:hover {
+            box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.1);
+        }
+    }
+
+    &__column {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 1rem;
+    }
+
+    &__column-title,
+    &__content-title {
+        font-size: 1.8rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+    }
+
+    &__details-content {
+        display: none;
+        margin-top: 2rem;
+        font-size: 1.4rem;
+        line-height: 1.5;
+        color: #6c757d;
+    }
+
+    &__collapsible {
+        background-color: transparent;
+        border: none;
+        font-size: 1.5rem;
+        text-decoration: underline;
+        cursor: pointer;
+        margin-bottom: 1rem;
+        transition: color 0.3s ease;
+
+        &:hover {
+            color: #007bff;
+        }
+    }
+
+    &__collapsible+&__details-content.open {
+        display: block;
+    }
+
+    &__button--previous {
+        background-color: transparent;
+        color: #007bff;
+        border: 2px solid #007bff;
+        border-radius: 0.5rem;
+        padding: 1rem 2rem;
+        font-size: 1.5rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        width: 100%;
+        max-width: 200px;
+        justify-self: end;
+
+        @media screen and (min-width: 768px) {
+            width: 200px;
+        }
+
+        &:hover {
+            background-color: #007bff;
+            color: #fff;
+        }
+    }
+
+
+    &__footer {
+        display: flex;
+        gap: 1rem;
+        justify-content: flex-end;
+        margin-top: 2rem;
+    }
+
+    &__button {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 0.5rem;
+        padding: 1rem 2rem;
+        font-size: 1.5rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        width: 100%;
+        max-width: 200px;
+        justify-self: end;
+
+        @media screen and (min-width: 768px) {
+            width: 200px;
+        }
+    }
+
+    &__button:hover {
+        background-color: #0062cc;
     }
 }

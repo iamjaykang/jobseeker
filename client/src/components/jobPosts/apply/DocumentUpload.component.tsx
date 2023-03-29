@@ -15,7 +15,7 @@ const DocumentUpload = ({ jobPost, currentUser, handleNextStep }: Props) => {
     setIsOpen(!isOpen);
   };
   return (
-    <div className="document-upload">
+    <div className="document-upload-form">
       <div className="document-upload__column">
         <div className="document-upload__row">
           <div className="document-upload__user-info">
