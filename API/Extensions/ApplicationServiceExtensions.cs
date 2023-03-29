@@ -3,6 +3,7 @@ using Application.Interfaces;
 using Application.JobPosts;
 using FluentValidation;
 using FluentValidation.AspNetCore;
+using Infrastructure.Documents;
 using Infrastructure.Security;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -35,6 +36,8 @@ namespace API.Extensions
             services.AddValidatorsFromAssemblyContaining<Create>();
             services.AddHttpContextAccessor();
             services.AddScoped<IUserAccessor, UserAccessor>();
+            services.AddScoped<IDocumentAccessor, DocumentAccessor>();
+            services.Configure<CloudinarySettings>(config.GetSection("Cloudinary"));
 
             return services;
         }

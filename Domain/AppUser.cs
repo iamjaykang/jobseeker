@@ -12,5 +12,7 @@ namespace Domain
         public ICollection<JobPostPoster> JobPosts { get; set; } = new List<JobPostPoster>();
 
         public ICollection<JobPostApplicant> AppliedJobPosts { get; set; } = new List<JobPostApplicant>();
+
+        public ICollection<Document> Documents { get; set; }
     }
 }

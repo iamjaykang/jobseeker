@@ -15,6 +15,7 @@ namespace Persistence
         public DbSet<JobPostApplicant> JobPostApplicants { get; set; }
 
         public DbSet<JobPostPoster> JobPostPosters { get; set; }
+        public DbSet<Document> Documents { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
