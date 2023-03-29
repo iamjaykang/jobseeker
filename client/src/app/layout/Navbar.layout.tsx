@@ -3,24 +3,26 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom/";
 import { logoutUser } from "../stores/users/user.action";
 import { selectUser } from "../stores/users/user.selector";
-import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
+import { MdKeyboardArrowDown } from "react-icons/md";
 
 const Navbar = () => {
+  const dispatch = useDispatch();
   const currentUser = useSelector(selectUser);
+
   const [showMenu, setShowMenu] = useState(false);
 
-  const dropdownButtonRef = useRef<HTMLButtonElement>(null);
+  const dropdownRef = useRef<HTMLUListElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
 
   const handleMenuToggle = () => {
     setShowMenu(!showMenu);
   };
-  const dispatch = useDispatch();
 
   const handleClickOutside = (e: MouseEvent) => {
     if (
-      dropdownButtonRef.current &&
-      !dropdownButtonRef.current.contains(e.target as Node) &&
-      e.target !== dropdownButtonRef.current
+      dropdownRef.current &&
+      !dropdownRef.current.contains(e.target as Node) &&
+      buttonRef.current !== e.target
     ) {
       setShowMenu(false);
     }
@@ -33,10 +35,9 @@ const Navbar = () => {
 
   useEffect(() => {
     document.addEventListener("click", handleClickOutside, true);
-    return () => {
+    return () =>
       document.removeEventListener("click", handleClickOutside, true);
-    };
-  }, []);
+  }, [setShowMenu]);
 
   return (
     <nav className="header__navbar">
@@ -54,17 +55,23 @@ const Navbar = () => {
         {currentUser ? (
           <li className="navbar__item" style={{ position: "relative" }}>
             <button
-              ref={dropdownButtonRef}
+              ref={buttonRef}
               className="navbar__button"
               onClick={handleMenuToggle}
+              aria-expanded={showMenu}
+              aria-haspopup="true"
             >
               {currentUser.firstName}
-            <span className={`navbar__arrow${showMenu ? " open" : ""}`}>
-              <MdKeyboardArrowDown />
-            </span>
+              <span className={`navbar__arrow${showMenu ? " open" : ""}`}>
+                <MdKeyboardArrowDown />
+              </span>
             </button>
             {showMenu && (
-              <ul className={`navbar__dropdown${showMenu ? " open" : ""}`}>
+              <ul
+                role="menu"
+                ref={dropdownRef}
+                className={`navbar__dropdown${showMenu ? " open" : ""}`}
+              >
                 <li className="navbar__item">
                   <button className="navbar__button" onClick={handleLogout}>
                     Log out
