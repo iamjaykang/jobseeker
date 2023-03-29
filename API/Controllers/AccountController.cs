@@ -100,6 +100,7 @@ namespace API.Controllers
             {
                 FirstName = user.FirstName,
                 LastName = user.LastName,
+                Email = user.Email,
                 Token = await _tokenService.CreateToken(user),
                 Username = user.UserName
             };
