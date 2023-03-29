@@ -1,0 +1,148 @@
+.step-indicator-container {
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: space-between;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+
+    .job-poster-info {
+        max-width: 1200px;
+        margin: auto;
+    }
+}
+
+.step-indicator {
+    max-width: 1200px;
+    width: 100%;
+    display: flex;
+    gap: 1rem;
+    justify-content: space-between;
+    margin: 2rem auto;
+}
+
+.step-indicator__step {
+    width: 100%;
+    flex: 1;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 600;
+    padding: 1rem;
+    border: 2px solid #007bff;
+    color: #007bff;
+    border-radius: 0.5rem;
+    background-color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.step-indicator__step.active {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.job-apply-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 0.5rem;
+    padding: 1rem 2rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+    justify-self: end;
+
+    @media screen and (min-width: 768px) {
+        width: 200px;
+    }
+  }
+  
+  .job-apply-button:hover {
+    background-color: #0062cc;
+  }
+
+.document-upload {
+    max-width: 1200px;
+    margin: auto;
+    display: grid;
+    padding: 2rem;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+
+    @media screen and (min-width: 768px) {
+        grid-template-columns: 3fr 2fr;
+        padding: 0;
+    }
+
+    &__column {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    &__row {
+        margin-bottom: 2rem;
+    }
+
+    &__user-info,
+    &__cv-upload,
+    &__cover-letter-upload,
+    &__job-description {
+        background-color: #ffffff;
+        box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+        padding: 2rem;
+        border-radius: 0.5rem;
+        transition: all 0.3s ease;
+
+        &:hover {
+            box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.1);
+        }
+    }
+
+    &__header {
+        font-size: 2rem;
+        font-weight: 600;
+        margin-bottom: 2rem;
+    }
+
+    &__subheader {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 2rem;
+    }
+
+    &__text {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+
+    &__collapsible {
+        background-color: transparent;
+        border: none;
+        font-size: 1.5rem;
+        text-decoration: underline;
+        cursor: pointer;
+        margin-bottom: 1rem;
+        transition: color 0.3s ease;
+
+        &:hover {
+            color: #007bff;
+        }
+    }
+
+    &__details-content {
+        display: none;
+        margin-top: 2rem;
+        font-size: 1.25rem;
+        line-height: 1.5;
+        color: #6c757d;
+    }
+
+    &__collapsible+&__details-content.open {
+        display: block;
+    }
+}
