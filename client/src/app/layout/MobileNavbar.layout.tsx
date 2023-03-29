@@ -24,7 +24,9 @@ const MobileNavbar = () => {
     <nav className="header__mobile-navbar">
       <button className="mobile-navbar__menu-toggle" onClick={handleMenuToggle}>
         Menu
-        {isOpen ? <MdKeyboardArrowUp /> : <MdKeyboardArrowDown />}
+        <span className={`mobile-navbar__arrow${isOpen ? " open" : ""}`}>
+        <MdKeyboardArrowDown />
+        </span>
       </button>
       <ul className={`mobile-navbar__dropdown${isOpen ? " open" : ""}`}>
         <li className="mobile-navbar__item">
