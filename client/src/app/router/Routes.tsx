@@ -3,6 +3,7 @@ import { createBrowserRouter, Navigate, RouteObject } from "react-router-dom/";
 import NotFound from "../../components/errors/notFound/NotFound.component";
 import ServerError from "../../components/errors/serverError/ServerError.component";
 import TestErrors from "../../components/errors/TestError.component";
+import JobPostApply from "../../components/jobPosts/apply/JobPostApply.component";
 import JobPostDetails from "../../components/jobPosts/details/JobPostDetails.component";
 import JobPostForm from "../../components/jobPosts/form/JobPostForm.component";
 import JobPostListPage from "../../components/jobPosts/jobList/JobPostListPage.component";
@@ -17,6 +18,7 @@ export const routes: RouteObject[] = [
     children: [
       { path: "browse-jobs", element: <JobPostListPage /> },
       { path: "browse-jobs/:id", element: <JobPostDetails /> },
+      { path: "job/:id/apply", element: <JobPostApply />},
       { path: "post-job", element: <JobPostForm key="create" /> },
       { path: "manage/:id", element: <JobPostForm key="manage" /> },
       { path: "login", element: <LoginForm /> },
