@@ -41,18 +41,27 @@ namespace Infrastructure.Documents
                     throw new Exception(uploadResult.Error.Message);
                 }
 
+                var folder = uploadParams.Folder;
+                var publicIdWithoutFolder = DocumentHelper.ExtractPublicIdWithoutFolder(uploadResult.PublicId, folder);
+
                 return new DocumentUploadResult
                 {
-                    PublicId = uploadResult.PublicId,
+                    PublicId = publicIdWithoutFolder,
                     Url = uploadResult.SecureUrl.ToString(),
                 };
             }
-                return null;
+            return null;
         }
 
-        public Task<string> DeleteDocument(string publicId)
+        public async Task<string> DeleteDocument(string publicId)
         {
-            throw new NotImplementedException();
+            var folder = "cv_uploads";
+            var fullPath = folder + "/" + publicId;
+            var deleteParams = new DeletionParams(fullPath);
+
+            var result = await _cloudinary.DestroyAsync(deleteParams);
+
+            return result.Result == "ok" ? result.Result : null;
         }
     }
 }

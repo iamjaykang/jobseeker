@@ -6,5 +6,6 @@ namespace Application.Interfaces
     public interface IDocumentAccessor
     {
         Task<DocumentUploadResult> AddDocument(IFormFile file);
+        Task<string> DeleteDocument(string publicId);
     }
 }
