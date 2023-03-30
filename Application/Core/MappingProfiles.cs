@@ -10,7 +10,9 @@ namespace Application.Core
         {
             CreateMap<JobPost, JobPost>();
 
-            CreateMap<AppUser, Profiles.Profile>();
+            CreateMap<AppUser, Profiles.Profile>()
+                .ForMember(dest => dest.Resume, opt => opt.MapFrom(src => src.Documents.FirstOrDefault(x => x.IsMain).Url))
+            ;
 
             CreateMap<JobPost, JobPostDto>()
                 .ForMember(dest => dest.Poster, opt => opt.MapFrom(src => src.Poster.Poster));
