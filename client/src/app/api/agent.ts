@@ -1,6 +1,7 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
 import { toast } from "react-toastify";
 import { JobPost, JobPostFormValues } from "../models/jobPost.model";
+import { Profile } from "../models/profile.model";
 import { User, UserFormValues } from "../models/user.model";
 import { router } from "../router/Routes";
 import { setServerError } from "../stores/common/common.action";
@@ -95,9 +96,14 @@ const Account = {
     requests.post<User>("/account/register", user),
 };
 
+const Profiles = {
+  get: (username: string) => requests.get<Profile>(`/profiles/${username}`)
+}
+
 const agent = {
   JobPosts,
   Account,
+  Profiles
 };
 
 export default agent;
