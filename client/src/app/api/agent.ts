@@ -97,13 +97,22 @@ const Account = {
 };
 
 const Profiles = {
-  get: (username: string) => requests.get<Profile>(`/profiles/${username}`)
-}
+  get: (username: string) => requests.get<Profile>(`/profiles/${username}`),
+  uploadDocument: (file: Blob) => {
+    let formData = new FormData();
+    formData.append("File", file);
+
+    return axios.post<Document>("documents", formData, {
+      headers: { "Content-Type": "multipart/form-data" },
+    })
+    .then((response) => response.data);
+  },
+};
 
 const agent = {
   JobPosts,
   Account,
-  Profiles
+  Profiles,
 };
 
 export default agent;
