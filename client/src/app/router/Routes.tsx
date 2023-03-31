@@ -19,7 +19,7 @@ export const routes: RouteObject[] = [
     children: [
       { path: "browse-jobs", element: <JobPostListPage /> },
       { path: "browse-jobs/:id", element: <JobPostDetails /> },
-      { path: "job/:id/apply", element: <JobPostApply />},
+      { path: "job/:jobPostId/apply/:username", element: <JobPostApply />},
       { path: "profiles/:username", element: <ProfilePage />},
       { path: "post-job", element: <JobPostForm key="create" /> },
       { path: "manage/:id", element: <JobPostForm key="manage" /> },
