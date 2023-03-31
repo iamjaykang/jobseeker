@@ -18,12 +18,27 @@ export type FetchProfileByUsernameFailed = ActionWithPayload<
   Error
 >;
 
+export type UploadDocumentLoading = ActionWithPayload<
+  PROFILE_ACTION_TYPES.UPLOAD_DOCUMENT_LOADING,
+  Blob
+>;
+
+export type UploadDocumentSuccess = ActionWithPayload<
+  PROFILE_ACTION_TYPES.UPLOAD_DOCUMENT_SUCCESS,
+  Document
+>;
+
+export type UploadDocumentFailed = ActionWithPayload<
+  PROFILE_ACTION_TYPES.UPLOAD_DOCUMENT_FAILED,
+  Error
+>;
+
 // Action to get PROFILE by username loading
 export const fetchProfileByUsernameLoading = withMatcher(
-  (username: string): FetchProfileByUsernameLoading =>
+  (userId: string): FetchProfileByUsernameLoading =>
     createAction(
       PROFILE_ACTION_TYPES.FETCH_PROFILE_BY_USERNAME_LOADING,
-      username
+      userId
     )
 );
 
@@ -40,4 +55,22 @@ export const fetchProfileByUsernameSuccess = withMatcher(
 export const fetchProfileByUsernameFailed = withMatcher(
   (error: Error): FetchProfileByUsernameFailed =>
     createAction(PROFILE_ACTION_TYPES.FETCH_PROFILE_BY_USERNAME_FAILED, error)
+);
+
+// Action for upload Document Loading
+export const uploadDocumentLoading = withMatcher(
+  (file: Blob): UploadDocumentLoading =>
+    createAction(PROFILE_ACTION_TYPES.UPLOAD_DOCUMENT_LOADING, file)
+);
+
+// Action for upload Document Success
+export const uploadDocumentSuccess = withMatcher(
+  (fileData: Document): UploadDocumentSuccess =>
+    createAction(PROFILE_ACTION_TYPES.UPLOAD_DOCUMENT_SUCCESS, fileData)
+);
+
+// Action for upload Document Failed
+export const uploadDocumentFailed = withMatcher(
+  (error: Error): UploadDocumentFailed =>
+    createAction(PROFILE_ACTION_TYPES.UPLOAD_DOCUMENT_FAILED, error)
 );

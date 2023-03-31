@@ -1,14 +1,18 @@
 import { AnyAction } from "redux";
-import { Profile } from "../../models/profile.model";
+import { Document, Profile } from "../../models/profile.model";
 import {
   fetchProfileByUsernameFailed,
   fetchProfileByUsernameLoading,
   fetchProfileByUsernameSuccess,
+  uploadDocumentFailed,
+  uploadDocumentLoading,
+  uploadDocumentSuccess,
 } from "./profile.action";
 
 export interface ProfileState {
   isLoading: boolean;
   profile: Profile | null;
+  document: Document | null;
   error: Error | null;
 }
 
@@ -30,6 +34,15 @@ const profilesReducer = (
     };
   }
 
+  if (uploadDocumentLoading.match(action)) {
+    return {
+      ...state,
+      document: null,
+      isLoading: true,
+      error: null,
+    }
+  }
+
   if (fetchProfileByUsernameSuccess.match(action)) {
     return {
       ...state,
@@ -39,6 +52,15 @@ const profilesReducer = (
     };
   }
 
+  if (uploadDocumentSuccess.match(action)) {
+    return {
+      ...state,
+      document: action.payload,
+      isLoading: false,
+      error: null,
+    }
+  }
+
   if (fetchProfileByUsernameFailed.match(action)) {
     return {
       ...state,
@@ -46,6 +68,15 @@ const profilesReducer = (
       user: null,
       error: action.payload,
     };
+  }
+
+  if (uploadDocumentFailed.match(action)) {
+    return {
+      ...state,
+      document: null,
+      isLoading: false,
+      error: action.payload,
+    }
   }
 
   return state;
