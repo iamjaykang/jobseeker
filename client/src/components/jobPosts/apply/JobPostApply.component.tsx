@@ -1,18 +1,28 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import DocumentUpload from "./DocumentUpload.component";
 import ReviewSubmit from "./ReviewSubmit.component";
 import "./jobPostApply.styles.css";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectJobPost } from "../../../app/stores/jobPosts/jobPosts.selector";
 import { selectUser } from "../../../app/stores/users/user.selector";
 import StepIndicator from "./StepIndicator.common";
+import { fetchJobPostByIdLoading } from "../../../app/stores/jobPosts/jobPosts.action";
+import { useParams } from "react-router-dom";
+import { selectProfile } from "../../../app/stores/profiles/profile.selector";
+import { fetchProfileByUsernameLoading } from "../../../app/stores/profiles/profile.action";
 
 const JobPostApply = () => {
   const [currentStep, setCurrentStep] = useState(1);
 
-  const currentUser = useSelector(selectUser);
+  const currentProfile = useSelector(selectProfile);
 
   const jobPost = useSelector(selectJobPost);
+
+  const dispatch = useDispatch();
+
+  const { jobPostId } = useParams();
+
+  const { username } = useParams();
 
   const handleNextStep = () => {
     setCurrentStep(currentStep + 1);
@@ -21,6 +31,18 @@ const JobPostApply = () => {
   const handlePreviousStep = () => {
     setCurrentStep(currentStep - 1);
   };
+
+  useEffect(() => {
+    if (!currentProfile) {
+      dispatch(fetchProfileByUsernameLoading(username!));
+    }
+  }, [currentProfile]);
+
+  useEffect(() => {
+    if (jobPost === null) {
+      dispatch(fetchJobPostByIdLoading(jobPostId!));
+    }
+  }, [jobPost]);
 
   return (
     <div className="job-apply-page">
@@ -37,7 +59,7 @@ const JobPostApply = () => {
         <div className="document-upload-container">
           <DocumentUpload
             jobPost={jobPost}
-            currentUser={currentUser}
+            currentProfile={currentProfile!}
             handleNextStep={handleNextStep}
           />
         </div>
@@ -45,7 +67,7 @@ const JobPostApply = () => {
         <div className="review-submit-container">
           <ReviewSubmit
             jobPost={jobPost}
-            currentUser={currentUser}
+            currentProfile={currentProfile!}
             handlePreviousStep={handlePreviousStep}
           />
         </div>

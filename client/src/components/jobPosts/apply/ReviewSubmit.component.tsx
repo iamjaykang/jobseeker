@@ -1,15 +1,20 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import { JobPost } from "../../../app/models/jobPost.model";
+import { Profile } from "../../../app/models/profile.model";
 import { User } from "../../../app/models/user.model";
+import { selectDocument } from "../../../app/stores/profiles/profile.selector";
 
 interface Props {
   jobPost: JobPost | null;
-  currentUser: User;
+  currentProfile: Profile;
   handlePreviousStep: () => void;
 }
 
-const ReviewSubmit = ({ jobPost, currentUser, handlePreviousStep }: Props) => {
+const ReviewSubmit = ({ jobPost, currentProfile, handlePreviousStep }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
+
+  const resume = useSelector(selectDocument);
 
   const handleDetailsOpen = () => {
     setIsOpen(!isOpen);
@@ -45,13 +50,25 @@ const ReviewSubmit = ({ jobPost, currentUser, handlePreviousStep }: Props) => {
             <div className="review-submit__column">
               <h4 className="review-submit__column-title">Personal Info</h4>
               <p className="review-submit__text">
-                {currentUser?.firstName} {currentUser?.lastName}
+                {currentProfile?.firstName} {currentProfile?.lastName}
               </p>
-              <p className="review-submit__text">{currentUser?.email}</p>
             </div>
             <div className="review-submit__column">
               <h4 className="review-submit__column-title">CV</h4>
-              CV section
+              {resume && (
+                <div className="review-submit__cv-info">
+                  <p className="review-submit__text">
+                    {resume.originalFileName}
+                  </p>
+                  <a
+                    className="review-submit__link"
+                    href={resume.url}
+                    target="_blank"
+                  >
+                    View CV
+                  </a>
+                </div>
+              )}
             </div>
             <div className="review-submit__column">
               <h4 className="review-submit__column-title">Cover Letter</h4>
@@ -61,7 +78,10 @@ const ReviewSubmit = ({ jobPost, currentUser, handlePreviousStep }: Props) => {
         </div>
       </div>
       <div className="review-submit__footer">
-        <button className="review-submit__button--previous" onClick={handlePreviousStep}>
+        <button
+          className="review-submit__button--previous"
+          onClick={handlePreviousStep}
+        >
           Previous Step
         </button>
         <button className="review-submit__button">Submit Application</button>

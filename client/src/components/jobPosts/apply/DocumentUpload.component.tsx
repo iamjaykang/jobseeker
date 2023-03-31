@@ -1,19 +1,24 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import FileUploadWidget from "../../../app/common/fileUploader/FileUploadWidget.common";
 import { JobPost } from "../../../app/models/jobPost.model";
+import { Profile } from "../../../app/models/profile.model";
+import { FaTrashAlt, FaDownload } from "react-icons/fa";
 import { User } from "../../../app/models/user.model";
+import SelectDocuments from "./SelectDocuments.component";
 
 interface Props {
   jobPost: JobPost | null;
-  currentUser: User;
+  currentProfile: Profile;
   handleNextStep: () => void;
 }
 
-const DocumentUpload = ({ jobPost, currentUser, handleNextStep }: Props) => {
+const DocumentUpload = ({ jobPost, currentProfile, handleNextStep }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleDetailsOpen = () => {
     setIsOpen(!isOpen);
   };
+
   return (
     <div className="document-upload-form">
       <div className="document-upload__column">
@@ -21,15 +26,19 @@ const DocumentUpload = ({ jobPost, currentUser, handleNextStep }: Props) => {
           <div className="document-upload__user-info">
             <h2 className="document-upload__header">User Info</h2>
             <p className="document-upload__text">
-              {currentUser?.firstName} {currentUser?.lastName}
+              {currentProfile?.firstName} {currentProfile?.lastName}
             </p>
-            <p className="document-upload__text">{currentUser?.email}</p>
           </div>
         </div>
         <div className="document-upload__row">
           <div className="document-upload__cv-upload">
             <h2 className="document-upload__header">Upload CV</h2>
-            file input
+            <FileUploadWidget currentProfile={currentProfile} />
+            {currentProfile && currentProfile.documents && (
+              <SelectDocuments
+                currentProfile={currentProfile}
+              />
+            )}
           </div>
         </div>
         <div className="document-upload__row">

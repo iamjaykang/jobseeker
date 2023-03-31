@@ -317,3 +317,140 @@
         background-color: #0062cc;
     }
 }
+
+/* file widget dropzone */
+
+.dropzone {
+    border: 2px dashed #bbb;
+    border-radius: 5px;
+    padding: 1rem;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color 0.3s ease;
+
+    &:hover {
+        border-color: #007bff;
+    }
+
+    &__text {
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+
+        &--info {
+            font-size: 1.5rem;
+            color: #999;
+            margin-top: 0.5rem;
+        }
+    }
+
+    .error-message {
+        font-size: 1.2rem;
+        color: #f87171;
+    }
+}
+
+/* file upload widget */
+
+.file-upload-widget {
+    &__file {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 1rem;
+        border: 2px dashed #bbb;
+        border-radius: 5px;
+        background-color: #ffffff;
+        transition: all 0.3s ease;
+
+        &:hover {
+            border-color: #007bff;
+        }
+    }
+
+    &__name {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+    }
+
+    &__size {
+        font-size: 1.2rem;
+        color: #6c757d;
+        margin-bottom: 1rem;
+    }
+
+    &__preview {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 150px;
+        height: 150px;
+        border-radius: 5px;
+        overflow: hidden;
+    }
+
+    &__delete,
+    &__view {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        text-decoration: none;
+        border-radius: 5px;
+        padding: 0.5rem 1rem;
+        font-size: 1.2rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+
+        &:hover {
+            background-color: #0062cc;
+        }
+    }
+}
+
+.existing-documents {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1rem;
+
+    .existing-documents__header {
+        display: flex;
+        margin: 3rem 0 1rem 0;
+        justify-content: space-between;
+        flex-direction: row;
+        width: 100%;
+
+        .existing-documents__label {
+            font-size: 1.6rem;
+            font-weight: 600;
+        }
+
+        .profile-page__document-actions {
+            margin: 0;
+
+            .profile-page__delete-button {
+                margin: 0 0.5rem;
+            }
+        }
+    }
+
+    .existing-documents__select {
+        font-size: 1.5rem;
+        border: 2px solid #bbb;
+        border-radius: 5px;
+        padding: 0.5rem;
+        width: 100%;
+        cursor: pointer;
+        transition: border-color 0.3s ease;
+
+        &:hover {
+            border-color: #007bff;
+        }
+
+        &:focus {
+            outline: none;
+            border-color: #007bff;
+        }
+    }
+}
