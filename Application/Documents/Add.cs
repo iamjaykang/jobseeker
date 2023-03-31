@@ -34,6 +34,8 @@ namespace Application.Documents
 
                 if (user == null) return null;
 
+                if (user.Documents.Count >= 2) return Result<Document>.Failure("You have reached the maximum number of documents allowed.");
+
                 var documentUploadResult = await _documentAccessor.AddDocument(request.File);
 
                 var document = new Document
