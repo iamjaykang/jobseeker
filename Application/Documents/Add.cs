@@ -42,10 +42,17 @@ namespace Application.Documents
                 {
                     OriginalFileName = request.File.FileName,
                     Url = documentUploadResult.Url,
-                    Id = documentUploadResult.PublicId
+                    Id = documentUploadResult.PublicId,
+                    IsMain = true
                 };
 
-                if (!user.Documents.Any(x => x.IsMain)) document.IsMain = true;
+                foreach (var doc in user.Documents)
+                {
+                    if (doc.Id != document.Id && doc.IsMain)
+                    {
+                        doc.IsMain = false;
+                    }
+                }
 
                 user.Documents.Add(document);
 
