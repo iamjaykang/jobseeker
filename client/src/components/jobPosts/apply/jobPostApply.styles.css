@@ -68,7 +68,7 @@
 }
 
 /* document upload */
-.document-upload-form {
+.document-upload .document-upload-container {
   max-width: 1200px;
   margin: auto;
   display: grid;
@@ -76,10 +76,17 @@
   grid-template-columns: 1fr;
   gap: 2rem;
 }
+.document-upload-form {
+  max-width: 1200px;
+  margin: auto;
+  padding: 2rem;
+  display: grid;
+}
 @media screen and (min-width: 768px) {
   .document-upload-form {
     grid-template-columns: 3fr 2fr;
-    padding: 0;
+    gap: 2rem;
+    padding: 2rem;
   }
 }
 .document-upload__column {
@@ -99,6 +106,29 @@
 }
 .document-upload__user-info:hover, .document-upload__cv-upload:hover, .document-upload__cover-letter-upload:hover, .document-upload__job-description:hover {
   box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.1);
+}
+.document-upload__user-info .document-upload__textarea, .document-upload__cv-upload .document-upload__textarea, .document-upload__cover-letter-upload .document-upload__textarea, .document-upload__job-description .document-upload__textarea {
+  width: 100%;
+  min-height: 150px;
+  padding: 1rem;
+  font-size: 1.5rem;
+  border: 2px solid #bbb;
+  border-radius: 5px;
+  resize: vertical;
+  transition: border-color 0.3s ease;
+  outline: none;
+}
+.document-upload__user-info .document-upload__textarea:focus, .document-upload__cv-upload .document-upload__textarea:focus, .document-upload__cover-letter-upload .document-upload__textarea:focus, .document-upload__job-description .document-upload__textarea:focus {
+  border-color: #007bff;
+}
+.document-upload__user-info .document-upload__textarea::-moz-placeholder, .document-upload__cv-upload .document-upload__textarea::-moz-placeholder, .document-upload__cover-letter-upload .document-upload__textarea::-moz-placeholder, .document-upload__job-description .document-upload__textarea::-moz-placeholder {
+  color: #999;
+}
+.document-upload__user-info .document-upload__textarea:-ms-input-placeholder, .document-upload__cv-upload .document-upload__textarea:-ms-input-placeholder, .document-upload__cover-letter-upload .document-upload__textarea:-ms-input-placeholder, .document-upload__job-description .document-upload__textarea:-ms-input-placeholder {
+  color: #999;
+}
+.document-upload__user-info .document-upload__textarea::placeholder, .document-upload__cv-upload .document-upload__textarea::placeholder, .document-upload__cover-letter-upload .document-upload__textarea::placeholder, .document-upload__job-description .document-upload__textarea::placeholder {
+  color: #999;
 }
 .document-upload__header {
   font-size: 2rem;

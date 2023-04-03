@@ -12,9 +12,14 @@ interface Props {
 
 const DocumentUpload = ({ jobPost, currentProfile, handleNextStep }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [coverLetter, setCoverLetter] = useState("");
 
   const handleDetailsOpen = () => {
     setIsOpen(!isOpen);
+  };
+
+  const handleCoverLetterChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setCoverLetter(event.target.value);
   };
 
   return (
@@ -42,7 +47,12 @@ const DocumentUpload = ({ jobPost, currentProfile, handleNextStep }: Props) => {
         <div className="document-upload__row">
           <div className="document-upload__cover-letter-upload">
             <h2 className="document-upload__header">Upload Cover Letter</h2>
-            file input
+            <textarea
+            className="document-upload__textarea"
+            value={coverLetter}
+            onChange={handleCoverLetterChange}
+            placeholder="Introduce yourself and briefly explain why you are suitable for this role. Consider your relevant skills, qualifications and related experience."
+          />
           </div>
         </div>
       </div>

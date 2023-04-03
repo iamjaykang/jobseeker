@@ -70,17 +70,26 @@
 /* document upload */
 
 .document-upload {
-    &-form {
+    .document-upload-container {
         max-width: 1200px;
         margin: auto;
         display: grid;
         padding: 2rem;
         grid-template-columns: 1fr;
         gap: 2rem;
+    }
+
+    &-form {
+        max-width: 1200px;
+        margin: auto;
+        padding: 2rem;
+        display: grid;
+        
 
         @media screen and (min-width: 768px) {
             grid-template-columns: 3fr 2fr;
-            padding: 0;
+            gap: 2rem;
+            padding: 2rem;
         }
     }
 
@@ -106,6 +115,26 @@
 
         &:hover {
             box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.1);
+        }
+
+        .document-upload__textarea {
+            width: 100%;
+            min-height: 150px;
+            padding: 1rem;
+            font-size: 1.5rem;
+            border: 2px solid #bbb;
+            border-radius: 5px;
+            resize: vertical;
+            transition: border-color 0.3s ease;
+            outline: none;
+
+            &:focus {
+                border-color: #007bff;
+            }
+
+            &::placeholder {
+                color: #999;
+            }
         }
     }
 
