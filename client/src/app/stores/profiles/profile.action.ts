@@ -20,7 +20,7 @@ export type FetchProfileByUsernameFailed = ActionWithPayload<
 
 export type UploadDocumentLoading = ActionWithPayload<
   PROFILE_ACTION_TYPES.UPLOAD_DOCUMENT_LOADING,
-  Blob
+  { file: Blob; username: string }
 >;
 
 export type UploadDocumentSuccess = ActionWithPayload<
@@ -33,13 +33,23 @@ export type UploadDocumentFailed = ActionWithPayload<
   Error
 >;
 
+export type DeleteDocumentLoading = ActionWithPayload<
+  PROFILE_ACTION_TYPES.DELETE_DOCUMENT_LOADING,
+  { documentId: string; username: string }
+>;
+
+export type DeleteDocumentSuccess =
+  Action<PROFILE_ACTION_TYPES.DELETE_DOCUMENT_SUCCESS>;
+
+export type DeleteDocumentFailed = ActionWithPayload<
+  PROFILE_ACTION_TYPES.DELETE_DOCUMENT_FAILED,
+  Error
+>;
+
 // Action to get PROFILE by username loading
 export const fetchProfileByUsernameLoading = withMatcher(
   (userId: string): FetchProfileByUsernameLoading =>
-    createAction(
-      PROFILE_ACTION_TYPES.FETCH_PROFILE_BY_USERNAME_LOADING,
-      userId
-    )
+    createAction(PROFILE_ACTION_TYPES.FETCH_PROFILE_BY_USERNAME_LOADING, userId)
 );
 
 // Action to get PROFILE by username success
@@ -59,8 +69,11 @@ export const fetchProfileByUsernameFailed = withMatcher(
 
 // Action for upload Document Loading
 export const uploadDocumentLoading = withMatcher(
-  (file: Blob): UploadDocumentLoading =>
-    createAction(PROFILE_ACTION_TYPES.UPLOAD_DOCUMENT_LOADING, file)
+  (file: Blob, username: string): UploadDocumentLoading =>
+    createAction(PROFILE_ACTION_TYPES.UPLOAD_DOCUMENT_LOADING, {
+      file,
+      username,
+    })
 );
 
 // Action for upload Document Success
@@ -73,4 +86,25 @@ export const uploadDocumentSuccess = withMatcher(
 export const uploadDocumentFailed = withMatcher(
   (error: Error): UploadDocumentFailed =>
     createAction(PROFILE_ACTION_TYPES.UPLOAD_DOCUMENT_FAILED, error)
+);
+
+// Action for delet Document Loading
+export const deleteDocumentLoading = withMatcher(
+  (documentId: string, username: string): DeleteDocumentLoading =>
+    createAction(PROFILE_ACTION_TYPES.DELETE_DOCUMENT_LOADING, {
+      documentId,
+      username,
+    })
+);
+
+// Action for delet Document Success
+export const deleteDocumentSuccess = withMatcher(
+  (): DeleteDocumentSuccess =>
+    createAction(PROFILE_ACTION_TYPES.DELETE_DOCUMENT_SUCCESS)
+);
+
+// Action for delet Document Failed
+export const deleteDocumentFailed = withMatcher(
+  (error: Error): DeleteDocumentFailed =>
+    createAction(PROFILE_ACTION_TYPES.DELETE_DOCUMENT_FAILED, error)
 );

@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import FileUploadWidget from "../../../app/common/fileUploader/FileUploadWidget.common";
 import { JobPost } from "../../../app/models/jobPost.model";
 import { Profile } from "../../../app/models/profile.model";
-import { FaTrashAlt, FaDownload } from "react-icons/fa";
-import { User } from "../../../app/models/user.model";
 import SelectDocuments from "./SelectDocuments.component";
 
 interface Props {

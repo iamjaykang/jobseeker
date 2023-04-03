@@ -25,7 +25,9 @@ const FileWidgetDropzone = ({ setFiles, currentProfile }: Props) => {
 
       if (currentProfile && currentProfile.documents!.length < 2) {
         setErrorMessage("");
-        dispatch(uploadDocumentLoading(acceptedFiles[0]));
+        dispatch(
+          uploadDocumentLoading(acceptedFiles[0], currentProfile.username)
+        );
       } else {
         setErrorMessage("You can only upload up to 2 documents");
       }

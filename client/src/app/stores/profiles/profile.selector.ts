@@ -18,3 +18,10 @@ export const selectDocument = createSelector(
     return profilesSlice.document;
   }
 );
+
+export const selectProfileIsLoading = createSelector(
+  [selectProfilesReducer],
+  (profilesSlice) => {
+    return profilesSlice.isLoading;
+  }
+)

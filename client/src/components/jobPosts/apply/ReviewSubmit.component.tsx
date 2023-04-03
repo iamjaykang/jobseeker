@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { JobPost } from "../../../app/models/jobPost.model";
 import { Profile } from "../../../app/models/profile.model";
-import { User } from "../../../app/models/user.model";
 import { selectDocument } from "../../../app/stores/profiles/profile.selector";
 
 interface Props {

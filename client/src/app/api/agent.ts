@@ -107,6 +107,7 @@ const Profiles = {
     })
     .then((response) => response.data);
   },
+  deleteDocument: (documentId: string) => requests.del<void>(`/documents/${documentId}`)
 };
 
 const agent = {

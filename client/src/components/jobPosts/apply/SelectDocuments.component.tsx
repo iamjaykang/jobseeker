@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { FaTrashAlt, FaDownload } from "react-icons/fa";
+import { useDispatch } from "react-redux";
 import { Profile } from "../../../app/models/profile.model";
+import { deleteDocumentLoading } from "../../../app/stores/profiles/profile.action";
 
 interface Props {
   currentProfile: Profile;
@@ -9,9 +11,10 @@ interface Props {
 const SelectDocuments = ({ currentProfile }: Props) => {
   const [selectedDocument, setSelectedDocument] = useState<string>("");
 
+  const dispatch = useDispatch();
+
   const handleDeleteDocument = () => {
-    // call API to delete selected document
-    console.log(`delete ${selectedDocument}`);
+    dispatch(deleteDocumentLoading(selectedDocument, currentProfile.username));
   };
 
   const selectedDoc = currentProfile?.documents?.find(
@@ -24,6 +27,11 @@ const SelectDocuments = ({ currentProfile }: Props) => {
     )?.id;
     setSelectedDocument(mainDocumentId || "");
   }, [currentProfile]);
+
+  useEffect(() => {
+    setSelectedDocument(currentProfile?.documents?.[0]?.id || "");
+  }, [currentProfile?.documents]);
+
   return (
     <div className="existing-documents">
       <div className="existing-documents__header">

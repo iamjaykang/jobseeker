@@ -1,7 +1,11 @@
 import { all, call, put, takeLatest } from "typed-redux-saga";
 import agent from "../../api/agent";
 import {
+  deleteDocumentFailed,
+  DeleteDocumentLoading,
+  deleteDocumentSuccess,
   fetchProfileByUsernameFailed,
+  fetchProfileByUsernameLoading,
   FetchProfileByUsernameLoading,
   fetchProfileByUsernameSuccess,
   uploadDocumentFailed,
@@ -21,12 +25,30 @@ export function* fetchProfile({ payload }: FetchProfileByUsernameLoading) {
 }
 
 export function* uploadDocument({ payload }: UploadDocumentLoading) {
+  const { file, username } = payload;
+
   try {
-    const document = yield* call(agent.Profiles.uploadDocument, payload);
+    const document = yield* call(agent.Profiles.uploadDocument, file);
 
     yield* put(uploadDocumentSuccess(document));
+
+    yield put(fetchProfileByUsernameLoading(username));
   } catch (error) {
     yield* put(uploadDocumentFailed(error as Error));
+  }
+}
+
+export function* deleteDocument({ payload }: DeleteDocumentLoading) {
+  const { documentId, username } = payload;
+
+  try {
+    yield* call(agent.Profiles.deleteDocument, documentId);
+
+    yield* put(deleteDocumentSuccess());
+
+    yield put(fetchProfileByUsernameLoading(username));
+  } catch (error) {
+    yield* put(deleteDocumentFailed(error as Error));
   }
 }
 
@@ -43,6 +65,17 @@ export function* onUploadDocumentLoading() {
   );
 }
 
+export function* onDeleteDocumentLoading() {
+  yield* takeLatest(
+    PROFILE_ACTION_TYPES.DELETE_DOCUMENT_LOADING,
+    deleteDocument
+  );
+}
+
 export function* profilesSaga() {
-  yield* all([call(onFetchProfileLoading), call(onUploadDocumentLoading)]);
+  yield* all([
+    call(onFetchProfileLoading),
+    call(onUploadDocumentLoading),
+    call(onDeleteDocumentLoading),
+  ]);
 }

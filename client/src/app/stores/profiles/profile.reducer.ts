@@ -1,6 +1,9 @@
 import { AnyAction } from "redux";
 import { Document, Profile } from "../../models/profile.model";
 import {
+  deleteDocumentFailed,
+  deleteDocumentLoading,
+  deleteDocumentSuccess,
   fetchProfileByUsernameFailed,
   fetchProfileByUsernameLoading,
   fetchProfileByUsernameSuccess,
@@ -34,13 +37,16 @@ const profilesReducer = (
     };
   }
 
-  if (uploadDocumentLoading.match(action)) {
+  if (
+    uploadDocumentLoading.match(action) ||
+    deleteDocumentLoading.match(action)
+  ) {
     return {
       ...state,
       document: null,
       isLoading: true,
       error: null,
-    }
+    };
   }
 
   if (fetchProfileByUsernameSuccess.match(action)) {
@@ -58,7 +64,16 @@ const profilesReducer = (
       document: action.payload,
       isLoading: false,
       error: null,
-    }
+    };
+  }
+
+  if (deleteDocumentSuccess.match(action)) {
+    return {
+      ...state,
+      document: null,
+      isLoading: false,
+      error: null,
+    };
   }
 
   if (fetchProfileByUsernameFailed.match(action)) {
@@ -70,13 +85,16 @@ const profilesReducer = (
     };
   }
 
-  if (uploadDocumentFailed.match(action)) {
+  if (
+    uploadDocumentFailed.match(action) ||
+    deleteDocumentFailed.match(action)
+  ) {
     return {
       ...state,
       document: null,
       isLoading: false,
       error: action.payload,
-    }
+    };
   }
 
   return state;

@@ -4,12 +4,12 @@ import ReviewSubmit from "./ReviewSubmit.component";
 import "./jobPostApply.styles.css";
 import { useDispatch, useSelector } from "react-redux";
 import { selectJobPost } from "../../../app/stores/jobPosts/jobPosts.selector";
-import { selectUser } from "../../../app/stores/users/user.selector";
 import StepIndicator from "./StepIndicator.common";
 import { fetchJobPostByIdLoading } from "../../../app/stores/jobPosts/jobPosts.action";
 import { useParams } from "react-router-dom";
-import { selectProfile } from "../../../app/stores/profiles/profile.selector";
+import { selectProfile, selectProfileIsLoading } from "../../../app/stores/profiles/profile.selector";
 import { fetchProfileByUsernameLoading } from "../../../app/stores/profiles/profile.action";
+import LoadingSpinner from "../../../app/common/loadingSpinner/LoadingSpinner.common";
 
 const JobPostApply = () => {
   const [currentStep, setCurrentStep] = useState(1);
@@ -19,6 +19,8 @@ const JobPostApply = () => {
   const jobPost = useSelector(selectJobPost);
 
   const dispatch = useDispatch();
+
+  const documentIsLoading = useSelector(selectProfileIsLoading);
 
   const { jobPostId } = useParams();
 
@@ -43,6 +45,8 @@ const JobPostApply = () => {
       dispatch(fetchJobPostByIdLoading(jobPostId!));
     }
   }, [jobPost]);
+
+  if (documentIsLoading) return <LoadingSpinner />
 
   return (
     <div className="job-apply-page">
