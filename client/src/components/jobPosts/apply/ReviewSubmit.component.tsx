@@ -1,19 +1,29 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import { JobPost } from "../../../app/models/jobPost.model";
 import { Profile } from "../../../app/models/profile.model";
-import { selectDocument } from "../../../app/stores/profiles/profile.selector";
 
 interface Props {
   jobPost: JobPost | null;
   currentProfile: Profile;
+  selectedDocument: string;
+  coverLetter: string;
   handlePreviousStep: () => void;
+  setCurrentStep: Dispatch<SetStateAction<number>>;
 }
 
-const ReviewSubmit = ({ jobPost, currentProfile, handlePreviousStep }: Props) => {
+const ReviewSubmit = ({
+  jobPost,
+  currentProfile,
+  handlePreviousStep,
+  selectedDocument,
+  coverLetter,
+  setCurrentStep,
+}: Props) => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const resume = useSelector(selectDocument);
+  const document = currentProfile.documents!.find(
+    (doc) => doc.id === selectedDocument
+  );
 
   const handleDetailsOpen = () => {
     setIsOpen(!isOpen);
@@ -53,25 +63,31 @@ const ReviewSubmit = ({ jobPost, currentProfile, handlePreviousStep }: Props) =>
               </p>
             </div>
             <div className="review-submit__column">
-              <h4 className="review-submit__column-title">CV</h4>
-              {resume && (
-                <div className="review-submit__cv-info">
+              <div className="review-submit__column-header">
+                <h4 className="review-submit__column-title">
+                  Documents Included
+                </h4>
+                <button
+                  className="review-submit__edit-button"
+                  onClick={() => setCurrentStep(1)}
+                >
+                  Edit
+                </button>
+              </div>
+              {document && (
+                <div className="review-submit__document-info">
                   <p className="review-submit__text">
-                    {resume.originalFileName}
+                    {document.originalFileName}
                   </p>
-                  <a
-                    className="review-submit__link"
-                    href={resume.url}
-                    target="_blank"
-                  >
-                    View CV
-                  </a>
+                  {coverLetter ? (
+                    <p className="review-submit__text">Cover Letter Included</p>
+                  ) : (
+                    <p className="review-submit__text">
+                      No Cover Letter Included
+                    </p>
+                  )}
                 </div>
               )}
-            </div>
-            <div className="review-submit__column">
-              <h4 className="review-submit__column-title">Cover Letter</h4>
-              Cover letter section
             </div>
           </div>
         </div>

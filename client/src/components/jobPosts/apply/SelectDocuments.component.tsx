@@ -1,16 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React, { Dispatch, SetStateAction, useEffect } from "react";
 import { FaTrashAlt, FaDownload } from "react-icons/fa";
 import { useDispatch } from "react-redux";
+import LoadingSpinner from "../../../app/common/loadingSpinner/LoadingSpinner.common";
 import { Profile } from "../../../app/models/profile.model";
 import { deleteDocumentLoading } from "../../../app/stores/profiles/profile.action";
 
 interface Props {
   currentProfile: Profile;
+  selectedDocument: string;
+  setSelectedDocument: Dispatch<SetStateAction<string>>;
 }
 
-const SelectDocuments = ({ currentProfile }: Props) => {
-  const [selectedDocument, setSelectedDocument] = useState<string>("");
-
+const SelectDocuments = ({
+  currentProfile,
+  selectedDocument,
+  setSelectedDocument,
+}: Props) => {
   const dispatch = useDispatch();
 
   const handleDeleteDocument = () => {
@@ -28,9 +33,9 @@ const SelectDocuments = ({ currentProfile }: Props) => {
     setSelectedDocument(mainDocumentId || "");
   }, [currentProfile]);
 
-  useEffect(() => {
-    setSelectedDocument(currentProfile?.documents?.[0]?.id || "");
-  }, [currentProfile?.documents]);
+  if (!currentProfile) {
+    return <LoadingSpinner />;
+  }
 
   return (
     <div className="existing-documents">
@@ -59,9 +64,11 @@ const SelectDocuments = ({ currentProfile }: Props) => {
         </div>
       </div>
       <select
-        defaultValue={selectedDocument}
+        value={selectedDocument}
         className="existing-documents__select"
-        onChange={(e) => setSelectedDocument(e.target.value)}
+        onChange={(e) => {
+          setSelectedDocument(e.target.value);
+        }}
       >
         {currentProfile.documents!.map((document) => (
           <option key={document.id} value={document.id}>

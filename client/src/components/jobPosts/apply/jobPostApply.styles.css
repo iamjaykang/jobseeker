@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /* step indicator */
 .step-indicator-container {
   background-color: #fff;
@@ -229,6 +230,26 @@
   flex-direction: column;
   justify-content: space-between;
   gap: 1rem;
+}
+.review-submit__column .review-submit__column-header {
+  display: flex;
+  justify-content: space-between;
+}
+.review-submit__column .review-submit__column-header .review-submit__edit-button {
+  border: 0;
+  background-color: transparent;
+  font-size: 1.6rem;
+  text-decoration: underline;
+  cursor: pointer;
+  color: blue;
+  height: 0;
+  padding: 0;
+  margin: auto 0;
+}
+.review-submit__column .review-submit__document-info p::before {
+  content: "•";
+  color: black;
+  margin-right: 0.5rem;
 }
 .review-submit__column-title, .review-submit__content-title {
   font-size: 1.8rem;

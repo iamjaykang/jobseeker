@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { Dispatch, useState } from "react";
 import FileUploadWidget from "../../../app/common/fileUploader/FileUploadWidget.common";
 import { JobPost } from "../../../app/models/jobPost.model";
 import { Profile } from "../../../app/models/profile.model";
@@ -7,19 +7,26 @@ import SelectDocuments from "./SelectDocuments.component";
 interface Props {
   jobPost: JobPost | null;
   currentProfile: Profile;
+  coverLetter: string;
+  setSelectedDocument: Dispatch<React.SetStateAction<string>>;
+  selectedDocument: string;
+  handleCoverLetterChange: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
   handleNextStep: () => void;
 }
 
-const DocumentUpload = ({ jobPost, currentProfile, handleNextStep }: Props) => {
+const DocumentUpload = ({
+  jobPost,
+  currentProfile,
+  handleNextStep,
+  coverLetter,
+  handleCoverLetterChange,
+  selectedDocument,
+  setSelectedDocument
+}: Props) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [coverLetter, setCoverLetter] = useState("");
 
   const handleDetailsOpen = () => {
     setIsOpen(!isOpen);
-  };
-
-  const handleCoverLetterChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setCoverLetter(event.target.value);
   };
 
   return (
@@ -38,9 +45,8 @@ const DocumentUpload = ({ jobPost, currentProfile, handleNextStep }: Props) => {
             <h2 className="document-upload__header">Upload CV</h2>
             <FileUploadWidget currentProfile={currentProfile} />
             {currentProfile && currentProfile.documents && (
-              <SelectDocuments
-                currentProfile={currentProfile}
-              />
+              <SelectDocuments currentProfile={currentProfile} selectedDocument={selectedDocument}
+              setSelectedDocument={setSelectedDocument} />
             )}
           </div>
         </div>
@@ -48,11 +54,11 @@ const DocumentUpload = ({ jobPost, currentProfile, handleNextStep }: Props) => {
           <div className="document-upload__cover-letter-upload">
             <h2 className="document-upload__header">Upload Cover Letter</h2>
             <textarea
-            className="document-upload__textarea"
-            value={coverLetter}
-            onChange={handleCoverLetterChange}
-            placeholder="Introduce yourself and briefly explain why you are suitable for this role. Consider your relevant skills, qualifications and related experience."
-          />
+              className="document-upload__textarea"
+              value={coverLetter}
+              onChange={handleCoverLetterChange}
+              placeholder="Introduce yourself and briefly explain why you are suitable for this role. Consider your relevant skills, qualifications and related experience."
+            />
           </div>
         </div>
       </div>

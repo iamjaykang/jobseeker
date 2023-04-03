@@ -7,12 +7,19 @@ import { selectJobPost } from "../../../app/stores/jobPosts/jobPosts.selector";
 import StepIndicator from "./StepIndicator.common";
 import { fetchJobPostByIdLoading } from "../../../app/stores/jobPosts/jobPosts.action";
 import { useParams } from "react-router-dom";
-import { selectProfile, selectProfileIsLoading } from "../../../app/stores/profiles/profile.selector";
+import {
+  selectProfile,
+  selectProfileIsLoading,
+} from "../../../app/stores/profiles/profile.selector";
 import { fetchProfileByUsernameLoading } from "../../../app/stores/profiles/profile.action";
 import LoadingSpinner from "../../../app/common/loadingSpinner/LoadingSpinner.common";
 
 const JobPostApply = () => {
   const [currentStep, setCurrentStep] = useState(1);
+
+  const [coverLetter, setCoverLetter] = useState("");
+
+  const [selectedDocument, setSelectedDocument] = useState("");
 
   const currentProfile = useSelector(selectProfile);
 
@@ -34,6 +41,12 @@ const JobPostApply = () => {
     setCurrentStep(currentStep - 1);
   };
 
+  const handleCoverLetterChange = (
+    event: React.ChangeEvent<HTMLTextAreaElement>
+  ) => {
+    setCoverLetter(event.target.value);
+  };
+
   useEffect(() => {
     if (!currentProfile) {
       dispatch(fetchProfileByUsernameLoading(username!));
@@ -46,7 +59,7 @@ const JobPostApply = () => {
     }
   }, [jobPost]);
 
-  if (documentIsLoading) return <LoadingSpinner />
+  if (documentIsLoading) return <LoadingSpinner />;
 
   return (
     <div className="job-apply-page">
@@ -65,13 +78,20 @@ const JobPostApply = () => {
             jobPost={jobPost}
             currentProfile={currentProfile!}
             handleNextStep={handleNextStep}
+            setSelectedDocument={setSelectedDocument}
+            selectedDocument={selectedDocument}
+            coverLetter={coverLetter}
+            handleCoverLetterChange={handleCoverLetterChange}
           />
         </div>
       ) : (
         <div className="review-submit-container">
           <ReviewSubmit
+            setCurrentStep={setCurrentStep}
             jobPost={jobPost}
             currentProfile={currentProfile!}
+            selectedDocument={selectedDocument}
+            coverLetter={coverLetter}
             handlePreviousStep={handlePreviousStep}
           />
         </div>

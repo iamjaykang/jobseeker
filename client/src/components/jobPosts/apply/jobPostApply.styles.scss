@@ -84,7 +84,7 @@
         margin: auto;
         padding: 2rem;
         display: grid;
-        
+
 
         @media screen and (min-width: 768px) {
             grid-template-columns: 3fr 2fr;
@@ -256,6 +256,29 @@
         flex-direction: column;
         justify-content: space-between;
         gap: 1rem;
+
+        .review-submit__column-header {
+            display: flex;
+            justify-content: space-between;
+
+            .review-submit__edit-button {
+                border: 0;
+                background-color: transparent;
+                font-size: 1.6rem;
+                text-decoration: underline;
+                cursor: pointer;
+                color: blue;
+                height: 0;
+                padding: 0;
+                margin: auto 0;
+            }
+        }
+
+        .review-submit__document-info p::before {
+            content: "\2022";
+            color: black;
+            margin-right: 0.5rem;
+        }
     }
 
     &__column-title,
