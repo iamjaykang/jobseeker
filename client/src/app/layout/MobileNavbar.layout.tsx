@@ -25,7 +25,7 @@ const MobileNavbar = () => {
       <button className="mobile-navbar__menu-toggle" onClick={handleMenuToggle}>
         Menu
         <span className={`mobile-navbar__arrow${isOpen ? " open" : ""}`}>
-        <MdKeyboardArrowDown />
+          <MdKeyboardArrowDown />
         </span>
       </button>
       <ul className={`mobile-navbar__dropdown${isOpen ? " open" : ""}`}>
@@ -50,7 +50,14 @@ const MobileNavbar = () => {
         {currentUser ? (
           <>
             <li className="mobile-navbar__item">
-              li
+              <Link
+                to={`profiles/${currentUser.username}`}
+                className="mobile-navbar__link"
+              >
+                Profile
+              </Link>
+            </li>
+            <li className="mobile-navbar__item">
               <button className="mobile-navbar__button" onClick={handleLogout}>
                 Log Out
               </button>

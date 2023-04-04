@@ -73,6 +73,14 @@ const Navbar = () => {
                 className={`navbar__dropdown${showMenu ? " open" : ""}`}
               >
                 <li className="navbar__item">
+                  <Link
+                    to={`profiles/${currentUser.username}`}
+                    className="navbar__link"
+                  >
+                    Profile
+                  </Link>
+                </li>
+                <li className="navbar__item">
                   <button className="navbar__button" onClick={handleLogout}>
                     Log out
                   </button>

@@ -174,7 +174,7 @@
         color: #333;
         font-size: 1.8rem;
         text-decoration: none;
-        transition: all 0.3s ease;
+        transition: color 0.3s ease;
 
         &:hover {
             color: #007acc;
@@ -205,7 +205,7 @@
         margin: auto;
         padding: 12px 16px;
         text-decoration: none;
-        border-radius: 1rem;
+        border-radius: 0;
         color: #333;
         font-size: 1.8rem;
         cursor: pointer;
@@ -213,7 +213,43 @@
 
         &:hover {
             background-color: #f5f5f5;
-            border-radius: 1rem;
+            border-radius: 0;
+        }
+    }
+
+    .navbar__dropdown .navbar__item:first-of-type {
+        border-radius: 1rem 1rem 0 0;
+
+        .navbar__link {
+            display: block;
+            margin: auto;
+            padding: 0 0 0 0.5rem;
+            text-decoration: none;
+            border-radius: 1rem 1rem 0 0;
+            color: #333;
+            font-size: 1.8rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+    
+            &:hover {
+                color: #007acc;
+                background-color: #f5f5f5;
+                border-radius: 1rem 1rem 0 0;
+            }
+        }
+
+        &:hover {
+            background-color: #f5f5f5;
+            border-radius: 1rem 1rem 0 0;
+        }
+    }
+
+    .navbar__dropdown .navbar__item:last-of-type {
+        border-radius: 0 0 1rem 1rem;
+
+        &:hover {
+            background-color: #f5f5f5;
+            border-radius: 0 0 1rem 1rem;
         }
     }
 
@@ -221,7 +257,6 @@
         position: absolute;
         display: inline-block;
         top: 60%;
-        left: 4.5rem;
         transform: translateY(-50%) rotate(0deg);
         font-size: 2rem;
         transition: transform 0.3s ease;
