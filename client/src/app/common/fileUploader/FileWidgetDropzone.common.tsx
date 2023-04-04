@@ -3,13 +3,15 @@ import { useDropzone } from "react-dropzone";
 import { useDispatch } from "react-redux";
 import { Profile } from "../../models/profile.model";
 import { uploadDocumentLoading } from "../../stores/profiles/profile.action";
+import LoadingSpinner from "../loadingSpinner/LoadingSpinner.common";
 
 interface Props {
   setFiles: (files: any) => void;
   currentProfile: Profile;
+  uploading: boolean;
 }
 
-const FileWidgetDropzone = ({ setFiles, currentProfile }: Props) => {
+const FileWidgetDropzone = ({ setFiles, currentProfile, uploading }: Props) => {
   const dispatch = useDispatch();
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -48,13 +50,19 @@ const FileWidgetDropzone = ({ setFiles, currentProfile }: Props) => {
   return (
     <div className="dropzone" {...getRootProps()}>
       <input {...getInputProps()} />
-      <p className="dropzone__text">
-        Drag and drop files here, or click to select files
-      </p>
-      <p className="dropzone__text--info">
-        Accepted file type: .pdf, Max file size: 2MB
-      </p>
-      {errorMessage && <p className="error-message">{errorMessage}</p>}
+      {uploading ? (
+        <LoadingSpinner />
+      ) : (
+        <>
+          <p className="dropzone__text">
+            Drag and drop files here, or click to select files
+          </p>
+          <p className="dropzone__text--info">
+            Accepted file type: .pdf, Max file size: 2MB
+          </p>
+          {errorMessage && <p className="error-message">{errorMessage}</p>}
+        </>
+      )}
     </div>
   );
 };
