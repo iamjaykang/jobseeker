@@ -4,6 +4,9 @@ import {
   addJobPostFailed,
   addJobPostLoading,
   addJobPostSuccess,
+  applyToJobPostFailed,
+  applyToJobPostLoading,
+  applyToJobPostSuccess,
   deleteJobPostFailed,
   deleteJobPostLoading,
   deleteJobPostSuccess,
@@ -20,7 +23,6 @@ import {
 
 export interface JobPostState {
   readonly isLoading: boolean;
-  readonly error: Error | null;
   readonly jobPostsArray: JobPost[];
   readonly jobPost: JobPost;
 }
@@ -31,7 +33,10 @@ const JOB_POSTS_INITIAL_STATE = {
   jobPost: null,
 };
 
-const jobPostsReducer = (state = JOB_POSTS_INITIAL_STATE, action = {} as AnyAction) => {
+const jobPostsReducer = (
+  state = JOB_POSTS_INITIAL_STATE,
+  action = {} as AnyAction
+) => {
   if (fetchAllJobPostsLoading.match(action)) {
     return {
       ...state,
@@ -52,7 +57,10 @@ const jobPostsReducer = (state = JOB_POSTS_INITIAL_STATE, action = {} as AnyActi
     };
   }
 
-  if (fetchJobPostByIdLoading.match(action)) {
+  if (
+    fetchJobPostByIdLoading.match(action) ||
+    applyToJobPostLoading.match(action)
+  ) {
     return {
       ...state,
       isLoading: true,
@@ -79,7 +87,8 @@ const jobPostsReducer = (state = JOB_POSTS_INITIAL_STATE, action = {} as AnyActi
   if (
     deleteJobPostSuccess.match(action) ||
     addJobPostSuccess.match(action) ||
-    updateJobPostSuccess.match(action)
+    updateJobPostSuccess.match(action) ||
+    applyToJobPostSuccess.match(action)
   ) {
     return {
       ...state,
@@ -92,7 +101,8 @@ const jobPostsReducer = (state = JOB_POSTS_INITIAL_STATE, action = {} as AnyActi
     updateJobPostFailed.match(action) ||
     addJobPostFailed.match(action) ||
     fetchJobPostByIdFailed.match(action) ||
-    deleteJobPostFailed.match(action)
+    deleteJobPostFailed.match(action) ||
+    applyToJobPostFailed.match(action)
   ) {
     return {
       ...state,

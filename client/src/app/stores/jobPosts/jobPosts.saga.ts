@@ -5,6 +5,9 @@ import {
   addJobPostFailed,
   AddJobPostLoading,
   addJobPostSuccess,
+  applyToJobPostFailed,
+  ApplyToJobPostLoading,
+  applyToJobPostSuccess,
   deleteJobPostFailed,
   DeleteJobPostLoading,
   deleteJobPostSuccess,
@@ -69,14 +72,33 @@ export function* deleteJobPost({ payload: jobId }: DeleteJobPostLoading) {
   }
 }
 
+export function* applyToJobPost({ payload }: ApplyToJobPostLoading) {
+  const { jobPostId, coverLetter, resumeUrl } = payload;
+
+  try {
+    yield* call(agent.JobPosts.apply, jobPostId, coverLetter, resumeUrl);
+
+    yield* put(applyToJobPostSuccess());
+    router.navigate(`/browse-jobs/${jobPostId}`)
+  } catch {
+    yield* put(applyToJobPostFailed());
+  }
+}
+
 // Saga to listen to fetch all users loading
 export function* onFetchAllJobPostsLoading() {
-  yield* takeLatest(JOB_POSTS_ACTION_TYPES.FETCH_ALL_JOB_POSTS_LOADING, fetchAllJobPosts);
+  yield* takeLatest(
+    JOB_POSTS_ACTION_TYPES.FETCH_ALL_JOB_POSTS_LOADING,
+    fetchAllJobPosts
+  );
 }
 
 // Saga to listen to fetch job by id loading
 export function* onFetchJobPostByIdLoading() {
-  yield* takeLatest(JOB_POSTS_ACTION_TYPES.FETCH_JOB_POST_BY_ID_LOADING, fetchJobPostById);
+  yield* takeLatest(
+    JOB_POSTS_ACTION_TYPES.FETCH_JOB_POST_BY_ID_LOADING,
+    fetchJobPostById
+  );
 }
 
 export function* onAddJobPostLoading() {
@@ -84,11 +106,24 @@ export function* onAddJobPostLoading() {
 }
 
 export function* onUpdateJobPostLoading() {
-  yield* takeLatest(JOB_POSTS_ACTION_TYPES.UPDATE_JOB_POST_LOADING, updateJobPost);
+  yield* takeLatest(
+    JOB_POSTS_ACTION_TYPES.UPDATE_JOB_POST_LOADING,
+    updateJobPost
+  );
 }
 
 export function* onDeleteJobPostLoading() {
-  yield* takeLatest(JOB_POSTS_ACTION_TYPES.DELETE_JOB_POST_LOADING, deleteJobPost);
+  yield* takeLatest(
+    JOB_POSTS_ACTION_TYPES.DELETE_JOB_POST_LOADING,
+    deleteJobPost
+  );
+}
+
+export function* onApplyToJobPostLoading() {
+  yield* takeLatest(
+    JOB_POSTS_ACTION_TYPES.APPLY_TO_JOB_POST_LOADING,
+    applyToJobPost
+  );
 }
 
 export function* jobPostsSaga() {
@@ -98,5 +133,6 @@ export function* jobPostsSaga() {
     call(onAddJobPostLoading),
     call(onUpdateJobPostLoading),
     call(onDeleteJobPostLoading),
+    call(onApplyToJobPostLoading),
   ]);
 }
