@@ -147,6 +147,13 @@
   }
 }
 
+.job-details-actions__error {
+  color: #f87171;
+  font-weight: bold;
+  margin-top: 1rem;
+  text-align: center;
+}
+
 
 @media (min-width: 768px) {
   .job-details-card-container {

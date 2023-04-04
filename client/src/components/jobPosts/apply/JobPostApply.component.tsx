@@ -9,10 +9,8 @@ import { fetchJobPostByIdLoading } from "../../../app/stores/jobPosts/jobPosts.a
 import { useParams } from "react-router-dom";
 import {
   selectProfile,
-  selectProfileIsLoading,
 } from "../../../app/stores/profiles/profile.selector";
 import { fetchProfileByUsernameLoading } from "../../../app/stores/profiles/profile.action";
-import LoadingSpinner from "../../../app/common/loadingSpinner/LoadingSpinner.common";
 
 const JobPostApply = () => {
   const [currentStep, setCurrentStep] = useState(1);
@@ -26,8 +24,6 @@ const JobPostApply = () => {
   const jobPost = useSelector(selectJobPost);
 
   const dispatch = useDispatch();
-
-  const documentIsLoading = useSelector(selectProfileIsLoading);
 
   const { jobPostId } = useParams();
 
@@ -58,8 +54,6 @@ const JobPostApply = () => {
       dispatch(fetchJobPostByIdLoading(jobPostId!));
     }
   }, [jobPost]);
-
-  if (documentIsLoading) return <LoadingSpinner />;
 
   return (
     <div className="job-apply-page">
