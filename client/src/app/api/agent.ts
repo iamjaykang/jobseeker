@@ -87,6 +87,12 @@ const JobPosts = {
   update: (newJobFormData: JobPostFormValues) =>
     requests.put<void>(`/jobPosts/${newJobFormData.id}`, newJobFormData),
   delete: (jobId: string) => requests.del<void>(`/jobPosts/${jobId}`),
+  apply: (jobPostId: string, coverLetter: string, resumeUrl: string) => {
+    return requests.post<void>(`/jobPosts/${jobPostId}/apply`, {
+      coverLetter,
+      resumeUrl,
+    });
+  },
 };
 
 const Account = {
@@ -102,13 +108,16 @@ const Profiles = {
     let formData = new FormData();
     formData.append("File", file);
 
-    return axios.post<Document>("documents", formData, {
-      headers: { "Content-Type": "multipart/form-data" },
-    })
-    .then((response) => response.data);
+    return axios
+      .post<Document>("documents", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      })
+      .then((response) => response.data);
   },
-  deleteDocument: (documentId: string) => requests.del<void>(`/documents/${documentId}`),
-  setMainDocument: (documentId: string) => requests.post<void>(`documents/${documentId}/setMain`, documentId)
+  deleteDocument: (documentId: string) =>
+    requests.del<void>(`/documents/${documentId}`),
+  setMainDocument: (documentId: string) =>
+    requests.post<void>(`documents/${documentId}/setMain`, documentId),
 };
 
 const agent = {
