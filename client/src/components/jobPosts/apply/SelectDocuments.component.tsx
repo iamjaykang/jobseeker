@@ -1,9 +1,10 @@
-import React, { Dispatch, SetStateAction, useEffect } from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import { FaTrashAlt, FaDownload } from "react-icons/fa";
 import { useDispatch } from "react-redux";
-import LoadingSpinner from "../../../app/common/loadingSpinner/LoadingSpinner.common";
 import { Profile } from "../../../app/models/profile.model";
-import { deleteDocumentLoading } from "../../../app/stores/profiles/profile.action";
+import {
+  deleteDocumentLoading,
+} from "../../../app/stores/profiles/profile.action";
 
 interface Props {
   currentProfile: Profile;
@@ -22,20 +23,15 @@ const SelectDocuments = ({
     dispatch(deleteDocumentLoading(selectedDocument, currentProfile.username));
   };
 
+  const handleSetSelectedDocument = (
+    e: React.ChangeEvent<HTMLSelectElement>
+  ) => {
+    setSelectedDocument(e.target.value);
+  };
+
   const selectedDoc = currentProfile?.documents?.find(
     (document) => document.id === selectedDocument
   );
-
-  useEffect(() => {
-    const mainDocumentId = currentProfile?.documents?.find(
-      (document) => document.isMain
-    )?.id;
-    setSelectedDocument(mainDocumentId || "");
-  }, [currentProfile]);
-
-  if (!currentProfile) {
-    return <LoadingSpinner />;
-  }
 
   return (
     <div className="existing-documents">
@@ -64,17 +60,16 @@ const SelectDocuments = ({
         </div>
       </div>
       <select
-        value={selectedDocument}
+        value={selectedDocument || ""}
         className="existing-documents__select"
-        onChange={(e) => {
-          setSelectedDocument(e.target.value);
-        }}
+        onChange={handleSetSelectedDocument}
       >
-        {currentProfile.documents!.map((document) => (
-          <option key={document.id} value={document.id}>
-            {document.originalFileName}
-          </option>
-        ))}
+        {currentProfile &&
+          currentProfile.documents!.map((document) => (
+            <option key={document.id} value={document.id}>
+              {document.originalFileName}
+            </option>
+          ))}
       </select>
     </div>
   );

@@ -1,6 +1,9 @@
 import React, { Dispatch, SetStateAction, useState } from "react";
+import { useDispatch } from "react-redux";
+import agent from "../../../app/api/agent";
 import { JobPost } from "../../../app/models/jobPost.model";
 import { Profile } from "../../../app/models/profile.model";
+import { applyToJobPostLoading } from "../../../app/stores/jobPosts/jobPosts.action";
 
 interface Props {
   jobPost: JobPost | null;
@@ -19,6 +22,7 @@ const ReviewSubmit = ({
   coverLetter,
   setCurrentStep,
 }: Props) => {
+  const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
 
   const document = currentProfile.documents!.find(
@@ -28,6 +32,13 @@ const ReviewSubmit = ({
   const handleDetailsOpen = () => {
     setIsOpen(!isOpen);
   };
+
+  const handleSubmitApplication = () => {
+    if (jobPost && document) {
+      dispatch(applyToJobPostLoading(jobPost?.id, coverLetter, document?.url));
+    }
+  };
+
   return (
     <div className="review-submit-form">
       <div className="review-submit__header">
@@ -99,7 +110,12 @@ const ReviewSubmit = ({
         >
           Previous Step
         </button>
-        <button className="review-submit__button">Submit Application</button>
+        <button
+          className="review-submit__button"
+          onClick={handleSubmitApplication}
+        >
+          Submit Application
+        </button>
       </div>
     </div>
   );

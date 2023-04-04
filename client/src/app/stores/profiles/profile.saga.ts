@@ -8,6 +8,9 @@ import {
   fetchProfileByUsernameLoading,
   FetchProfileByUsernameLoading,
   fetchProfileByUsernameSuccess,
+  setDocumentToMainFailed,
+  SetDocumentToMainLoading,
+  setDocumentToMainSucccess,
   uploadDocumentFailed,
   UploadDocumentLoading,
   uploadDocumentSuccess,
@@ -52,6 +55,20 @@ export function* deleteDocument({ payload }: DeleteDocumentLoading) {
   }
 }
 
+export function* setDocumentToMain({ payload }: SetDocumentToMainLoading) {
+  const { documentId, username } = payload;
+
+  try {
+    yield* call(agent.Profiles.setMainDocument, documentId);
+
+    yield* put(setDocumentToMainSucccess());
+
+    yield put(fetchProfileByUsernameLoading(username));
+  } catch (error) {
+    yield* put(setDocumentToMainFailed(error as Error));
+  }
+}
+
 export function* onFetchProfileLoading() {
   yield* takeLatest(
     PROFILE_ACTION_TYPES.FETCH_PROFILE_BY_USERNAME_LOADING,
@@ -72,10 +89,18 @@ export function* onDeleteDocumentLoading() {
   );
 }
 
+export function* onSetDocumentToMainLoading() {
+  yield* takeLatest(
+    PROFILE_ACTION_TYPES.DOCUMENT_TO_MAIN_LOADING,
+    setDocumentToMain
+  )
+}
+
 export function* profilesSaga() {
   yield* all([
     call(onFetchProfileLoading),
     call(onUploadDocumentLoading),
     call(onDeleteDocumentLoading),
+    call(onSetDocumentToMainLoading)
   ]);
 }

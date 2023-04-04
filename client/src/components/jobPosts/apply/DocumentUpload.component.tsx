@@ -1,7 +1,10 @@
 import React, { Dispatch, useState } from "react";
+import { useSelector } from "react-redux";
 import FileUploadWidget from "../../../app/common/fileUploader/FileUploadWidget.common";
 import { JobPost } from "../../../app/models/jobPost.model";
 import { Profile } from "../../../app/models/profile.model";
+import { selectDocumentIsLoading } from "../../../app/stores/profiles/profile.selector";
+import { selectUser } from "../../../app/stores/users/user.selector";
 import SelectDocuments from "./SelectDocuments.component";
 
 interface Props {
@@ -10,7 +13,9 @@ interface Props {
   coverLetter: string;
   setSelectedDocument: Dispatch<React.SetStateAction<string>>;
   selectedDocument: string;
-  handleCoverLetterChange: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  handleCoverLetterChange: (
+    event: React.ChangeEvent<HTMLTextAreaElement>
+  ) => void;
   handleNextStep: () => void;
 }
 
@@ -21,8 +26,12 @@ const DocumentUpload = ({
   coverLetter,
   handleCoverLetterChange,
   selectedDocument,
-  setSelectedDocument
+  setSelectedDocument,
 }: Props) => {
+  const currentUser = useSelector(selectUser);
+
+  const documentIsLoading = useSelector(selectDocumentIsLoading);
+
   const [isOpen, setIsOpen] = useState(false);
 
   const handleDetailsOpen = () => {
@@ -36,18 +45,22 @@ const DocumentUpload = ({
           <div className="document-upload__user-info">
             <h2 className="document-upload__header">User Info</h2>
             <p className="document-upload__text">
-              {currentProfile?.firstName} {currentProfile?.lastName}
+              {currentUser?.firstName} {currentUser?.lastName}
             </p>
           </div>
         </div>
         <div className="document-upload__row">
           <div className="document-upload__cv-upload">
             <h2 className="document-upload__header">Upload CV</h2>
-            <FileUploadWidget currentProfile={currentProfile} />
-            {currentProfile && currentProfile.documents && (
-              <SelectDocuments currentProfile={currentProfile} selectedDocument={selectedDocument}
-              setSelectedDocument={setSelectedDocument} />
-            )}
+            <FileUploadWidget
+              currentProfile={currentProfile}
+              uploading={documentIsLoading}
+            />
+            <SelectDocuments
+              currentProfile={currentProfile}
+              selectedDocument={selectedDocument}
+              setSelectedDocument={setSelectedDocument}
+            />
           </div>
         </div>
         <div className="document-upload__row">

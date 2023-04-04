@@ -1,4 +1,5 @@
 import { createSelector } from "reselect";
+import { Profile } from "../../models/profile.model";
 import { RootState } from "../store";
 import { ProfileState } from "./profile.reducer";
 
@@ -24,4 +25,16 @@ export const selectProfileIsLoading = createSelector(
   (profilesSlice) => {
     return profilesSlice.isLoading;
   }
-)
+);
+
+export const selectDocumentIsLoading = createSelector(
+  [selectProfilesReducer],
+  (profilesSlice) => {
+    return profilesSlice.documentIsLoading;
+  }
+);
+
+export const selectMainDocumentId = createSelector(
+  [selectProfile],
+  (profile: Profile | null) => profile?.documents?.find((doc) => doc.isMain)?.id
+);

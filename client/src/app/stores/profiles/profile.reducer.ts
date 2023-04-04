@@ -7,6 +7,9 @@ import {
   fetchProfileByUsernameFailed,
   fetchProfileByUsernameLoading,
   fetchProfileByUsernameSuccess,
+  setDocumentToMainFailed,
+  setDocumentToMainLoading,
+  setDocumentToMainSucccess,
   uploadDocumentFailed,
   uploadDocumentLoading,
   uploadDocumentSuccess,
@@ -14,6 +17,7 @@ import {
 
 export interface ProfileState {
   isLoading: boolean;
+  documentIsLoading: boolean;
   profile: Profile | null;
   document: Document | null;
   error: Error | null;
@@ -22,6 +26,9 @@ export interface ProfileState {
 const PROFILE_INITIAL_STATE = {
   isLoading: false,
   profile: null,
+  documentIsLoading: false,
+  document: null,
+  error: null
 };
 
 const profilesReducer = (
@@ -39,12 +46,13 @@ const profilesReducer = (
 
   if (
     uploadDocumentLoading.match(action) ||
-    deleteDocumentLoading.match(action)
+    deleteDocumentLoading.match(action) ||
+    setDocumentToMainLoading.match(action)
   ) {
     return {
       ...state,
       document: null,
-      isLoading: true,
+      documentIsLoading: true,
       error: null,
     };
   }
@@ -62,16 +70,18 @@ const profilesReducer = (
     return {
       ...state,
       document: action.payload,
-      isLoading: false,
+      documentIsLoading: false,
       error: null,
     };
   }
 
-  if (deleteDocumentSuccess.match(action)) {
+  if (
+    deleteDocumentSuccess.match(action) ||
+    setDocumentToMainSucccess.match(action)
+  ) {
     return {
       ...state,
-      document: null,
-      isLoading: false,
+      documentIsLoading: false,
       error: null,
     };
   }
@@ -87,12 +97,13 @@ const profilesReducer = (
 
   if (
     uploadDocumentFailed.match(action) ||
-    deleteDocumentFailed.match(action)
+    deleteDocumentFailed.match(action) ||
+    setDocumentToMainFailed.match(action)
   ) {
     return {
       ...state,
       document: null,
-      isLoading: false,
+      documentIsLoading: false,
       error: action.payload,
     };
   }
